@@ -193,3 +193,129 @@ const obj = {
 
 ## Conceptual Aside: Arrays, Collections of Anything
 
+Arrays can hold literally anything: strings, numbers, booleans, functions, objects, everything!
+
+```js
+const arr = [
+  1,
+  false,
+  "hello",
+  {},
+  function() {}
+];
+```
+
+## Arguments and Spread
+
+### Arguments variable 
+
+When a function is invoked, the JavaScript engine sets up the execution context. One special variable it sets up in this process is called the **arguments** variable.
+
+```js
+greet("Dan");
+
+function greet(firstName, lastName, language) {
+  language = language || "en"; // sets default value if one isn't provided
+
+  console.log(firstName); // logs "Dan"
+  console.log(lastName); // logs undefined
+  console.log(language); // logs "en"
+
+  console.log(arguments); // logs ["Dan", undefined, "en"]
+};
+```
+
+**Note**: The JavaScript engine will hoist the parameters and give them an initial value of `undefined`.
+
+**Note 2**: The `arguments` variable is **array-like**. It has some features of an array but not all. (Many people think this is a bug.)
+
+### Spread operator
+
+The `arguments` variable is being deprecated. The new way is the spread `...` operator.
+
+```js
+// ...arguments captures all the arguments in one variable
+function greet(..arguments) {
+  console.log(arguments);
+};
+```
+
+## Framework Aside: Function Overloading
+
+**Function overloading** is the ability to create multiple functions of the same name that each get called to perform different tasks depending on context. JavaScript *does not* have this feature.
+
+The JavaScript workaround is to use functional programming and leverage the fact that functions are first-class (you can pass them into other functions):
+
+```js
+function greet(language) {
+  if (language === "en") {
+    console.log("Hello!");
+  };
+
+  if (language === "fr") {
+    console.log("Bonjour !");
+  };
+};
+
+// You're creating shorthand functions that do the parameter passing for you!
+function greetEnglish() { greet("en"); };
+function greetFrancais() { greet("fr"); };
+```
+
+The above pattern is often used by frameworks to **make using the framework easier**.
+
+## Conceptual Aside: Syntax Parsers
+
+The syntax parser will literally run through your code **character by character** and decide what you're going to do based on a strict set of rules.
+
+Example is the `return` statement:
+
+```js
+r // syntax parser sees an r and expects return
+re
+ret
+retu
+retur
+return;
+```
+
+The power of the syntax parser is it can **make changes** to the actual code you write.
+
+## Dangerous Aside: Automatic Semicolon Insertion
+
+Syntax parsers try to be helpful by *adding* semicolons for you. **You should always add your own semicolons because you don't want the syntax parser to do it**.
+
+**Fun fact**: Semicolons are *not optional*, but the syntax parser makes it seem optional.
+
+Example issue:
+
+```js
+function greet() {
+  // Let's say you want to break your return statement into multiple lines...
+  return
+  {
+    greeting: "Hello"
+  };
+};
+
+console.log(greet()); // logs undefined
+```
+
+In the example above, the syntax parser sees a new line character after return. Seeing that, it thinks the return statement ends at that line, so it converts to `return;`, which ends the function!
+
+The solution is to **always start with an opening bracket on the same line**. This ensures that the syntax parser knows to expect more further down.
+
+```js
+function greet() {
+  return {
+    greeting: "Hello"
+  };
+};
+```
+
+## Framework Aside: Whitespace
+
+**Whitespace** are invisible characters that create literal space between your other characters. Includes returns, tabs, spaces.
+
+## Immediately Invoked Function Expressions (IIFEs)
+
