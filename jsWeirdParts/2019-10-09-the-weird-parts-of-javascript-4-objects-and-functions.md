@@ -72,3 +72,124 @@ When we say functions are objects, that means functions have:
 In addition, functions have special properties:
 * **Name**: this is where the name of the function gets stored (doesn't exist if anonymous function)
 * **Code**: this is where the code written inside the function gets stored (and also what gets run when you invoke the function)
+
+## Function Statements and Function Expressions
+
+### Expressions and statements
+
+**Expressions** return a value. (That value doesn't necessarily have to be saved in a variable, but it can be). Examples:
+
+```js
+var a = 3; // assignment operator returns 3
+1 + 2; // plus operator returns 3
+```
+
+**Statements** just do work; they run the code and that's it. Examples:
+
+```js
+if (true) { console.log("RUN")! }; // if statements just run;
+var a = if (true) {}; // this doesn't return anything for a to store!
+```
+
+### Applied to functions
+
+**Function statements** don't return a value; they just get stored in memory:
+
+```js
+// No value gets returned here
+// It simply gets stored in memory during creation of execution context
+function greet() {
+  console.log("Hi");
+};
+```
+
+**Function expressions** return a value, which you can store in a variable:
+
+```js
+// creates a function object
+// Variable points to memory address of function object
+var anonymousGreet = function() {
+  console.log("Hi");
+};
+```
+Important differences with function expressions:
+* Function expressions are **anonymous**. They're not given a **name property**. Instead, function expressions have variable names that point to the anonymous function.
+* Function expressions create an **object**. Function statements just store the code in memory.
+* Function expressions are **NOT hoisted**. The execution context doesn't evaluate the right side of the equality operator, so you can't successfully invoke the function.
+
+## Conceptual Aside: By Value vs. By Reference
+
+**By value** is where the value itself is given when passing the value around, creating copies along the way.
+
+```js
+const a = 3; // value 3 gets stored in memory and a points to it
+const b = a; // value 3 gets COPIED and stored in new place in memory and b points to new place
+```
+
+**By reference** is where the reference (or memory address) is given when passing the value around. No copies are created.
+
+```js
+const a = {}; // a points to this object in memory
+const b = a; // b points to the same object
+```
+
+### Changing and comparing values
+
+One side effect is that by value and by reference behave differently when you change the value.
+
+```js
+let a = 3;
+let b = a;
+a = 4;
+console.log(a, b); // logs 4 and 3; b isn't affected by re-assignment
+
+let a = {};
+b = a;
+a.greeting = "Hello";
+console.log(b.greeting, a.greeting); // logs "Hello" twice; adding the property to a affects b too
+```
+
+## Objects, Functions, and this
+
+Recall that `this` get defined every time an execution context is created.
+
+When a function is created in the global object, `this` points to the global object:
+
+```js
+function logThis() {
+  console.log(this); // logs global object
+};
+```
+
+When a method is created in an object, `this` points to the object:
+
+```js
+const obj = {
+  logThis: function() { console.log(this); } // logs obj
+};
+
+// Note: You're using an anonymous function expression to create the method!
+```
+
+When a function is created *inside* a method, `this` points to the global object again. **Many people consider this a bug**:
+
+```js
+const obj = {
+  logThis: function() {
+    const logDis = function() { console.log(this); };
+    logDis(); // logs global object
+  }
+};
+
+// SOLUTION: pass this by reference to hold onto it
+const obj = {
+  logThis: function() {
+    const self = this; // pass by reference!
+    const logDis = function() { console.log(self); };
+    logDis(); // logs obj
+  }
+};
+```
+
+## Conceptual Aside: Arrays, Collections of Anything
+
