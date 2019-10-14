@@ -319,3 +319,204 @@ function greet() {
 
 ## Immediately Invoked Function Expressions (IIFEs)
 
+An **IIFE** is where you invoke a function expression *immediately* after creating it.
+
+```js
+function(name) {
+  console.log("Hello " + name);
+}();
+```
+
+This works because of operator precedence. The anonymous function creates a function object first. Then immediately afterwards, the code property in the function object is invoked using `()`.
+
+### Writing IIFE without throwing error
+
+You can write expressions with no variables, and it won't throw an error.
+
+```js
+3;
+"Hello";
+{ name: "Dan" };
+```
+
+The problem with function expressions is that the syntax parser *will* expect a function statement because it starts with the word `function`. As a result, an error is thrown.
+
+```js
+// SyntaxError: function statement requires a name
+function() { console.log("Hello") };
+```
+
+**Solution**: Wrap the function expression in parentheses (a group) first.
+
+```js
+(function() { console.log("Hello") })();
+
+// NOTE: The () invoking the function can be both inside or outside of the grouping
+```
+
+## Framework Aside: IIFEs and Safe Code
+
+IIFEs are used in frameworks to promote **safe code** (similar to namespacing).
+
+```js
+// app.js file contents
+const greeting = "Hola";
+
+// framework.js file contents
+(function() {
+  const greeting = "Hello";
+
+  // run framework code here
+})();
+
+console.log(greeting); // logs "Hola"
+```
+
+In the example above, the IIFE creates a new execution context where the variables created don't affect the variables in the global execution context. This helps ensure that there are no conflicts between JS files.
+
+**Pro tip**: You will find many frameworks wrap their entire source code in an IIFE for the above reasons.
+
+### Overriding global object
+
+Inside an IIFE, you can *intentionally* override properties in the global object by simply passing the global object as an argument into the IIFE.
+
+```js
+(function(global) {
+  global.greeting = "Hello";
+})(window);
+```
+
+**Note**: The special power of an IIFE here is that overriding the global object must be intentional. You can't accidentally override.
+
+## Understanding Closures
+
+A **closure** is where an execution context closes in its outer variables.
+
+```js
+function greet(whatToSay) {
+  return function(name) {
+    console.log(whatToSay + " " + name);
+  };
+};
+
+const sayHi = greet("Hi");
+sayHi("Dan");
+```
+
+In the example above, `greet("Hi");` creates a new execution context that contains the lexically scoped variable `whatToSay`. Then it gets popped off the stack because the code has successfully run.
+
+However, `sayHi("Dan");`, when run, still can access `whatToSay`. Why?
+
+**Answer**: Because `sayHi` was created *inside* `greet`, the JavaScript engine will make sure that it has access to the variables it's supposed to have access to. That means `whatToSay` is available *even though* `greet` is not even in the execution stack. We say that `sayHi` **closed in** its outer variables. **This is a built-in feature of JavaScript**.
+
+**Note**: Variables in execution contexts don't get removed from memory when the code block finishes. This happens periodically during a phase called garbage collection.
+
+### Weird case of closures
+
+The following code snippet will log `3` three times because `i` is `3` at the time of function invocation. This makes sense when you think about **closure**.
+
+```js
+function buildFunctions() {
+
+  var arr = [];
+
+  for (var i = 0; i < 3; i++) {
+    arr.push(
+      function () {
+        console.log(i);
+      };
+    );
+  };
+
+  return arr;
+};
+
+var fs = buildFunctions();
+
+fs[0]();
+fs[1]();
+fs[2]();
+```
+
+The ES6 solution is to just use `let`. `let` block scopes `i` for each iteration of the `for` loop:
+
+```js
+for (let i = 0; i < 3; i++) {
+  // ...
+};
+```
+
+OR the ES5 solution is to use an **IIFE** to create a unique execution context for each iteration:
+
+```js
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    return function() {
+      console.log(j);
+    };
+  })(i);
+};
+```
+
+IIFEs work because each IIFE has its own `j` that it can reference when the function is invoked.
+
+## Framework Aside: Function Factories
+
+**Function factories** are functions that create other functions and return them. Their power comes in the fact that they utilize *closures*.
+
+```js
+function makeGreeting(language) {
+  const greetingMap = {
+    "en": "Hello",
+    "fr": "Bonjour"
+  };
+
+  return function(firstName, lastName) {
+    console.log(`${greetingMap[language]} ${firstName} ${lastName}`);
+  };
+};
+
+const greetEnglish = makeGreeting("en");
+const greetFrancais = makeGreeting("fr");
+
+greetEnglish("Dan", "Fitz"); // logs "Hello Dan Fitz" b/c "en" is part of closure
+greetFrancais("Dan", "Fitz"); // logs "Bonjour Dan Fitz" b/c "fr" is part of closure
+```
+
+**Note**: Every *call* of `makeGreeting` creates its own execution context. That's why `greetingMap[language]` still works when we call the functions created.
+
+## Closures and Callbacks
+
+Functions that take callback functions make use of closures, first-class functions, and function expressions all at once!
+
+```js
+const sayHiLater = function() {
+  const greeting = "Hi!";
+
+  // setTimeout takes a function expression as an argument!
+  setTimeout(function() {
+    
+    console.log(greeting); // greeting is an outer variable that gets closed in!
+
+  }, 3000);
+};
+
+sayHiLater();
+```
+
+**Note**: A **callback function** is a function that gets passed as an argument to another function to be run when that other function finishes.
+
+## Call, Apply, and Bind
+
+Functions are objects, and built into them are special methods: `call`, `apply`, and `bind`.
+
+`bind(targetThis);` binds whatever you want `this` to refer to when the function is invoked:
+
+```js
+const newThis = function() {
+  console.log(this.name);
+}.bind({ name: "Dan" });
+
+newThis(); // logs "Dan"
+```
+
