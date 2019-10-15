@@ -1,8 +1,8 @@
-—
+---
 categories: [frontend]
 tags: [js]
 title: "The Weird Parts of JavaScript 4: Objects and Functions"
-—
+---
 
 ## Objects and the Dot
 
@@ -510,7 +510,7 @@ sayHiLater();
 
 Functions are objects, and built into them are special methods: `call`, `apply`, and `bind`.
 
-`bind(targetThis);` binds whatever you want `this` to refer to when the function is invoked:
+`bind(targetThis);` binds whatever you want `this` to refer to when the function is invoked, returning a **copy** of the function with the new binding:
 
 ```js
 const newThis = function() {
@@ -520,3 +520,54 @@ const newThis = function() {
 newThis(); // logs "Dan"
 ```
 
+`call(targetThis, ...arguments);` sets a `this` and **calls** the function:
+
+```js
+const logName = function(greeting, message) {
+  console.log(greeting + " " + this.name + ". " + message);
+};
+
+logName.call({ name: "Dan" }, "Hello", "I love you!"); // logs "Hello Dan. I love you!"
+```
+
+`apply(targetThis, [...arguments]);` does the same thing as `call` but takes an **array of arguments**:
+
+```js
+logName.apply({ name: "Dan" }, ["Hello", "I love you!"]);
+```
+
+### Function borrowing
+
+Sometimes you have 2 objects that are very similar, but one has a method that you want to use on the other. You can use one of the function methods to **borrow** the method and use it on the intended object.
+
+```js
+const person = {
+  name: "Dan Fitz",
+  logName: function() { console.log(this.name) };
+};
+
+const person2 = {
+  name: "John Wage",
+};
+
+person.logName.call(person2); // logs "John Wage"
+```
+
+### Function currying
+
+**Function currying** is the process of **breaking down** a function that takes multiple arguments into a series of functions that each take **1 argument**.  `bind` is powerful for this:
+
+```js
+function multiply(a, b) {
+  return a * b;
+};
+
+const multiplyByTwo = multiple.bind(this, 2); // 2 is now the permanent value for the first argument
+multiplyByTwo(3); // returns 6
+```
+
+**Note**: You can also think of function currying as **creating a copy** of a function with some **preset parameters**. It's very useful in mathematical situations.
+
+## Functional Programming
+
+??
