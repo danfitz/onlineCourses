@@ -1,7 +1,7 @@
 ---
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript 4: Objects and Functions"
+title: "The Weird Parts of JavaScript Module 4: Objects and Functions"
 ---
 
 ## Objects and the Dot

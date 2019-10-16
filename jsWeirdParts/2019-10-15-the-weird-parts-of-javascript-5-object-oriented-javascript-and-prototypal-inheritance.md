@@ -1,7 +1,7 @@
 ---
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript 5: Object-Oriented JavaScript and Prototypal Inheritance"
+title: "The Weird Parts of JavaScript Module 5: Object-Oriented JavaScript and Prototypal Inheritance"
 ---
 
 ## Conceptual Aside: Classical vs. Prototypal Inheritance

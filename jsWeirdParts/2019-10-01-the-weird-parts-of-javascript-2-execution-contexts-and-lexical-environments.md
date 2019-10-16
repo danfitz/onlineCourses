@@ -1,7 +1,7 @@
 ---
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript 2: Execution Contexts and Lexical Environments"
+title: "The Weird Parts of JavaScript Module 2: Execution Contexts and Lexical Environments"
 ---
 
 ## Conceptual Aside: Syntax Parsers, Execution Contexts, and Lexical Environments

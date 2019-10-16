@@ -1,7 +1,7 @@
 ---
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript 3: Types and Operators"
+title: "The Weird Parts of JavaScript Module 3: Types and Operators"
 ---
 
 ## Conceptual Aside: Types and JavaScript
