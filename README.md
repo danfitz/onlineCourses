@@ -4,9 +4,9 @@ This is a roadmap of everything I'm learning now or interested in learning next.
 
 ## NOW
 
-I'm currently learning the intricacies of vanilla JavaScript. I believe that understanding the foundations will make frameworks easier.
+I'm currently learning React in more depth (including Redux, React Router, Hooks)! I want to understand the intricacies of React and learn to use it to its full potential.
 
-**Current course**: [JavaScript: Understanding the Weird Parts](https://www.udemy.com/course/understand-javascript/)
+**Current course**: [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 
 ## NEXT
 
