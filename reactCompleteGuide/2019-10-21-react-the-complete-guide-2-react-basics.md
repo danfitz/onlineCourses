@@ -1,7 +1,7 @@
 ---
 categories: [frontend]
 tags: [react]
-title: "React - The Complete Guide Module 2: React Basics?"
+title: "React - The Complete Guide Module 2: React Basics"
 ---
 
 ## Build Workflow
@@ -71,9 +71,19 @@ It's best practice to **capitalize** your component names, so that they don't co
 
 ## Components
 
-### Functional vs. class components
+### Stateless vs. stateful components
 
-**Best practice**: You should *almost always* use functional components.
+Functional and class components tend to get broken up into **stateless** and **stateful** components.
+
+Stateless components have the following descriptions:
+* Dumb (they don't have logic)
+* Presentational (they just display stuff)
+
+Stateful components are described as:
+* Smart (they have logic)
+* Containers (they contain information)
+
+**Best practice**: You should *almost always* use stateless components because they're easier to manage. Minimize the number of stateful components to minimize over-complexity.
 
 ### props.children
 
@@ -103,3 +113,130 @@ const Component = (props) => {
 `props` is useful when you want to get information from *outside* the component.
 
 `state` is useful when you want to control information from *inside* the component.
+
+Anytime you update `props` or `state`, React checks the DOM to see if information needs changing and makes the appropriate changes.
+
+## useState Hook
+
+As of React 16.8, functional components have state using **React hooks**.
+
+React hooks are functions like `useState` that add extra functionality to your functional components.
+
+Here's the code pattern:
+
+```js
+import React, { useState } from "react";
+
+const app = () => {
+  // useState makes React aware of initial state, returning an array with:
+  // 1. current state
+  // 2. setState method
+  const [counterState, setCounterState] = useState({
+    counter: 1
+  });
+
+  // Here's an event callback function just like normal!
+  const handleClick = () => {
+    // setState works as normal
+    setCounterState({
+      counter: counterState.counter + 1
+    });
+  };
+
+  // Referencing state works normally too!
+  return (
+    <div>
+      <p>{counterState.counter}</p>
+      <button onClick={handleClick}>Increase initial state</button>
+    </div>
+  );
+};
+```
+
+**Major difference**: `useState` doesn't carry over untouched state when using `setCounterState`. You must *manually* bring the state over.
+
+```js
+const [counterState, setCounterState] = useState({
+  counter: 1,
+  otherState: "hello"
+});
+
+setCounterState({
+  counter: counterState.counter + 1,
+  otherState: counterState.otherState // manual!
+});
+```
+
+**Best practice**: Instead of updating state all with one method, it's better to `useState` for each piece of data you want to keep track of. This is known as **state slicing**.
+
+**Note**: `useState` can take any piece of data, not just objects!
+
+```js
+const [counterState, setCounterState] = useState({
+  counter: 1
+});
+
+const [otherState, setOtherState] = useState("some other value");
+```
+
+**Pro tip**: Technically, you don't need to use class-based components at all anymore. However, class-based components are still considered the *standard* for state management.
+
+## Passing Method References Between Components
+
+There are 2 known ways to pass a method to another component
+
+**Anonymous function**
+
+```js
+<Component onClick={() => this.handleClick("newValue")} />
+```
+
+**`bind` method**
+
+```js
+<Component onClick={this.handleClick.bind(this, "newValue")} />
+```
+
+**Pro tip**: The anonymous function pattern is actually inefficient. It sometimes triggers unnecessary re-renders. `bind` is better.
+
+## Styling Components
+
+There are 2 ways to styles your components:
+
+1. Stylesheet
+  * Add `className` to component
+  * Style class using `.css` stylesheet
+  * Import `.css` file into component
+
+**Note**: Import basically makes Webpack aware of the `.css` file, which will include a link to it in the HTML
+
+```
+// Component
+<Component className="component" />
+
+// Stylesheet
+.component {
+  margin: 0 auto;
+}
+
+// Import
+import "./component.css";
+```
+
+2. Inline styling
+  * Create a JS `style` object variable
+  * Pass `style` object into `style` JSX attribute of component
+
+**Note**: Inline styles don't have access to all CSS features (e.g. `:hover`).
+
+```js
+render() {
+  const style = {
+    backgroundColor: "white"
+  };
+
+  return (
+    <Component style={style} />
+  );
+};
+```
