@@ -253,3 +253,15 @@ const component = props => {
 ```
 
 **Explanation**: React doesn't allow adjacent JSX elements because `return` must return a single expression, and adjacent `React.createElement` calls are multiple expressions. 
+
+**Note**: As of React 16.2, React ships with a `React.Fragment` component that does the exact same thing.
+
+## Higher-order Components
+
+**Higher-order components** wrap other components, adding something to those components: logic, error handling, styling, or JSX.
+
+Examples include:
+* `Auxiliary`
+* `WithClass`: wraps component with a `div` and `props.className`
+
+**Note**: By convention, higher-order components are named starting with `With` like `WithClass`.
