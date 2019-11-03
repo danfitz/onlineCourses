@@ -141,7 +141,9 @@ There are 3 possible behaviours that useEffect can have depending on what you pa
 * `[foo, bar]` or dependencies
   * `useEffect` callback and cleanup method run *if* the dependencies changed.
 
-## Optimization with componentShouldUpdate
+## Virtual DOM Optimization
+
+### Optimization with componentShouldUpdate
 
 Every time `state` or `props` changes, that triggers a full re-render of the virtual DOM. This has performance costs we can recuperate using `shouldComponentUpdate`.
 
@@ -184,5 +186,70 @@ class Child extends Component {
 
 **Note**: The reason reference comparison works is that we created a copy of `arr` using the spread operator, i.e., `[...this.state.arr]`.
 
+**Pro tip**: You can use the prototype `PureComponent` instead of `Component` too. `PureComponent` has `shouldComponentUpdate` built in, running a shallow comparison of all `props` and `state`.
+
 ### Optimization with React.memo
 
+`React.memo` performs **memoization** on your functional components, storing a cache of the component. The component will then *only* re-render if its inputs change, i.e. `props`. This minimizes unnecessary re-renders.
+
+```js
+const child = props => {
+  return <p>{props.description}</p>;
+};
+
+export default React.memo(child); // THE MAGIC HAPPENS HERE
+```
+
+Recall that by default, when a parent component re-renders, it will re-render all its children too. So if, say, `this.state.title` changes, `child` will still re-render.
+
+`React.memo` solves this. Now, `child` will only re-render when `props.description` changes.
+
+### When should you optimize?
+
+`shouldComponentUpdate` and `React.memo` still run code. That means they have computing costs. In cases where the child component *always* needs to update when the parent updates, those computing costs aren't worth it. You're better off defaulting to always re-rendering.
+
+**Best practice**: Only apply `shouldComponentUpdate` and `React.memo` to components that *unnecessarily* re-render.
+
+## How React Updates the DOM
+
+The basis of React is that it only updates the real DOM when it detects changes. Updating the real DOM is computationally expensive, so minimizing such changes is valuable. Here's how DOM changes happen in React:
+
+1. When React invokes the `render` method, it creates a virtual DOM.
+2. On a re-render, React compares the current virtual DOM with the new virtual DOM.
+3. If any differences are detected, those differences lead to real DOM updates *only* for the elements affected.
+
+**Note**: `shouldComponentUpdate` and `React.memo` stop short this entire process because even this process has computational costs (though much less than updating the real DOM).
+
+## Adjacent JSX Elements
+
+There are at least 2 ways to return adjacent JSX elements:
+
+1. `return` an array of JSX elements *with keys* for each element.
+
+```js
+const component = props => {
+  return [
+    <h1 key="title">Component</h1>,
+    <p key="description">I do stuff!</p>
+  ];
+};
+```
+
+The problem with the array solution is that it's tedious to have to add a key.
+
+2. Create an `Auxiliary` component that wraps around your adjacent JSX elements.
+
+```js
+const Auxiliary = props => props.children;
+
+const component = props => {
+  return (
+    <Auxiliary>
+      <h1>Component</h1>
+      <p>I do stuff!</p>
+    </Auxiliary>
+  );
+};
+```
+
+**Explanation**: React doesn't allow adjacent JSX elements because `return` must return a single expression, and adjacent `React.createElement` calls are multiple expressions. 

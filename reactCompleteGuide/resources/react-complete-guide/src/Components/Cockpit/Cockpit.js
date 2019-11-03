@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import classes from "./Cockpit.css";
 
+const Aux = props => {
+  console.log(props.children);
+  return props.children;
+};
+
 const cockpit = props => {
   useEffect(() => {
     console.log("Cockpit.js useEffect");
@@ -13,14 +18,14 @@ const cockpit = props => {
       console.log("Cockpit.js cleanup work in effect...");
       clearTimeout(timeoutId);
     };
-  }, []);
+  });
 
   const assignedClasses = [];
   
-  if (props.people.length <= 2) {
+  if (props.numPeople <= 2) {
     assignedClasses.push(classes.red);
   };
-  if (props.people.length <= 1) {
+  if (props.numPeople <= 1) {
     assignedClasses.push(classes.bold);
   };
 
@@ -28,12 +33,14 @@ const cockpit = props => {
   if (!props.showPeople) btnClass += ` ${classes.redButton}`;
 
   return (
-    <div className={classes.Cockpit}>
+    // <div className={classes.Cockpit}>
+    <Aux>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>Status of App</p>
       <button className={btnClass} onClick={props.togglePeopleHandler}>Toggle People</button>
-    </div>
+    {/* // </div> */}
+    </Aux>
   );
 };
 
-export default cockpit;
+export default React.memo(cockpit);
