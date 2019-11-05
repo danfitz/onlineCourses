@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./App.css";
 import People from "../Components/People/People";
 import Cockpit from "../Components/Cockpit/Cockpit";
-import WithClass from "../hoc/WithClass";
+import { WithClass } from "../hoc/WithClass";
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +17,8 @@ class App extends Component {
         { id: "3509sdlkj", name: "Bibi", age: 67 }
       ],
       showPeople: false,
-      showCockpit: true
+      showCockpit: true,
+      counter: 0
     };
   };
 
@@ -54,8 +55,11 @@ class App extends Component {
     const people = [...this.state.people];
     people[personIndex] = copyPerson;
 
-    this.setState({
-      people
+    this.setState((prevState) => {
+      return {
+        people,
+        counter: prevState.counter + 1
+      };
     });
   };
 
@@ -83,6 +87,8 @@ class App extends Component {
     return (
       <WithClass className={classes.App}>
         <button onClick={this.toggleCockpit}>Toggle Cockpit</button>
+
+        <p>Counter: {this.state.counter}</p>
         
         { this.state.showCockpit ?
           <Cockpit

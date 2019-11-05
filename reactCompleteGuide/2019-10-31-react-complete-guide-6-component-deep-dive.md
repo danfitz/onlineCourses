@@ -258,10 +258,136 @@ const component = props => {
 
 ## Higher-order Components
 
-**Higher-order components** wrap other components, adding something to those components: logic, error handling, styling, or JSX.
+**Higher-order components** wrap other components, *adding* something to those components: logic, error handling, styling, or JSX.
 
 Examples include:
 * `Auxiliary`
 * `WithClass`: wraps component with a `div` and `props.className`
 
 **Note**: By convention, higher-order components are named starting with `With` like `WithClass`.
+
+### Higher-order component structures
+
+The first kind of higher-order component is a JSX wrapping component. You already saw it with `Auxiliary`. Here's another example.
+
+```js
+const WithClass = props => (
+  <div className={props.className}>
+    {props.children}
+  </div>
+);
+
+// Snippets from <App />
+return (
+  <WithClass className="App"><p>Hello!</p></WithClass>
+);
+```
+
+The second kind of higher-order component is a function that returns a functional component.
+
+```js
+const withClass = (WrappedComponent, className) => {
+  return props => (
+    <div className={className}>
+      <WrappedComponent />
+    </div>
+  );
+};
+
+export default withClass(App, "App");
+```
+
+**Pro tip**: Although you can use either structure, it makes sense to use the JSX wrapping technique for JSX-related additions. Then use the functional component return technique for more logic-related additions. This helps with separation of concerns and keeping things compartmentalized.
+
+## More on props and state
+
+### Passing unknown props
+
+Sometimes you want to pass an entire object of `props` to a component, but you don't want to manually add them as JSX attributes one after another.
+
+You might think this will work, but it won't:
+
+```js
+<Component props={props} />
+```
+
+That simply gives the component access to a `props.props` object. Instead, you need to use the spread operator:
+
+```js
+<Component {...props} />
+```
+
+This spreads every key/value pair as if it was written like this:
+
+```js
+<Component name="Dan" age="27" />
+```
+
+### Setting state correctly
+
+When you invoke `setState`, React doesn't immediately update state. Instead, React **schedules** a state update to be done when resources are available. In other words, **you can't guarantee that your state is updating synchronously**.
+
+As a result, you want to avoid updating state with values that *depend upon* old state. Like this:
+
+```js
+this.setState({
+  counter: this.state.counter + 1
+});
+
+// You can't guarantee that `this.state.counter`
+// is going to be the value you expect it to be.
+```
+
+Instead, you want to pass a callback function that React *guarantees* will be the old state you expect.
+
+```js
+this.setState((prevState, props) => { // <= notice the arguments
+  return {
+    counter: prevState.counter + 1
+  };
+});
+```
+
+**Important**: This is considered **best practice** when you're updating state with values dependent upon old state.
+
+### Using PropTypes
+
+When you're working with other developers, you may want your `props` to be explicit about what data types it accepts and what keys it accepts. To do this, just `npm install prop-types`.
+
+To use `prop-types`, you just tack on an object map to your component as a property:
+
+```js
+import PropTypes from "prop-types";
+
+Component.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number,
+  friends: PropTypes.array,
+  handleClick: PropTypes.func
+};
+```
+
+Now in development mode, your application will throw errors and warnings when the developer passes in the wrong data types or wrong attribute names.
+
+**Pro tip**: For functions, you can even specify what arguments the function accepts and what it returns.
+
+### Using refs
+
+Read this: https://reactjs.org/docs/refs-and-the-dom.html
+
+There are 2 ways of making use of `refs`.
+
+The React 16.3+ way is to use `React.createRef`.
+
+```js
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+  };
+
+  render() {
+    return <div ref={this.ref}>Hello!</div>;
+  };
+};
+```
