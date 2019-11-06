@@ -373,21 +373,146 @@ Now in development mode, your application will throw errors and warnings when th
 
 ### Using refs
 
-Read this: https://reactjs.org/docs/refs-and-the-dom.html
+Usually, `props` is the only way to modify a child. However, sometimes we want to **imperatively** modify a child outside of the normal dataflow. For this, we use `refs` to do things like:
+* Focus, text selection, media playback
+* Triggering animations
+
+**Note**: *Imperative* programming in React means directly defining the flow of actions to do things like manipulate the DOM--like jQuery. *Declarative* programming simply sets up a roadmap of how actions *should* be performed.
 
 There are 2 ways of making use of `refs`.
 
-The React 16.3+ way is to use `React.createRef`.
+1. Callback `refs`. In your component's `ref`, pass a callback function that takes the reference to the element as an argument.
+
+```js
+class App extends Component {
+  componentDidMount() {
+    this.textInput.focus(); // 2. focuses element
+  };
+
+  render() {
+    <div>
+      <input
+        type="text"
+        ref={elem => this.textInput = elem} // 1. upon render: stores element ref in component
+      />
+    </div>
+  };
+};
+```
+
+2. The React 16.3+ way is to use `React.createRef`.
 
 ```js
 class App extends Component {
   constructor(props) {
     super(props);
-    this.ref = React.createRef();
+    this.ref = React.createRef(); // 1. creates new ref object
+  };
+
+  componentDidMount() {
+    this.ref.current.focus(); // 3. focuses element
   };
 
   render() {
-    return <div ref={this.ref}>Hello!</div>;
+    return (
+    <div>
+      <input
+        type="text"
+        ref={this.ref} // 2. upon render: stores element ref in `current` property
+      />
+    </div>
+    );
   };
 };
 ```
+
+### Refs in functional components
+
+Both use cases for `refs` above work on class components. To do something similar with functional components, we need the `useRef` hook.
+
+```js
+import React, { useEffect, useRef } from "react";
+
+const component = () => {
+  const inputRef = useRef(null); // 1. creates ref with initial value of null
+
+  useEffect(() => {
+    inputRef.current.focus(); // 3. focuses element
+  }, []);
+
+  return (
+    <div>
+      <input
+        type="text"
+        ref={inputRef} // 2. upon render: stores element ref in `current` property
+      />
+    </div>
+  );
+};
+```
+
+## Context and Props Chaining
+
+When your app starts getting bigger and bigger, you'll find you're passing `props` down multiple levels. This is messy and hard to manage. For example, passing `props` from component A to component D is stupid when component B and C don't really care for or use the same `props`.
+
+Solution created by React: **context**. Context essentially creates a **globally available JavaScript object** for passing state--where you decide where it's available. (Context can be a string, array, or any other value too, not just an object.)
+
+### Instructions
+
+1. Create a `context.js` folder containing your `context` object.
+
+```js
+import React from "react";
+
+const context = React.createContext({ // <= initial context state object
+  isLoggedIn: false,
+  toggleLogin: () => {}
+});
+
+export default context;
+```
+
+2. In your container component carrying your state and thus *providing* context, wrap `<Context.Provider>` around the JSX code you want to gain access to context. Make sure to provide an object containing the state you want to pass into context in the `value` attribute.
+
+```js
+import Context from "context/context";
+
+class App extends Component {
+  state = { isLoggedIn: false };
+
+  handleLogin = () => this.setState((prevState) => {
+    return { isLoggedIn: !prevState.isLoggedIn };
+  });
+
+  render() {
+    return (
+      <Context.Provider
+        value={{
+          isLoggedIn: this.state.isLoggedIn,
+          toggleLogin: this.handleLogin
+      }}>
+        <Child />
+      </Context.Provider>
+    );
+  };
+};
+```
+
+3. Finally, in the component *using* context, wrap `<Context.Consumer>` around the JSX code you want to *use* context. Make sure to provide a *callback function* inside the component wrapper. Context gets passed as an argument into the callback.
+
+```js
+import Context from "context/context";
+
+const child = () => {
+  return (
+    <Context.Consumer>
+      {(context) => (
+        <button onClick={context.toggleLogin}>
+          {context.isLoggedIn ? "Log Out" : "Log In"}
+        </button>
+      )}
+    <Context.Consumer/>
+  );
+};
+```
+

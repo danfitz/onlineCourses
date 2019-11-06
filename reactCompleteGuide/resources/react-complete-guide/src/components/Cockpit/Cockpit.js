@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.css";
 import Auxiliary from "../../hoc/Auxiliary";
+import AuthContext from "../../context/authContext";
 
 const cockpit = props => {
+  const btnRef = useRef(null);
+
   useEffect(() => {
     console.log("Cockpit.js useEffect");
-
-    const timeoutId = setTimeout(() => {
-      // alert("AHHH");
-    }, 1000);
+    btnRef.current.click();
 
     return () => {
       console.log("Cockpit.js cleanup work in effect...");
-      clearTimeout(timeoutId);
     };
-  });
+  }, []);
 
   const assignedClasses = [];
   
@@ -29,12 +28,27 @@ const cockpit = props => {
   if (!props.showPeople) btnClass += ` ${classes.redButton}`;
 
   return (
-    // <div className={classes.Cockpit}>
     <Auxiliary>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>Status of App</p>
-      <button className={btnClass} onClick={props.togglePeopleHandler}>Toggle People</button>
-    {/* // </div> */}
+      
+      <button
+        ref={btnRef}
+        className={btnClass}
+        onClick={props.togglePeopleHandler}
+        >
+        Toggle People
+      </button>
+
+      <AuthContext.Consumer>
+        {(context) => (
+          <button
+            onClick={context.toggleLogin}
+          >
+            { context.isAuthenticated ? "Log Out" : "Log In" }
+          </button>
+        )}
+      </AuthContext.Consumer>
     </Auxiliary>
   );
 };

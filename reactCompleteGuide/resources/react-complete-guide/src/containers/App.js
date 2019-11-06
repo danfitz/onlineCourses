@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import People from "../Components/People/People";
-import Cockpit from "../Components/Cockpit/Cockpit";
+import People from "../components/People/People";
+import Cockpit from "../components/Cockpit/Cockpit";
+import AuthContext from "../context/authContext";
 import { WithClass } from "../hoc/WithClass";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
       ],
       showPeople: false,
       showCockpit: true,
+      isAuthenticated: false,
       counter: 0
     };
   };
@@ -81,6 +83,12 @@ class App extends Component {
     });
   };
 
+  loginHandler = () => {
+    this.setState((prevState) => {
+      return { isAuthenticated: !prevState.isAuthenticated };
+    });
+  };
+
   render() {
     console.log("App.js render");
 
@@ -90,20 +98,26 @@ class App extends Component {
 
         <p>Counter: {this.state.counter}</p>
         
-        { this.state.showCockpit ?
-          <Cockpit
-            title={this.props.title}
-            showPeople={this.state.showPeople}
-            numPeople={this.state.people.length}
-            togglePeopleHandler={this.togglePeopleHandler} />
-        : null }
-        
-        { this.state.showPeople ?
-          <People
-            people={this.state.people}
-            clicked={this.deletePerson}
-            changed={this.handleNameChange} />
-        : null }
+        <AuthContext.Provider
+          value={{
+            isAuthenticated: this.state.isAuthenticated,
+            toggleLogin: this.loginHandler
+        }}>
+          { this.state.showCockpit ?
+            <Cockpit
+              title={this.props.title}
+              showPeople={this.state.showPeople}
+              numPeople={this.state.people.length}
+              togglePeopleHandler={this.togglePeopleHandler} />
+          : null }
+          
+          { this.state.showPeople ?
+            <People
+              people={this.state.people}
+              clicked={this.deletePerson}
+              changed={this.handleNameChange} />
+          : null }
+        </AuthContext.Provider>
       </WithClass>
     );
   };
