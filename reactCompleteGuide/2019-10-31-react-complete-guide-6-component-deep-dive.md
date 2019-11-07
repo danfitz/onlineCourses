@@ -457,7 +457,7 @@ When your app starts getting bigger and bigger, you'll find you're passing `prop
 
 Solution created by React: **context**. Context essentially creates a **globally available JavaScript object** for passing state--where you decide where it's available. (Context can be a string, array, or any other value too, not just an object.)
 
-### Instructions
+### Implementing context
 
 1. Create a `context.js` folder containing your `context` object.
 
@@ -503,16 +503,55 @@ class App extends Component {
 ```js
 import Context from "context/context";
 
-const child = () => {
-  return (
-    <Context.Consumer>
-      {(context) => (
-        <button onClick={context.toggleLogin}>
-          {context.isLoggedIn ? "Log Out" : "Log In"}
-        </button>
-      )}
-    <Context.Consumer/>
-  );
+class Child extends Component {
+  render() {
+    return (
+      <Context.Consumer>
+        {(context) => (
+          <button onClick={context.toggleLogin}>
+            {context.isLoggedIn ? "Log Out" : "Log In"}
+          </button>
+        )}
+      <Context.Consumer/>
+    );
+  };
 };
 ```
 
+The below alternative approach is even better because it gives access to context in lifecycle methods, not just JSX!
+
+```js
+import Context from "context/context";
+
+class Child extends Component {
+  static contextType = Context; // global property accessible directly on class without instantiating
+
+  render() {
+    return (
+      // this.context is now available!
+      <button onClick={this.context.toggleLogin}>
+        {this.context.isLoggedIn ? "Log Out" : "Log In"}
+      </button>
+    );
+  };
+};
+```
+
+### useContext hook
+
+For functional components, the `useContext` gives us an easy way to add context.
+
+```js
+import React, { useContext } from "react";
+import Context from "context/context";
+
+const child = () => {
+  const context = useContext(Context); // this is where the magic happens!
+
+  return (
+    <button onClick={context.toggleLogin}>
+      {context.isLoggedIn ? "Log Out" : "Log In"}
+    </button>
+  );
+};
+```
