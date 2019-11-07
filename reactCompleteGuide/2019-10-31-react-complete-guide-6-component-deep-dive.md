@@ -143,7 +143,7 @@ There are 3 possible behaviours that useEffect can have depending on what you pa
 
 ## Virtual DOM Optimization
 
-### Optimization with componentShouldUpdate
+### Optimization with shouldComponentUpdate
 
 Every time `state` or `props` changes, that triggers a full re-render of the virtual DOM. This has performance costs we can recuperate using `shouldComponentUpdate`.
 
