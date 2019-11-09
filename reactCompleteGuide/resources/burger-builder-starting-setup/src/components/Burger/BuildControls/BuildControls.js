@@ -30,7 +30,7 @@ const buildControls = props => {
 
       <button
         className={classes.OrderButton}
-        onClick={props.toggleSummary}
+        onClick={props.showSummary}
         disabled={!props.purchasable}
       >
         Order Now

@@ -4,6 +4,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Modal from "../../components/UI/Modal/Modal";
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -23,12 +24,6 @@ class BurgerBuilder extends Component {
     totalPrice: 4,
     purchasable: false,
     summaryVisible: false
-  };
-
-  summaryHandler = () => {
-    this.setState({
-      summaryVisible: true
-    });
   };
 
   updatePurchaseState = () => {
@@ -74,6 +69,14 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState();
   };
 
+  summaryHandler = () => {
+    this.setState(prevState => {
+      return {
+        summaryVisible: !prevState.summaryVisible
+      };
+    });
+  };
+
   render() {
     const disabledInfo = { ...this.state.ingredients };
     for (let key in disabledInfo) {
@@ -82,7 +85,10 @@ class BurgerBuilder extends Component {
 
     return (
       <Auxiliary>
-        <Modal show={this.state.summaryVisible}>
+        <Modal
+          show={this.state.summaryVisible}
+          exit={this.summaryHandler}
+        >
           <OrderSummary
             ingredients={this.state.ingredients}
             price={this.state.totalPrice}
@@ -99,7 +105,7 @@ class BurgerBuilder extends Component {
           disabledInfo={disabledInfo}
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
-          toggleSummary={this.summaryHandler}
+          showSummary={this.summaryHandler}
         />
       </Auxiliary>
     );
