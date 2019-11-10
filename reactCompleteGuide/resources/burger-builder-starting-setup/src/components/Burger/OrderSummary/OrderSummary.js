@@ -17,8 +17,8 @@ const orderSummary = props => {
         {summaryJSX}
       </ul>
       <p>Continue to checkout?</p>
-      <Button type="Success">Checkout</Button>
-      <Button type="Danger">Cancel</Button>
+      <Button type="Danger" clicked={props.exit}>Cancel</Button>
+      <Button type="Success" clicked={props.checkout}>Checkout</Button>
     </Auxiliary>
   );
 };

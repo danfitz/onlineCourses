@@ -76,6 +76,10 @@ class BurgerBuilder extends Component {
       };
     });
   };
+  
+  checkoutHandler = () => {
+    alert("Enjoy your burger!");
+  };
 
   render() {
     const disabledInfo = { ...this.state.ingredients };
@@ -92,6 +96,8 @@ class BurgerBuilder extends Component {
           <OrderSummary
             ingredients={this.state.ingredients}
             price={this.state.totalPrice}
+            exit={this.summaryHandler}
+            checkout={this.checkoutHandler}
           />
         </Modal>
         
