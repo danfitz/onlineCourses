@@ -1,0 +1,23 @@
+.MenuButton {
+  width: 2rem;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  border: none;
+  background-color: transparent;
+}
+
+.MenuButton div {
+  width: 90%;
+  height: 0.15rem;
+  background-color: white;
+}
+
+@media (min-width: 500px) {
+  .MenuButton {
+      display: none;
+  }
+}
