@@ -4,6 +4,9 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Modal from "../../components/UI/Modal/Modal";
+import Spinner from "../../components/UI/Spinner/Spinner";
+
+import axios from "../../axiosOrders";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -22,7 +25,8 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 4,
     purchasable: false,
-    summaryVisible: false
+    summaryVisible: false,
+    checkoutLoading: false
   };
 
   updatePurchaseState = () => {
@@ -77,7 +81,32 @@ class BurgerBuilder extends Component {
   };
   
   checkoutHandler = () => {
-    alert("Enjoy your burger!");
+    this.setState({ checkoutLoading: true });
+
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: "Dan Fitz",
+        address: {
+          street: "123 Main Street",
+          zipCode: "A1A1A1",
+          country: "Canada"
+        },
+        email: "dan@danfitz.com"
+      },
+      deliveryMethod: "fastest"
+    };
+
+    axios.post("/orders.json", order)
+      .then(response => {
+        console.log(response);
+        this.setState({ checkoutLoading: false, summaryVisible: false });
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ checkoutLoading: false, summaryVisible: false });
+      });
   };
 
   render() {
@@ -92,14 +121,16 @@ class BurgerBuilder extends Component {
           show={this.state.summaryVisible}
           exit={this.summaryHandler}
         >
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            price={this.state.totalPrice}
-            exit={this.summaryHandler}
-            checkout={this.checkoutHandler}
-          />
+          { this.state.checkoutLoading ?
+            <Spinner /> :
+            <OrderSummary
+              ingredients={this.state.ingredients}
+              price={this.state.totalPrice}
+              exit={this.summaryHandler}
+              checkout={this.checkoutHandler}
+            /> }
         </Modal>
-        
+
         <Burger
           ingredients={this.state.ingredients}
         />

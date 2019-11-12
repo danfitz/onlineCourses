@@ -14,4 +14,3 @@ Before you even start a React app, you want to figure out these 3 things:
 2. **Application state or data**. What are the main bits of data you'll be using in the application?
 
 3. **Components vs. containers**. Which components will just be presentational and dumb? Which will hold state and contain the presentational components?
-

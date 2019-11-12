@@ -1,0 +1,20 @@
+.Post {
+    width: 12.5rem;
+    padding: 0.8rem;
+    text-align: center;
+    border: 0.05rem solid #eee;
+    box-shadow: 0 0.1rem 0.15rem #ccc;
+    margin: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.Post:hover,
+.Post:active {
+    background-color: #C0DDF5;
+}
+
+.Author {
+    margin: 0.8rem 0;
+    color: #ccc;
+}
