@@ -5,6 +5,7 @@ import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Modal from "../../components/UI/Modal/Modal";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import withErrorModal from "../../hoc/withErrorModal/withErrorModal";
 
 import axios from "../../axiosOrders";
 
@@ -98,7 +99,7 @@ class BurgerBuilder extends Component {
       deliveryMethod: "fastest"
     };
 
-    axios.post("/orders.json", order)
+    axios.post("/orders.", order)
       .then(response => {
         console.log(response);
         this.setState({ checkoutLoading: false, summaryVisible: false });
@@ -148,4 +149,4 @@ class BurgerBuilder extends Component {
   };
 };
 
-export default BurgerBuilder;
+export default withErrorModal(BurgerBuilder, axios);
