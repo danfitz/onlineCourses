@@ -1,5 +1,11 @@
+const chalk = require("chalk");
+
 const getNotes = require("./notes.js");
 
-console.log(getNotes());
+// console.log(getNotes());
 
-console.log(module.exports);
+const msg = chalk.bgGreen.bold("Your console message: %s");
+
+console.log(msg, "APP SUCCESSFULLY BUILT AND DEPLOYED");
+
+// console.log(chalk.bgGreen.bold._styles);
