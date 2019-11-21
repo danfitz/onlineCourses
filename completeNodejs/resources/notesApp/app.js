@@ -1,11 +1,16 @@
 const chalk = require("chalk");
-
+const yargs = require("yargs");
 const getNotes = require("./notes.js");
 
-// console.log(getNotes());
+// const command = process.argv[2];
 
-const msg = chalk.bgGreen.bold("Your console message: %s");
+// if (command === "add") {
+//   console.log("Adding note...");
+// };
 
-console.log(msg, "APP SUCCESSFULLY BUILT AND DEPLOYED");
+// if (command === "remove") {
+//   console.log("Removing note...");
+// };
 
-// console.log(chalk.bgGreen.bold._styles);
+console.log(process.argv);
+console.log(yargs.argv);
