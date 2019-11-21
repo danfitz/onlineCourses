@@ -26,13 +26,24 @@ if (process.argv[2] === "add") {
 };
 ```
 
-However, `process.argv` isn't great at parsing strings, especially when we use flags.
+However, `process.argv` isn't great at parsing strings, especially when we use flags. In order to parse strings to use flags in our commands, we can import modules like `yargs`.
 
 ```js
 // In console: node app.js add --title="New Note"
 
 console.log(process.argv[3]);
 // Logs "--title='New Note'" as one long string
+
+const yargs = require("yargs");
+console.log(yargs.argv.title);
+// Logs "New Note"
 ```
 
-In order to parse strings to use flags in our commands, we can import `yargs`.
+## Yargs tips
+
+1. By default, modules like `yargs` provide a `--help` flag showing other available flags. One other default flag is `--version`, which starts at v1.0.0. You can update this using `yargs.version("1.1.0");`.
+
+2. To add commands to `yargs`, use the `yargs.command` method and pass a configuration object inside. The key property is `handler`, which runs the callback you provide when the command is invoked.
+
+3. `yargs.parse()` must appear the bottom of your code in order for anything to appear on your command line.
+
