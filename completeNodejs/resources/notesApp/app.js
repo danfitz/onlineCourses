@@ -16,10 +16,15 @@ yargs.command({
     },
     body: {
       describe: "Note body",
-      type: "string"
+      type: "string",
+      demandOption: true
     }
   },
-  handler(yargv) { console.log("Adding a new note: " + yargv.title) }
+  handler(argv) {
+    console.log("Adding a new note...");
+    console.log("Title:", argv.title)
+    console.log("Body:", argv.body);
+  }
 });
 
 // Remove a note command

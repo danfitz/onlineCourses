@@ -47,3 +47,25 @@ console.log(yargs.argv.title);
 
 3. `yargs.parse()` must appear the bottom of your code in order for anything to appear on your command line.
 
+## Storing Data
+
+Now that we can obtain inputs using `yargs` and the command line, how do we store that data? Basic answer is to use the `fs` (file system) built-in Node.js module
+
+### In JSON
+
+JSON is just a string. JavaScript provides the `JSON` API to easily convert JS objects to and from JSON. (`JSON.stringify` converts objects to JSON. `JSON.parse` converts JSON to objects.)
+
+```js
+// Example
+const json = JSON.stringify(obj);
+```
+
+Using the `fs` module, we can perform the following steps to write data into JSON and then read from it.
+
+1. Create a JS object.
+2. `JSON.stringify(obj);` to convert to JSON.
+3. `fs.writeFileSync("file.json", json);` to write JSON string to file.
+4. `const dataBuffer = fs.readFileSync(file.json);` to return a **data buffer** (it's bytes, not strings).
+5. `dataBuffer.toString();` to convert data buffer to JSON string.
+6. `JSON.parse(json);` to convert JSON back to object.
+7. Now you can use object in your code!
