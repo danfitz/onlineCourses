@@ -51,10 +51,10 @@ const add = function({ title, body }) {
   const notes = loadNotes();
 
   // If note title exists, exit function
-  const notesWithTitle = notes.filter(note => note.title === title);
+  const existingNote = notes.find(note => note.title === title);
 
-  if (notesWithTitle.length) {
-    console.log(chalk.inverse.yellow("Note title taken! Try a different title..."));
+  if (existingNote) {
+    console.log(chalk.inverse.yellow("Note title taken..."));
     return;
   };
 
@@ -75,7 +75,7 @@ const remove = function({ title }) {
 
   // If note title not found, exit function
   if (notes.length === poppedNotes.length) {
-    console.log(chalk.inverse.yellow("Note title not found. Try again..."));
+    console.log(chalk.inverse.yellow("Note not found..."));
     return;
   };
 
@@ -83,7 +83,29 @@ const remove = function({ title }) {
   saveNotes(poppedNotes, chalk.inverse.green(`Note "${title}" removed!`));
 };
 
+const read = function({ title }) {
+  const notes = loadNotes();
+
+  const note = notes.find(note => note.title === title);
+
+  if (note) {
+    console.log(chalk.bold.inverse(note.title.toUpperCase()));
+    console.log(note.body);
+  } else {
+    console.log(chalk.inverse.yellow("Note not found"))
+  };
+};
+
+const list = function() {
+  const notes = loadNotes();
+
+  console.log(chalk.bold.inverse("Your list of notes:"));
+  notes.forEach(note => console.log(note.title));
+};
+
 module.exports = {
   add,
-  remove
+  remove,
+  read,
+  list
 };

@@ -41,14 +41,21 @@ yargs.command({
 yargs.command({
   command: "read",
   describe: "Read an existing note",
-  handler() { console.log("Reading an existing note...") }
+  builder: {
+    title: {
+      describe: "Note title",
+      type: "string",
+      demandOption: true
+    }
+  },
+  handler: notes.read
 });
 
 // List notes command
 yargs.command({
   command: "list",
   describe: "List all notes",
-  handler() { console.log("Listing all notes...") }
+  handler: notes.list
 });
 
 yargs.parse(); // runs
