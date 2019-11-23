@@ -1,4 +1,5 @@
 const fs = require("fs");
+const chalk = require("chalk");
 
 // ***** READ AND WRITE HELPERS *****
 
@@ -34,9 +35,13 @@ const loadNotes = function() {
 };
 
 // Function that writes notes from array
-const saveNotes = function(notes) {
-  writeJson("notes.json", notes);
-  console.log("Notes updated!");
+const saveNotes = function(notes, message) {
+  try {
+    writeJson("notes.json", notes);
+    console.log(message);
+  } catch(error) {
+    console.log(chalk.inverse.red("Something went wrong:", error));
+  };
 };
 
 
@@ -49,7 +54,7 @@ const add = function({ title, body }) {
   const notesWithTitle = notes.filter(note => note.title === title);
 
   if (notesWithTitle.length) {
-    console.log("Note title taken! Try a different title...");
+    console.log(chalk.inverse.yellow("Note title taken! Try a different title..."));
     return;
   };
 
@@ -59,7 +64,7 @@ const add = function({ title, body }) {
     body
   });
 
-  saveNotes(notes);
+  saveNotes(notes, chalk.inverse.green(`Note "${title}" added!`));
 };
 
 const remove = function({ title }) {
@@ -70,12 +75,12 @@ const remove = function({ title }) {
 
   // If note title not found, exit function
   if (notes.length === poppedNotes.length) {
-    console.log("Note title not found. Unable to remove note...");
+    console.log(chalk.inverse.yellow("Note title not found. Try again..."));
     return;
   };
 
   // Else remove note
-  saveNotes(poppedNotes);
+  saveNotes(poppedNotes, chalk.inverse.green(`Note "${title}" removed!`));
 };
 
 module.exports = {
