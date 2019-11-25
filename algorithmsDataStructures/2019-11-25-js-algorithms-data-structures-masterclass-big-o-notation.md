@@ -2,7 +2,7 @@
 categories: [compsci]
 tags: [js, algorithms]
 title: "JavaScript Algorithms and Data Structures Masterclass Module 1: Big O Notation"
-sources: [udemy]
+source: [udemy]
 ---
 
 ## Motivation for Big O Notation

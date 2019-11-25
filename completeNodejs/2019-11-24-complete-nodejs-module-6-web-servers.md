@@ -71,3 +71,26 @@ When we use `express.static`, we're handing express a static directory. That mea
 Using template engines like **handlebars**, we can do 2 things:
 1. Render dynamic content
 2. Create reusable code that can be used across these dynamic pages, e.g. reusable header
+
+### Configuring handlebars
+
+1. `npm install hbs`. (We use `hbs` because it's configured to work with express.)
+2. Configure express to recognize `hbs` using `app.set('view engine', 'hbs')`.
+  * **Note**: `app.set` is the standard way to configure anything in express.
+
+**Bonus**: You can customize the directory of your templates using...
+
+```js
+app.set('views', path.join(__dirname, '../newDirName'))
+```
+
+### Rendering dynamic content
+
+Here's instructions to render dynamic content using handlebars:
+
+1. Create `views` directory at root.
+2. Create `myTemplate.hbs` and place HTML inside. All dynamic content is in this format: `{{ varName }}` (like jinja).
+  * **Note**: You can reference assets inside `public` using relative paths still!
+3. Inside an `app.get` callback, call `res.render('myTemplate', { varName: 'value' })`. Now your template has access to dynamic variables!
+
+### Reusable template partials
