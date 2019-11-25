@@ -191,7 +191,7 @@ Ask yourself: **how many items can be in a set?** A few? Hundreds? Billions?
 
 ### One-to-one
 
-**One-to-one** is the easiest to model. There are 3 ways of creating the relationship:
+**One-to-one** relationships are the easiest to model. There are 3 ways of creating the relationship:
 1. Embed data inside document.
   * If the relationship is truly unique, this should work.
 2. Create 2 documents in different collections using the same document ID. (Like buckets.)
@@ -223,6 +223,104 @@ db.collection('users').doc('userId').get()
 
 ### One-to-many
 
+**One-to-many** relationships are the most common. There are 3 ways to model it:
 
+1. Embed an array of maps
+  * Great when you have a small number of items in a set and don't need to query the data.
+  * If you need to query the data, you have to read *all parent documents* and then query client-side, which is expensive.
+
+So, if data needs to be *queried*, opt for:
+
+2. Subcollection
+  * However, you can only query scoped to the specific document
+
+So, if you need to query across parent documents, opt for:
+
+3. Root collection
+  * Here, you reference the relevant document ID in your documents, creating the relationship.
+
+```js
+const authorId = 'ayn-rand'
+
+// 1. Embedded array of maps
+const authorWithBooks = db.collection('authors').doc(authorId)
+
+// 2. Subcollection
+const books = db.collection('authors').doc(authorId).collection('books')
+
+// 3. Root Collection, requires index
+const booksFrom1971 = db.collection('books')
+  .where('author', '==', authorId)
+  .where('published', '>', 1971)
+```
 
 ### Many-to-many
+
+**Many-to-many** relationships are the most complex to model.
+
+1. Create an **middle-man collection**
+  * In a middle-man collection, the 2 document IDs are keys in the document.
+  * The original documents don't have data about the relationship. They have to go to the middle-man collection to get the data.
+  * **Note**: If you want to create a unique relationship (e.g. user can only heart a post once), make the document ID into a **composite ID**, which combines the 2 document IDs together.
+
+2. Embedded map with document IDs as keys
+  * You're essentially creating a reference point for related data in the document.
+  * The downside to this is that when we're querying the data, we're pulling in data from the parent document as well, which could be unnecessarily expensive.
+
+3. Embedded array with document IDs as items
+  * This is similar to an embedded map but uses an array instead.
+  * **Note**: You can only use the `array-contains` operator once at a time.
+
+```js
+const authorId = 'dr-seuss';
+const bookId   = 'lorax';
+
+// 1. Middle Man Collection
+const userReviews = db.collection('reviews').where('author', '==', authorId);
+const bookReviews = db.collection('reviews').where('book', '==', bookId);
+
+// Single read with composite key
+const specificReview = db.collection('reviews').doc(`${bookId}_${authorId}`);
+
+// 2. Map
+// Reviews embedded on books
+const bookWithReviews = db.collection('books').doc(bookId);
+const userReviews = db.collection('books').orderBy('reviews.jeff-delaney');
+
+// 3. Array
+const books = db.collection('books').where('categories', 'array-contains', 'fiction');
+
+// 4. Bucket
+// Get a collection of documents with an array of IDs
+const getLikedBooks = async () => {
+
+  // Get books through user likes
+  const userLikes = await db.collection('likes').orderBy('jeff-delaney').get();
+  const bookIds = userLikes.docs.map(snap => snap.id);
+
+  const bookReads = bookIds.map(id => db.collection('books').doc(id).get() );
+  const books = Promise.all(bookReads)
+}
+
+getLikedBooks()
+```
+
+## Advanced Techniques for Efficiency
+
+### Data duplication
+
+**Data duplication** is about duplicating data at different places in the database to decrease the number of reads required to get the data. (This is a no-no in SQL but normal in NoSQL.)
+
+An example of data duplication is a one-to-many relationship where a user can have multiple comments. Each comment is given the user's document ID for reference. However, if we want to avoid reading the user's document to get more data on them, we can *duplicate* some of that data in the comment document itself.
+
+Data duplication makes the most sense when you have information with **lots of reads but few writes**: you're decreasing number of reads required to gather data, but you're increasing number of places you have to write when that data changes.
+
+**Pro tip**:
+* Good candidates for data duplication are things like usernames, which almost never change. When they do change, however, you may have to update them in 1000s of documents.
+* Bad candidates are things like
+
+## Aggregation via cloud functions
+
+We can create cloud functions like `onCreate`, `onDelete`, `onUpdate`, and more that run when an event happens.
+
+The most common use case for this is incrementing and decrementing counters (e.g. like count). By creating aggregate data, you decrease the number of reads required to get that data, increasing performance.
