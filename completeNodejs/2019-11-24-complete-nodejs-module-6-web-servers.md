@@ -94,3 +94,35 @@ Here's instructions to render dynamic content using handlebars:
 3. Inside an `app.get` callback, call `res.render('myTemplate', { varName: 'value' })`. Now your template has access to dynamic variables!
 
 ### Reusable template partials
+
+**Partials** are reusable bits of HTML that you can include in your handlebars templates (e.g. headers).
+
+1. `const hbs = require('hbs')` for the module.
+2. Tell handlebars where we're going to put our partials: `hbs.registerPartials(partialsPath)`.
+3. At `partialsPath`, create your partial snippet of HTML `partial.hbs`
+4. Inside one of your templates, you can now inject your partial via `{{>partial}}`.
+5. **Bonus**: Your partial can reference the same variables passed into your templates via `res.render`.
+
+**Note**: If you're running `nodemon`, you'll need to provide an `-e js,hbs` flag to your command to tell `nodemon` to listen for hbs files as well.
+
+## 404 Page
+
+A 404 page is basically a **catch-all** for every URL path *other* than ones you explicitly created using `app.get`.
+
+To do this, you need to use a **wildcard** in `app.get` like `app.get('*', ...)`.
+
+**Note**: You must place this wildcard as the *last* `app.get` call. That's because when a user visits your web server, it searches for a match to your route from top to bottom.
+
+```js
+// 1. First checks to see if URL matches static file
+app.use(express.static(publicPath))
+
+// 2. Then checks your explicit app.get calls
+app.get('/', ...)
+app.get('/about', ...)
+
+// 3. Finally matches wildcard
+app.get('*', ...)
+```
+
+**Pro tip**: The wildcard character can include a specific pattern. For example, `/help/*` matches any routes that are subpaths of `/help`.
