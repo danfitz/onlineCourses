@@ -1,6 +1,12 @@
+// Core modules
 const path = require('path')
+// npm modules
 const express = require('express')
 const hbs = require('hbs')
+// Personal modules
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
+
 
 // Initialize express
 const app = express()
@@ -40,13 +46,21 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-  res.send({
-    forecast: 5.54,
-    location: 'Toronto, ON, Canada'
-  })
+  if (!req.query.address) {
+    res.send({
+      error: 'You must provide an address'
+    })
+
+  } else {
+    geocode({ address: req.query.address })
+      .then(response => forecast(response))
+      .then(response => res.send({response}))
+      .catch(error => res.send({error}))
+  }
 })
 
 app.get('/products', (req, res) => {
+  console.log(req.query)
   res.send({
     name: 'iPhone XS 64GB',
     price: 599.99
