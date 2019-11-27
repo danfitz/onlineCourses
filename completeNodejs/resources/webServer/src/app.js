@@ -46,6 +46,13 @@ app.get('/weather', (req, res) => {
   })
 })
 
+app.get('/products', (req, res) => {
+  res.send({
+    name: 'iPhone XS 64GB',
+    price: 599.99
+  })
+})
+
 app.get('/help/*', (req, res) => {
   res.render('404', {
     title: '404 Help',
