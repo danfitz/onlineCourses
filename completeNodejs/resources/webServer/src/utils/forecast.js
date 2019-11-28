@@ -16,7 +16,7 @@ const forecast = data => {
         const body = response.body
         const newData = {
           ...data,
-          forecast: `${body.daily.data[0].summary} It is currently ${body.currently.temperature} degree celsius outside. There is ${body.currently.precipProbability}% chance of rain.`
+          forecast: `${body.daily.data[0].summary} It is currently ${body.currently.temperature.toFixed(1)} degrees celsius outside. There is ${body.currently.precipProbability}% chance of rain.`
         }
 
         resolve(newData)
