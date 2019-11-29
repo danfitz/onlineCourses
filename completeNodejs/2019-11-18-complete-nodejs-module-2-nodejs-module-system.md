@@ -2,6 +2,7 @@
 categories: [backend]
 tags: [nodejs, js]
 title: "Complete Node.js Developer Course Module 2: Node.js Module System"
+source: [udemy]
 ---
 
 There are 3 kinds of modules in Node.js:

@@ -2,6 +2,7 @@
 categories: [backend]
 tags: [nodejs, js]
 title: "Complete Node.js Developer Course Module 4: Debugging Node.js"
+source: [udemy]
 ---
 
 ## Debugging Node.js

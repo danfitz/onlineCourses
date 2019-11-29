@@ -2,6 +2,7 @@
 categories: [frontend]
 tags: [react]
 title: "React - The Complete Guide Module 3: Rendering Lists and Conditionals"
+source: [udemy]
 ---
 
 ## Conditional Rendering

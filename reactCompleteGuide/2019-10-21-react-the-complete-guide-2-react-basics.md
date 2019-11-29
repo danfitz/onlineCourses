@@ -2,6 +2,7 @@
 categories: [frontend]
 tags: [react]
 title: "React - The Complete Guide Module 2: React Basics"
+source: [udemy]
 ---
 
 ## Build Workflow
