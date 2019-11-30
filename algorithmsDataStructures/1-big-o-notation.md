@@ -1,9 +1,11 @@
 ---
+title: "Big O Notation"
 categories: [compsci]
 tags: [js, algorithms]
-title: "JavaScript Algorithms and Data Structures Masterclass Module 1: Big O Notation"
 source: [udemy]
 ---
+
+# Big O Notation
 
 ## Motivation for Big O Notation
 
@@ -15,7 +17,7 @@ More importantly, big O notation allows us to **numerically represent** the perf
 
 **Note**: Big O notation isn't a black and white calculation that can tell you the best solution in all cases. Implementations can have trade-offs.
 
-## What is Big O Notation?
+## An example
 
 Suppose that we want to get the sum of all numbers from 1 up to n. There are 2 working solutions we can think of:
 
@@ -43,7 +45,7 @@ Which is better? What does better even *mean*?
 
 **Pro tip**: We care the most about **speed** and **memory intensiveness**. At the same time, prioritizing these will often come at the cost of readability, so it's a balancing act.
 
-### Speed and the problem with time
+### The problem with time
 
 One way we might want to measure speed is to use a timer.
 
@@ -68,7 +70,58 @@ The above example *does* demonstrate that the algorithm is much more efficient. 
   * **Pro tip**: Very often, you'll be comparing very fast algorithms. If time was your measurement, they'd all look identical.
 4. Some code takes hours to run. It would be nice to be able to talk about the speed of our code without relying on these long tests.
 
-## Big O Expressions
+### If not time, then what?
+
+Instead of time, the better way is to measure the **number of simple operations** that the computer has to perform.
+
+```js
+const addUpTo = n => {
+  let sum = 0 // 1 assignment operation
+  // 1 assignment, n comparisons, n addition + assignment
+  for (let i = 1; i <= n; i++) {
+    sum += i // n addition + assignment
+  }
+  return sum
+}
+
+const algorithmAddUpTo = n => {
+  return n * (n + 1) / 2 // 3 operations: addition, multiplication, division!
+}
+```
+
+In the examples above, we might say:
+* Iterative approach is `5n + 2`
+* Formulaic approach is `3`
+
+However, with big O notation, we aren't really conceerned with whether it's `5n`, `20n`, or `10000n`. The important thing is that the number of operations grow **proportionally with n**.
+
+## What is Big O Notation?
+
+Big O notation is just a way to **formally talk about how the runtime of an algorithm grows as the inputs grow**.
+
+The syntax for big O is `O(f(n))`:
+* `O()` denotes that we're talking about big O
+* `f()` is the function or algorithm being measured
+* `n` is the input passed into `f()`
+
+`f(n)`, when run, generates an **output**, which tells us the runtime in formalized terms. Some classic patterns include:
+* **Linear**: `f(n) = n`
+* **Quadratic**: `f(n) = n^2`
+* **Constant**: `f(n) = 1`
+* Or something else entirely!
+
+**Note**: Big O notation is always talking about the **worst-case scenario**: huge inputs. Small inputs usually will be too similar for it to matter.
+
+## Simplifying Big O Expressions
+
+* Multiples of `n` like `100n` don't matter. We just say `n`.
+  * Instead, we care about **order of magnitude**: the size of the runtime of an input relative to its previous smaller inputs. In other words, **growth rate**!
+
+* Constant numbers of operations, whether it's `100` or `1000`, get simplified down to `1` for simplicity.
+
+* Smaller terms, like multipliers or constants, don't matter.
+  * For example, `95n^2 + 150`, from a **big picture view**, starts to look the same as `n^2`. So we drop `150` and `95` and just say `n^2`.
+  * Another example: `n^2 + 5n`. Say `n = 10000`. That means `100,000,000 + 50000`. `5n`, from big picture, is miniscule, so we drop it. 
 
 ## Time Complexity and Space Complexity
 
