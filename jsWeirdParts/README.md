@@ -1,3 +1,3 @@
-# React: The Complete Guide
+# JavaScript: Understanding the Weird Parts
 
-This is a test README.md file for a directory.
+[Link to Udemy Course](https://www.udemy.com/course/understand-javascript/)
