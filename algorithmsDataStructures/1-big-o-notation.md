@@ -1,5 +1,6 @@
 ---
-title: "Big O Notation"
+title: 'Big O Notation'
+date: '2019-11-25'
 categories: [compsci]
 tags: [js, algorithms]
 source: [udemy]
