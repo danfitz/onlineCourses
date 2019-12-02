@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# Styling React Components
+# 4 - Styling React Components
 
 **Recall**: We know 2 ways to style components and elements so far.
 

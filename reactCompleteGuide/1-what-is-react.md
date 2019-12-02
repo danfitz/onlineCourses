@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# What is React?
+# 1 - What is React?
 
 React is a **JavaScript library** for building **user interfaces**.
 

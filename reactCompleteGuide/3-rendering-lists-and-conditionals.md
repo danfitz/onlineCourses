@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# Rendering Lists and Conditionals
+# 3 - Rendering Lists and Conditionals
 
 ## Conditional Rendering
 

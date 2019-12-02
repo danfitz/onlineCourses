@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# Debugging React Apps
+# 5 - Debugging React Apps
 
 ## Logical Errors and Source Maps
 

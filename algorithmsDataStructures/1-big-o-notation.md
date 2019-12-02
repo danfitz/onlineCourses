@@ -1,12 +1,13 @@
 ---
 title: 'Big O Notation'
+part: 1
 date: '2019-11-25'
 categories: [compsci]
 tags: [js, algorithms]
 source: [udemy]
 ---
 
-# Big O Notation
+# 1- Big O Notation
 
 ## Motivation for Big O Notation
 

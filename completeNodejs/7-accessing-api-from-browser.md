@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# Accessing API from Browser
+# 7 - Accessing API from Browser
 
 The goal of this section is to learn how to create an **API endpoint** where the data provided is *customizable based on user input*, i.e., query parameters.
 
