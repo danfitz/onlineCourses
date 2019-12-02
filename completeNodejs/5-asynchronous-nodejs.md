@@ -1,9 +1,13 @@
 ---
+title: "Asynchronous Node.js"
+part: 5
+date: "2019-11-24"
 categories: [backend]
 tags: [nodejs, js]
-title: "Complete Node.js Developer Course Module 5: Asynchronous Node.js"
 source: [udemy]
 ---
+
+# Asynchronous Node.js
 
 ## The HTTPS Core Module
 

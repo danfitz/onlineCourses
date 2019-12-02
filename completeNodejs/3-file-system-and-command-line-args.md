@@ -1,9 +1,13 @@
 ---
+title: "File System and Command Line Args"
+part: 3
+date: "2019-11-19"
 categories: [backend]
 tags: [nodejs, js]
-title: "Complete Node.js Developer Course Module 3: File System and Command Line Args"
 source: [udemy]
 ---
+
+# File System and Command Line Args
 
 ## Command Line Arguments
 

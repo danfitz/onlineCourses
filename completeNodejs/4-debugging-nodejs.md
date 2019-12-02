@@ -1,11 +1,13 @@
 ---
+title: "Debugging Node.js"
+part: 4
+date: "2019-11-23"
 categories: [backend]
 tags: [nodejs, js]
-title: "Complete Node.js Developer Course Module 4: Debugging Node.js"
 source: [udemy]
 ---
 
-## Debugging Node.js
+# Debugging Node.js
 
 There are 2 kinds of bugs:
 * Bugs that throw explicit errors that you can read

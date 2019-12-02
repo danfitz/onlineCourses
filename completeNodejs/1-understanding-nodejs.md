@@ -1,9 +1,13 @@
 ---
+title: "Understanding Node.js"
+part: 1
+date: "2019-11-18"
 categories: [backend]
 tags: [nodejs, js]
-title: "Complete Node.js Developer Course Module 1: Understanding Node.js"
 source: [udemy]
 ---
+
+# Understanding Node.js
 
 ## What is Node.js?
 
