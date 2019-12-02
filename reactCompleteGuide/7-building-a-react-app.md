@@ -1,9 +1,13 @@
 ---
+title: "Building A React App"
+part: 7
+date: "2019-11-07"
 categories: [frontend]
-tags: [react]
-title: "React - Complete Guide 7: Building A React App"
+tags: [react, js]
 source: [udemy]
 ---
+
+# Building A React App
 
 ## Planning A React App
 

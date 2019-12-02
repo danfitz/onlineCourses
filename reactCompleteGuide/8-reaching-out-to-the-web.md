@@ -1,9 +1,13 @@
 ---
+title: "Reaching Out to the Web"
+part: 8
+date: "2019-11-11"
 categories: [frontend]
-tags: [react]
-title: "React - Complete Guide 8: Reaching Out to the Web"
+tags: [react, js]
 source: [udemy]
 ---
+
+# Reaching Out to the Web
 
 ## HTTP Requests in React
 

@@ -1,9 +1,13 @@
 ---
+title: "Debugging React Apps"
+part: 5
+date: "2019-10-31"
 categories: [frontend]
-tags: [react]
-title: "React - Complete Guide 5: Debugging React Apps"
+tags: [react, js]
 source: [udemy]
 ---
+
+# Debugging React Apps
 
 ## Logical Errors and Source Maps
 

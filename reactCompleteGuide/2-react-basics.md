@@ -1,9 +1,13 @@
 ---
+title: "React Basics"
+part: 2
+date: "2019-10-21"
 categories: [frontend]
-tags: [react]
-title: "React - The Complete Guide Module 2: React Basics"
+tags: [react, js]
 source: [udemy]
 ---
+
+# React Basics
 
 ## Build Workflow
 

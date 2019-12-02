@@ -28,4 +28,7 @@ The value of SSH with GitHub is that you can connect without a username and pass
 
 ### Heroku
 
-Heroku allows configuration in the command line. Just run `heroku keys:add`, and it will find `id_rsa.pub` automatically.
+Heroku allows configuration in the command line.
+
+1. Run `heroku keys:add`, and it will find `id_rsa.pub` automatically.
+2. Then run `heroku create <appName>` to create new app.

@@ -1,9 +1,13 @@
 ---
+title: "Rendering Lists and Conditionals"
+part: 3
+date: "2019-10-22"
 categories: [frontend]
-tags: [react]
-title: "React - The Complete Guide Module 3: Rendering Lists and Conditionals"
+tags: [react, js]
 source: [udemy]
 ---
+
+# Rendering Lists and Conditionals
 
 ## Conditional Rendering
 

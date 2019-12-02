@@ -1,9 +1,13 @@
 ---
+title: "Styling React Components"
+part: 4
+date: "2019-10-29"
 categories: [frontend]
-tags: [react]
-title: "React - Complete Guide 4: Styling React Components"
+tags: [react, js]
 source: [udemy]
 ---
+
+# Styling React Components
 
 **Recall**: We know 2 ways to style components and elements so far.
 

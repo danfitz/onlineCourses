@@ -1,9 +1,13 @@
 ---
+title: "Component Deep Dive"
+part: 6
+date: "2019-10-31"
 categories: [frontend]
-tags: [react]
-title: "React - Complete Guide 6: Component Deep Dive"
+tags: [react, js]
 source: [udemy]
 ---
+
+# Component Deep Dive
 
 ## Container vs. Presentational Components
 
