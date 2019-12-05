@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# 8 - Reaching Out to the Web
+# Reaching Out to the Web
 
 ## HTTP Requests in React
 

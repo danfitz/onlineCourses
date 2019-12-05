@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# 6 - Component Deep Dive
+# Component Deep Dive
 
 ## Container vs. Presentational Components
 

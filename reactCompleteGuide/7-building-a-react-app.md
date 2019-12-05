@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# 7 - Building A React App
+# Building A React App
 
 ## Planning A React App
 

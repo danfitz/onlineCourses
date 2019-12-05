@@ -7,7 +7,7 @@ tags: [react, js]
 source: [udemy]
 ---
 
-# 2 - React Basics
+# React Basics
 
 ## Build Workflow
 
