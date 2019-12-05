@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# 2 - Node.js Module System
+# Node.js Module System
 
 There are 3 kinds of modules in Node.js:
 * Core modules

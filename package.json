@@ -1,0 +1,22 @@
+{
+  "name": "onlinecourses",
+  "version": "1.0.0",
+  "description": "This is a roadmap of everything I'm learning now or interested in learning next.",
+  "main": "index.js",
+  "scripts": {
+    "summarize": "book sm -i resources,node_modules -t \"Dan Fitz's Notes\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danfitz/onlineCourses.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danfitz/onlineCourses/issues"
+  },
+  "homepage": "https://github.com/danfitz/onlineCourses#readme",
+  "devDependencies": {
+    "gitbook-summary": "^1.2.2"
+  }
+}

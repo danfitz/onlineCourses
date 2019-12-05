@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# 5 - Asynchronous Node.js
+# Asynchronous Node.js
 
 ## The HTTPS Core Module
 

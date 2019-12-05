@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# 4 - Debugging Node.js
+# Debugging Node.js
 
 There are 2 kinds of bugs:
 * Bugs that throw explicit errors that you can read

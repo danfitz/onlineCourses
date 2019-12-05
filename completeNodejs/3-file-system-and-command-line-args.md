@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# 3 - File System and Command Line Args
+# File System and Command Line Args
 
 ## Command Line Arguments
 

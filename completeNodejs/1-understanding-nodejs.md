@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# 1 - Understanding Node.js
+# Understanding Node.js
 
 ## What is Node.js?
 

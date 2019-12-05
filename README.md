@@ -21,3 +21,14 @@ Finally, a little every day, I'm learning **algorithms and data structures** out
 ## NEXT
 
 * Learn mobile starting with React Native using [Stephen Grider's Udemy course](https://www.udemy.com/course/the-complete-react-native-and-redux-course/)
+
+## On SUMMARY.md
+
+Currently, these notes are hosted using GitBook. When GitBook renders the `.md` files into HTML, it dynamically generates a Table of Contents sidebar containing navigation through all notes. However, it's out of order.
+
+To solve this, I need to provide a `SUMMARY.md` file, which allows me to customize what appears in the Table of Contents sidebar. However, it's tedious to maintain this file manually. So, I've included `gitbook-summary` as an npm dev dependency.
+
+Any time an `.md` file is added, removed, or moved:
+
+1. `npm install` all dependencies (if you haven't already).
+2. In the root directory, `npm run summarize`. This will generate a `SUMMARY.md` file by going through every file in the repo.

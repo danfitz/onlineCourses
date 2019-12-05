@@ -7,7 +7,7 @@ tags: [nodejs, js]
 source: [udemy]
 ---
 
-# 6 - Web Servers
+# Web Servers
 
 ## What is Express?
 
