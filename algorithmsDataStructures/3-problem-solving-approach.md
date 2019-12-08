@@ -29,7 +29,17 @@ Here's the basic steps to solving a problem:
 
 ### 1. Understand the problem
 
+It's tempting, especially in a stressful setting like an interview, to jump straight into solving a problem. However, here's some things you want to do to make sure you **understand the problem** first:
+
+* Try to restate the problem in your own words.
+* What are the inputs that go into the problem?
+* What are the outputs that *should* come from the solution to the problem?
+* Can the outputs be *determined* from the inputs? In other words, are the inputs enough information to get the outputs expected?
+* How should I label the important pieces of data that are part of the problem? Is there key *terminology* I should create? (Example: parameter names)
+
 ### 2. Explore concrete examples
+
+
 
 ### 3. Break it down
 
