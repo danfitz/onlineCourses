@@ -77,8 +77,61 @@ charCount(5)
 
 ### 3. Break it down
 
+**Explicitly** write out the steps you need to take during the solution: rough pseudocode.
 
+Benefits:
+* Forces you to *think* about the code that you write before you write it; more targeted, effective, and **focused**
+* Helps you catch/keep in your radar things you're afraid of facing or misunderstandings that may steer you away from the solution
+
+Example:
+
+```js
+// Return an object with lowercase alphanumeric characters as keys containing counts
+const charCount = str => {
+  // Make object to return at end
+  // Loop over string
+    // For each char...
+    // If char is a number/letter AND is not in object, add it and set value to 1
+    // If char is a number/letter AND a key in object, so add 1 to count
+    // If char is something else (space, punctuation, etc.), don't do anything
+  // Return object
+}
+```
 
 ### 4. Solve/simplify the problem
+
+Now that you've broken down the problem, it's time to **implement** the solution. However, at this stage, if you find that there's small bits you don't really know how to deal with or find challenging, it might make sense to **simplify** the problem first.
+
+In other words: **SOLVE THE PROBLEM**. If you can't, **SOLVE A SIMPLER PROBLEM**!
+
+Solving the problem is not all or nothing. It's dangerous to put all your eggs in one basket and *only* aim for a 100% solution. It's often much better to at least have something to *show for*, so it's smart to solve the 90% you *know* you can do before working on the last 10% you know you'll get stuck on.
+
+The process:
+1. Find the core difficulties
+2. Temporarily ignore those difficulties
+3. Write a simplified solution
+   * **Pro tip**: Along the way, you'll often gain insight into how to achieve (4) 
+4. Then try to incorporate those difficulties back in if you can
+
+In the example below, we solve 90% of the `charCount` problem *except* how to check if a character is alphanumeric:
+
+```js
+const charCount = str => {
+  const result = {}
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i].toLowercase()
+    if (result[char]) {
+      result[char]++
+    } else {
+      result[char] = 1
+    }
+  }
+
+  return result
+}
+```
+
+With the example, we can then figure out the alphanumeric validation check and simply **plug it into** the existing code.
 
 ### 5. Look back and refactor
