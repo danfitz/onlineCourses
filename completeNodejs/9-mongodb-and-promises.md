@@ -148,3 +148,43 @@ db.collection('users').find({ name: 'John' }) // <= returns cursor pointing to d
 * `toArray` gets all the documents
 * `limit` limits the documents retrieved when chained *before* `toArray`
 * `count` gets the number of documents matching
+
+### Updating documents
+
+This is the **update** in CRUD. Here are the code snippets for the `updateOne` and `updateMany` methods:
+
+```js
+const updatePromise = db.collection('users').updateOne({ age: 27 }, {
+  $set: { age: 1 } // <= set age to 1 for first user found age 27
+})
+
+updatePromise.then(res => console.log(res.matchedCount, res.modifiedCount))
+
+const updateManyPromise = db.collection('users').updateMany({ age: 27 }, {
+  $inc: { age: 2 } // <= increments age by 2 for for all users age 27
+})
+
+updateManyPromise.then(res => console.log(res.matchedCount, res.modifiedCount))
+```
+
+**Note**: Notice that you can also use the **promise structure** for MongoDB instead of just a callback!
+
+More about `updateOne` and `updateMany`:
+* The first argument provided is the **filter** parameters and the second is the **update operators**.
+* The update operators define what you want to do with the documents targeted by the filter. Read about [update operators](https://docs.mongodb.com/manual/reference/operator/update/) for more info.
+* In the promise response, we're interested in `matchedCount` and `modifiedCount` to learn about the status of our update.
+
+
+### Deleting documents
+
+This is the **delete** in CRUD. Here are the code snippets for the `deleteOne` and `deleteMany` methods:
+
+```js
+db.collection('users').deleteOne({ name: 'Dan' })
+  .then(res => console.log(res.deletedCount))
+
+db.collection('users').deleteMany( { age: 27 })
+  .then(res => console.log(res.deletedCount))
+```
+
+Straightforward! It's just like the methods above!
