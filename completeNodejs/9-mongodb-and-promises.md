@@ -45,7 +45,7 @@ const connectionURL = 'mongodb://127.0.0.1:27071' // default for local databases
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
   // Check for error
   if (error) {
-    console.log('Failed to connected')
+    console.log('Failed to connect')
     return
   }
 
@@ -91,6 +91,60 @@ db.collection('users').insertMany([
 
 **Pro tip**: `result.ops` is the most useful property in `result`. It provides you with an array of all the documents you just wrote *with* their automatically generated unique IDs.
 
+### Object IDs
+
+Any time you create a document, it's automatically assigned an **object ID** both as a key and a field within the document. These are alphanumeric values meant to be **globally unique identifiers** or **GUIDs**. (In contrast, SQL usually has incrementing IDs for its tables like 1, 2, 3, 4.)
+
+Benefits of GUIDs:
+* MongoDB opted for GUIDs because it ensures zero query collision when you spread your database across multiple servers. This allows for smooth scaling.
+* Because MongoDB's GUIDs are generated via an algorithm, you can locally generate them *without* needing contact with your database.
+
+Here's the process to create your own object IDs using the `mongodb` Node.js library:
+
+```js
+const { ObjectID } = require('mongodb')
+
+const id = new ObjectID() // constructor function!
+id.getTimestamp() // returns timestamp embedded *inside* ID!
+```
+
+**Note**: The `ObjectID` creates an ID composed of a Unix timestamp, a random value, and a counter. Because of the timestamp embedded inside, you can actually get its value to find out when your document was created!
+
+To add your ID to a new document, simply add it as an `_id` property in the object:
+
+```js
+db.collection('users').insertOne({
+  _id: new ObjectID(),
+  name: 'Dan'
+})
+```
+
+**Note**: Object IDs are represented in MongoDB as **binary data**. It does this because the string representation *we* see (e.g. `5df51b461217c710848fbb77`) is double the size of the binary version. It's all about space saving. Proof:
+
+```js
+const id = new ObjectID() // returns binary representation
+console.log(id.id.length) // return 12!
+const stringId = id.toHexString() // returns string representation
+console.log(stringId.length) // returns 24!
+```
+
 ### Reading documents
 
-The object ID
+This is the **read** in CRUD. Here are code snippets for the `find` and `findOne` methods:
+
+```js
+db.collection('users').findOne({
+  _id: new ObjectID('5df51e00f1784519fc76149b'), // <= You MUST convert string into object ID
+  name: 'John' // <= Notice that you can search MULTIPLE criteria
+}, (error, user) => {
+  console.log(user) // if user found, returns object; if no user found, returns **null**
+})
+
+db.collection('users').find({ name: 'John' }) // <= returns cursor pointing to data
+  .toArray((error, users) => console.log(users)) // <= gets all the data from the cursor
+```
+
+**Important**: When you use `find`, MongoDB doesn't assume that you always want *all* matching documents back. Sometimes you just want 5 of the documents or maybe even the number of documents (without reading their contents). In order to allow for this flexibility, `find` returns a **cursor** *pointing* to the matching documents, which you then apply methods to:
+* `toArray` gets all the documents
+* `limit` limits the documents retrieved when chained *before* `toArray`
+* `count` gets the number of documents matching
