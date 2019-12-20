@@ -14,7 +14,7 @@ Finally, a little every day, I'm learning **algorithms and data structures** out
 * [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
   * 39% complete as of 2019/11/18
 * [The Complete Node.js Developer Course (3rd Edition)](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/)
-  * 41% complete as of 2019/12/07
+  * 45% complete as of 2019/12/15
 * [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)
   * 5% complete as of 2019/12/07
 
