@@ -7,6 +7,7 @@
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
 - [Complete Nodejs](completeNodejs/README.md)
   * [Understanding Node.js](completeNodejs/1-understanding-nodejs.md)
+  * [REST AP Is And Mongoose](completeNodejs/10-rest-apis-and-mongoose.md)
   * [Node.js Module System](completeNodejs/2-nodejs-module-system.md)
   * [File System And Command Line Args](completeNodejs/3-file-system-and-command-line-args.md)
   * [Debugging Node.js](completeNodejs/4-debugging-nodejs.md)
@@ -27,6 +28,11 @@
   * [The Weird Parts Of Java Script Module 4 Objects And Functions](jsWeirdParts/2019-10-09-the-weird-parts-of-javascript-4-objects-and-functions.md)
   * [The Weird Parts Of Java Script Module 5 Object Oriented Java Script And Prototypal Inheritance](jsWeirdParts/2019-10-15-the-weird-parts-of-javascript-5-object-oriented-javascript-and-prototypal-inheritance.md)
   * [The Weird Parts Of Java Script Module 6 Defining Objects](jsWeirdParts/2019-10-15-the-weird-parts-of-javascript-6-defining-objects.md)
+- Mysql Bootcamp
+  * [Overview And Installation](mysqlBootcamp/1-overview-and-installation.md)
+  * [Creating Databases And Tables](mysqlBootcamp/2-creating-databases-and-tables.md)
+- Random Notes
+  * [Understanding React Hooks](randomNotes/understanding-react-hooks.md)
 - [React Complete Guide](reactCompleteGuide/README.md)
   * [What Is React](reactCompleteGuide/1-what-is-react.md)
   * [React Basics](reactCompleteGuide/2-react-basics.md)
