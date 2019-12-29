@@ -18,17 +18,23 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
+    ingredients: undefined,
     totalPrice: 4,
     purchasable: false,
     summaryVisible: false,
-    checkoutLoading: false
+    checkoutLoading: false,
+    error: false
   };
+
+  componentDidMount() {
+    axios.get('/ingredients.json')
+      .then(response => {
+        this.setState({ ingredients: response.data })
+      })
+      .catch(error => {
+        this.setState({ error: true })
+      })
+  }
 
   updatePurchaseState = () => {
     this.setState(prevState => {
@@ -99,7 +105,7 @@ class BurgerBuilder extends Component {
       deliveryMethod: "fastest"
     };
 
-    axios.post("/orders.", order)
+    axios.post("/orders.json", order)
       .then(response => {
         console.log(response);
         this.setState({ checkoutLoading: false, summaryVisible: false });
@@ -122,7 +128,7 @@ class BurgerBuilder extends Component {
           show={this.state.summaryVisible}
           exit={this.summaryHandler}
         >
-          { this.state.checkoutLoading ?
+          { this.state.checkoutLoading || !this.state.ingredients ?
             <Spinner /> :
             <OrderSummary
               ingredients={this.state.ingredients}
@@ -132,18 +138,22 @@ class BurgerBuilder extends Component {
             /> }
         </Modal>
 
-        <Burger
-          ingredients={this.state.ingredients}
-        />
+        {this.state.ingredients ? (
+          <Auxiliary>
+            <Burger
+              ingredients={this.state.ingredients}
+            />
 
-        <BuildControls
-          price={this.state.totalPrice}
-          purchasable={this.state.purchasable}
-          disabledInfo={disabledInfo}
-          addIngredient={this.addIngredientHandler}
-          removeIngredient={this.removeIngredientHandler}
-          showSummary={this.summaryHandler}
-        />
+            <BuildControls
+              price={this.state.totalPrice}
+              purchasable={this.state.purchasable}
+              disabledInfo={disabledInfo}
+              addIngredient={this.addIngredientHandler}
+              removeIngredient={this.removeIngredientHandler}
+              showSummary={this.summaryHandler}
+            />
+          </Auxiliary>
+        ) : this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />}
       </Auxiliary>
     );
   };

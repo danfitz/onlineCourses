@@ -27,4 +27,6 @@ The difference between SQL and MySQL is the difference between a **database** an
 * There is actually a written **SQL standard** that all DBMS's try to adhere to.
 * One DBMS differs from another because of its *features* like security, user permissions, speed, download size, etc.
 
-## Setting up MySQL
+## Accessing MySQL
+
+To get into the CLI for MySQL, just run `mysql-ctl cli` in the terminal.

@@ -47,11 +47,22 @@ const resInterceptor = axios.interceptors.response.use(response => {
   // Do something with error
   return Promise.reject(error); // pushes forwards error for local handling 
 });
+```
+
+## Removing Interceptors
+
+To eject/remove an interceptor, simply use:
+
+```js
+const reqInterceptor = axios.interceptors.request.use(...)
+const resInterceptor = axios.interceptors.response.use(...)
 
 // ** TO EJECT INTERCEPTOR **
 axios.interceptors.request.eject(reqInterceptor);
 axios.interceptors.response.eject(resInterceptor);
 ```
+
+**Note**: It's a good idea to add `eject` as part of a **cleanup** function like `componentWillUnmount` or the cleanup callback in `useEffect`.
 
 ## Global Configuration
 
@@ -86,3 +97,45 @@ Now you can use `axiosInstance` for HTTP requests and even create multiple insta
 
 **Pro tip**: Instances work because of prototypal inheritance! You're overriding default behaviour in the global `axios` object. If you don't override, `axiosInstance` will inherit `axios` properties.
 
+## Error Handling HOC
+
+Using interceptors, we can create a higher-order component that handles any `axios` errors and displays them. Here's the basic code:
+
+```js
+const withErrorHandler = (WrappedComponent, axios) => {
+  return props => {
+    // Create error state
+    const [error, setError] = useState(null)
+
+    // On mount, add axios interceptors to axios instance USED BY WrappedComponent
+    useEffect(() => {
+      axios.interceptors.request.use(req => {
+        setError(null) // <= Reset error state on new request
+        return req
+      })
+
+      axios.interceptors.response.use(res => res, err => {
+        setError(err) // <= Set error state
+        return Promise.reject(err)
+      })
+    }, [setError])
+
+    return (
+      <>
+        <Modal {/* <= We're using a modal to display the error */}
+          show={error ? true : false}
+        >
+          {error ? error.message : null}
+        <Modal />
+        <WrappedComponent {...props} /> {/* <= Passing props down to component */}
+      </>
+    )
+  }
+}
+```
+
+Then in your actual component, add the HOC:
+
+```js
+export default withErrorHandler(MyComponent, axios)
+```

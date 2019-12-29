@@ -6,20 +6,28 @@ const withErrorModal = (WrappedComponent, axios) => {
   return props => {
     const [ errorState, setErrorState ] = useState({ error: null });
 
+    
+    const reqInterceptor = axios.interceptors.request.use(request => {
+      setErrorState({ error: null });
+      return request;
+    });
+    const resInterceptor = axios.interceptors.response.use(res => res, error => {
+      setErrorState({ error: error })
+      return Promise.reject(error);
+    })
+
     useEffect(() => {
-      axios.interceptors.request.use(request => {
-        setErrorState({ error: null });
-        return request;
-      });
-      axios.interceptors.response.use(res => res, error => {
-        setErrorState({ error: error })
-        return Promise.reject(error);
-      })
-    }, []);
+      return () => {
+        axios.interceptors.request.eject(reqInterceptor)
+        axios.interceptors.response.eject(resInterceptor)
+      }
+    }, [reqInterceptor, resInterceptor]);
+
 
     const exitErrorModal = () => {
       setErrorState({ error: null });
     };
+
 
     return (
       <Auxiliary>
@@ -29,7 +37,7 @@ const withErrorModal = (WrappedComponent, axios) => {
         >
           { errorState.error ? errorState.error.message : null }
         </Modal>
-        <WrappedComponent />
+        <WrappedComponent {...props} />
       </Auxiliary>
     );
   };
