@@ -31,6 +31,7 @@
 - Mysql Bootcamp
   * [Overview And Installation](mysqlBootcamp/1-overview-and-installation.md)
   * [Creating Databases And Tables](mysqlBootcamp/2-creating-databases-and-tables.md)
+  * [Inserting Data](mysqlBootcamp/3-inserting-data.md)
 - Random Notes
   * [Understanding React Hooks](randomNotes/understanding-react-hooks.md)
 - [React Complete Guide](reactCompleteGuide/README.md)
@@ -42,3 +43,4 @@
   * [Component Deep Dive](reactCompleteGuide/6-component-deep-dive.md)
   * [Building A React App](reactCompleteGuide/7-building-a-react-app.md)
   * [Reaching Out To The Web](reactCompleteGuide/8-reaching-out-to-the-web.md)
+  * [Routing](reactCompleteGuide/9-routing.md)

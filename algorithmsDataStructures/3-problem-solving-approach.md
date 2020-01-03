@@ -77,7 +77,7 @@ charCount(5)
 
 ### 3. Break it down
 
-**Explicitly** write out the steps you need to take during the solution: rough pseudocode.
+**Explicitly** write out the steps you need to take during the solution: rough **pseudocode**.
 
 Benefits:
 * Forces you to *think* about the code that you write before you write it; more targeted, effective, and **focused**
@@ -98,11 +98,13 @@ const charCount = str => {
 }
 ```
 
+**Pro tip**: If you just start writing thinking you'll figure out the details later, you risk **pigeon-holing** yourself into whatever code you write. Worst case scenario: you'll end up deleting everything you wrote. Breaking down your solution into clear steps solves for this problem.
+
 ### 4. Solve/simplify the problem
 
 Now that you've broken down the problem, it's time to **implement** the solution. However, at this stage, if you find that there's small bits you don't really know how to deal with or find challenging, it might make sense to **simplify** the problem first.
 
-In other words: **SOLVE THE PROBLEM**. If you can't, **SOLVE A SIMPLER PROBLEM**!
+In other words, **SOLVE THE PROBLEM**. If you can't, **SOLVE A SIMPLER PROBLEM**!
 
 Solving the problem is not all or nothing. It's dangerous to put all your eggs in one basket and *only* aim for a 100% solution. It's often much better to at least have something to *show for*, so it's smart to solve the 90% you *know* you can do before working on the last 10% you know you'll get stuck on.
 
@@ -135,3 +137,21 @@ const charCount = str => {
 With the example, we can then figure out the alphanumeric validation check and simply **plug it into** the existing code.
 
 ### 5. Look back and refactor
+
+It's tempting to just stop working on your code once you know that it works. Often times this is acceptable too, if you're tight on time and need something in production fast.
+
+However, it's often important to look back at your code to find ways to improve it. Here's some prompting questions:
+
+* Can you test the result to tell you if it works?
+* Is there another way of deriving the result or solving the problem?
+  * There's often more than one way of doing anything!
+* Can you understand your solution at a glance? How intuitive and legible is it?
+* Can you reuse this solution to solve other problems?
+  * Finding these connections yields more positive outcomes.
+* Can you improve the **performance** of your solution?
+  * Think space complexity and time complexity.
+* Can you think of other reasons to refactor?
+  * Other reasons include: adhering to company's style guide 
+* How have other people solved this problem?
+  * Getting other people's solutions can teach you a lot about what you can do.
+  * **Note**: Sometimes this might mean looking at solutions outside your preferred languages!
