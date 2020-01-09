@@ -118,4 +118,87 @@ const pointersSumZero = nums => {
 
 ## Sliding Window Pattern
 
+The **sliding window pattern** is a way to obtain a **subset** of data by creating a **window** that you move around and change size depending on certain conditions.
+
+Here's the naive solution to problem that requires tracking a subset of data:
+
+```js
+// Create a function that takes in (a) sorted array of numbers and (b) n
+// That function should return the highest sum from consecutive n set of numbers in that array
+// For example, [1, 2, 3, 4], 2 should return 7
+
+// This naive solution is closer to `O(n^2)`
+const findSubArraySum = (nums, n) => {
+  if (n > nums.length) return null // <= short circuit
+
+  let max = -Infinity // <= Ensures NEGATIVE (on top of positive) numbers get replaced by temp
+  
+  // First loop
+  for (let i = 0; i < nums.length - n + 1; i++) {
+    let temp = 0
+    // Almost a second loop (especially if nums and n are LARGE, e.g., 1,000,000 nums and n = 100,000)
+    for (let j = 0; j < n; j++) {
+      temp += nums[i + j]
+    }
+
+    if (temp > max) max = temp
+  }
+
+  return max
+}
+```
+
+Here's the sliding window solution:
+
+```js
+const slidingSubArraySum = (nums, n) => {
+  if (n > nums.length) return null // <= short circuit
+
+  let left = nums[0]
+  let right = nums[n - 1]
+
+  // Initialize max and temp
+  let max = 0
+  let temp = 0
+  for (let i = 0; i < n; i++) max += nums[i]
+  temp = max
+
+  // Loop through array ONCE, removing left-most number in window and adding number to the right of window
+  // In other words, you're SLIDING the window's EDGES 
+  for (let i = n; i < nums.length; i++) {
+    temp = temp - nums[i - n] + nums[i]
+    max = Math.max(max, temp) // <= simple boolean comparison
+  }
+
+  return max
+}
+```
+
+**Note**: The key difference between solutions is that the sliding window *removes* the redundancy of looping through *every* number and adding them up. You know every number in the *middle* is shared between iterations. You can just remove the left edge and add to the right edge.
+
 ## Divide and Conquer Pattern
+
+The **divide and conquer pattern** is the process of dividing a data set into *smaller chunks* and repeating some process on those subsets of data. (By dividing the data, it can significantly decrease time complexity.)
+
+Let's take a look at *search algorithms* quickly to show off the value of divide and conquer.
+
+In the naive solution, we implement **linear search**, which is `O(n)` because it loops through the data set once.
+
+```js
+// Create a function that returns the index where some value is located in a SORTED array (if none found, return -1)
+const linearSearch = (arr, num) => {
+  for (let i = 0; i < arr.length; i++) if (arr[i] === num) return i
+  return -1
+}
+```
+
+In the divide and conquer solution, we perform **binary search**, which is `O(log n)`. The basic idea is this:
+
+1. Find the middle point of a data set.
+2. Compare if it's larger, smaller, or equal to the value you're searching for.
+   * *If it's larger, grab the subset of numbers BEFORE the middle point*
+   * *If it's smaller, grab the subset of numbers AFTER the middle point*
+   * *If it's equal, return its index!*
+3. Eventually, you either find the number or you run out of the ability to cut your data set in half, so you return `-1`.
+
+**Note**: Binary search is specifically `O(log 2 n)` because its halving the data set with each attempt (basically the opposite of doubling it with every step, which is is `2^x`).
