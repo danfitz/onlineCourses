@@ -1,3 +1,5 @@
+// ===== FREQUENCY COUNTER PATTERN =====
+
 // This function compares is two words are anagrams of each other
 // The time complexity is `O(n)`
 const isAnagram = (word1, word2) => {

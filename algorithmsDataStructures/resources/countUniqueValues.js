@@ -1,3 +1,5 @@
+// ===== MULTIPLE POINTERS PATTERN =====
+
 // Create a function that returns the number of unique values in a SORTED array of numbers
 // [1, 2, 3] should return 3
 // [1, 1, 1, 5] should return 2

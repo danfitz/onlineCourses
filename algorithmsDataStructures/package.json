@@ -1,0 +1,14 @@
+{
+  "name": "algorithmsdatastructures",
+  "version": "1.0.0",
+  "description": "[Link to Udemy Course](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
