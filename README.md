@@ -16,7 +16,7 @@ Finally, a little every day, I'm learning **algorithms and data structures** out
 * [The Complete Node.js Developer Course (3rd Edition)](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/)
   * 45% complete as of 2019/12/15
 * [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)
-  * 5% complete as of 2019/12/07
+  * 19% complete as of 2020/01/11
 
 ## NEXT
 

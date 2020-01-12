@@ -5,6 +5,8 @@
   * [Analyzing Performance Of Arrays And Objects](algorithmsDataStructures/2-analyzing-performance-of-arrays-and-objects.md)
   * [Problem Solving Approach](algorithmsDataStructures/3-problem-solving-approach.md)
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
+  * [Recursion](algorithmsDataStructures/5-recursion.md)
+  * [Searching Algorithms](algorithmsDataStructures/6-searching-algorithms.md)
 - [Complete Nodejs](completeNodejs/README.md)
   * [Understanding Node.js](completeNodejs/1-understanding-nodejs.md)
   * [REST AP Is And Mongoose](completeNodejs/10-rest-apis-and-mongoose.md)
