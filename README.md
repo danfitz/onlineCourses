@@ -17,6 +17,8 @@ Finally, a little every day, I'm learning **algorithms and data structures** out
   * 45% complete as of 2019/12/15
 * [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)
   * 19% complete as of 2020/01/11
+* [The Ultimate MySQL Bootcamp](https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/)
+  * 18% complete as of 2020/01/13
 
 ## NEXT
 
