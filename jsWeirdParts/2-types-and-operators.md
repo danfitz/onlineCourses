@@ -1,8 +1,13 @@
 ---
+title: 'Types and Operators'
+part: 2
+date: '2019-10-06'
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript Module 3: Types and Operators"
+source: [udemy]
 ---
+
+# Types and Operators
 
 ## Conceptual Aside: Types and JavaScript
 

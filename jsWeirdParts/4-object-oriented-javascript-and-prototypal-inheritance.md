@@ -1,8 +1,13 @@
 ---
+title: 'Object-Oriented JavaScript and Prototypal Inheritance'
+part: 4
+date: '2019-10-15'
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript Module 5: Object-Oriented JavaScript and Prototypal Inheritance"
+source: [udemy]
 ---
+
+# Object-Oriented JavaScript and Prototypal Inheritance
 
 ## Conceptual Aside: Classical vs. Prototypal Inheritance
 

@@ -1,8 +1,13 @@
 ---
+title: 'Defining Objects'
+part: 5
+date: '2019-10-15'
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript Module 6: Defining Objects"
+source: [udemy]
 ---
+
+# Defining Objects
 
 ## Function Constructors, new, and The History of JavaScript
 

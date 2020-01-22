@@ -1,8 +1,13 @@
 ---
+title: 'Objects and Functions'
+part: 3
+date: '2019-10-09'
 categories: [frontend]
 tags: [js]
-title: "The Weird Parts of JavaScript Module 4: Objects and Functions"
+source: [udemy]
 ---
+
+# Objects and Functions
 
 ## Objects and the Dot
 

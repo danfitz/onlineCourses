@@ -34,6 +34,8 @@
   * [Overview And Installation](mysqlBootcamp/1-overview-and-installation.md)
   * [Creating Databases And Tables](mysqlBootcamp/2-creating-databases-and-tables.md)
   * [Inserting Data](mysqlBootcamp/3-inserting-data.md)
+  * [CRUD Commands](mysqlBootcamp/4-crud-commands.md)
+  * [The World Of String Functions](mysqlBootcamp/5-the-world-of-string-functions.md)
 - Random Notes
   * [Understanding React Hooks](randomNotes/understanding-react-hooks.md)
 - [React Complete Guide](reactCompleteGuide/README.md)
