@@ -34,6 +34,8 @@ SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM table;
 Use `SUBSTRING` to **select portions** of a string, e.g., the last 3 characters.
 
 ```sql
--- In MySQL, strings 
-SELECT SUBSTRING('Hello World', 1, 4);
+-- In MySQL, strings are one-indexed, so they start at 1
+SELECT SUBSTRING('Hello World', 1, 4); -- Grabs 4 characters starting from the 1st
+SELECT SUBSTRING('Hello World', 2); -- Grabs EVERY character starting from the 2nd
+SELECT SUBSTRING('Hello World', -3); -- Grabs every character starting from 3rd last
 ```
