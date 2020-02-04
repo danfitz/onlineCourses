@@ -15,6 +15,8 @@ This section will deal with **string functions** specifically. All of MySQL's st
 
 But here's the most *popular* string functions you'll use 99% of the time:
 
+**Pro tip**: All of the below string functions can be *combined* by nesting one inside another.
+
 ## CONCAT
 
 Use `CONCAT` alongside a command like `SELECT` to **combine strings together**.
@@ -39,3 +41,41 @@ SELECT SUBSTRING('Hello World', 1, 4); -- Grabs 4 characters starting from the 1
 SELECT SUBSTRING('Hello World', 2); -- Grabs EVERY character starting from the 2nd
 SELECT SUBSTRING('Hello World', -3); -- Grabs every character starting from 3rd last
 ```
+
+## REPLACE
+
+Use `REPLACE` to replace a portion of a string with another string value.
+
+```sql
+SELECT REPLACE('Hello World', 'Hell', '!@#$'); -- Becomes '!@#$o World'
+SELECT REPLACE('HellO World', 'o', 'x'); -- Becomes 'HellO Wxrld' b/c it's case sensitive
+```
+
+## REVERSE
+
+Use `REVERSE` to literally just **reverse** a string from, say, `'Hello World'` to `'dlroW olleH'`.
+
+```sql
+SELECT REVERSE(title) FROM books; -- returns reverse of all titles
+```
+
+## CHAR_LENGTH
+
+Use `CHAR_LENGTH` to tell you **how many** characters are in a given string.
+
+```sql
+-- Returns text with describing character length of author last names
+SELECT
+  CONCAT(author_lname, ' is ', CHAR_LENGTH(author_lname), ' characters long') AS 'description'
+FROM books;
+```
+
+## UPPER and LOWER
+
+Use `UPPER` and `LOWER` to change the case of a string.
+
+```sql
+SELECT UPPER('Hello World'); -- returns 'HELLO WORLD'
+SELECT LOWER('Hello World'); -- returns 'hello world'
+```
+
