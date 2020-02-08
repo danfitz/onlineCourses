@@ -25,6 +25,7 @@
 - [Fundamentals Math](fundamentalsMath/README.md)
   * [Numbers And Negative Numbers](fundamentalsMath/1-numbers-and-negative-numbers.md)
   * [Factors And Multiples](fundamentalsMath/2-factors-and-multiples.md)
+  * [Fractions](fundamentalsMath/3-fractions.md)
 - Js Weird Parts
   * [Execution Contexts And Lexical Environments](jsWeirdParts/1-execution-contexts-and-lexical-environments.md)
   * [Types And Operators](jsWeirdParts/2-types-and-operators.md)
@@ -37,6 +38,7 @@
   * [Inserting Data](mysqlBootcamp/3-inserting-data.md)
   * [CRUD Commands](mysqlBootcamp/4-crud-commands.md)
   * [The World Of String Functions](mysqlBootcamp/5-the-world-of-string-functions.md)
+  * [Refining Our Selections](mysqlBootcamp/6-refining-our-selections.md)
 - Random Notes
   * [Understanding React Hooks](randomNotes/understanding-react-hooks.md)
 - [React Complete Guide](reactCompleteGuide/README.md)
