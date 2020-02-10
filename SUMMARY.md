@@ -39,6 +39,7 @@
   * [CRUD Commands](mysqlBootcamp/4-crud-commands.md)
   * [The World Of String Functions](mysqlBootcamp/5-the-world-of-string-functions.md)
   * [Refining Our Selections](mysqlBootcamp/6-refining-our-selections.md)
+  * [The Magic Of Aggregate Functions](mysqlBootcamp/7-the-magic-of-aggregate-functions.md)
 - Random Notes
   * [Understanding React Hooks](randomNotes/understanding-react-hooks.md)
 - [React Complete Guide](reactCompleteGuide/README.md)
