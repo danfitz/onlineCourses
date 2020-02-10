@@ -40,5 +40,39 @@ SELECT author_fname, author_lname FROM books ORDER BY author_lname, author_fname
 
 ## LIMIT
 
+`LIMIT`, when used in conjunction with `ORDER BY`, gives you back a subset of data.
+
+```sql
+SELECT * FROM books ORDER BY released_year DESC LIMIT 10; -- returns 10 newest books
+```
+
+When you want to define *where* your limit point *starts*, you write `LIMIT <starting_index>,<number_of_items>`.
+  * **Note**: The starting index is *zero-indexed*.
+
+```sql
+SELECT * FROM books ORDER BY released_year DESC LIMIT 0,10; -- returns 10 newest books
+SELECT * FROM books ORDER BY released_year DESC LIMIT 10,10; -- returns 11th-20th newest books
+SELECT * FROM books ORDER BY released_year DESC LIMIT 20,10; -- returns 21st-30th newest books
+```
+
+**Pro tip**: Using `LIMIT` with a starting index is great for things like pagination!
+
+**Pro tip**: When you want to select from a certain index *all the way to the end of the table*, provide a gigantic number:
+
+`LIMIT 5,99999999999999999999`
+
 ## LIKE
 
+`LIKE` allows you to set conditions in `WHERE` that search for **open-ended patterns** rather than strict equality.
+
+```sql
+SELECT * FROM books WHERE released_year LIKE '19__'; -- returns books released in the 1900s
+SELECT * FROM books WHERE author_lname LIKE 'Mc%'; -- returns books with author last names beginning with Mc
+SELECT * FROM books WHERE title LIKE '%\%%'; -- returns books with % symbol somewhere in title
+```
+
+`_` is a wildcard representing exactly 1 character. `%` is a wildcard representing an indefinite number of characters (including zero).
+
+**Note**: `LIKE` is case *insensitive*, so in the example above, `Mc%` and `mc%` both work.
+
+**Pro tip**: Any search functionality usually employs `LIKE` on some level.
