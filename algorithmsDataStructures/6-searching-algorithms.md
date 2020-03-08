@@ -35,6 +35,44 @@ You might think that, averaged out, that would make its time complexity `O(n/2)`
 
 Details about it can be found in the [problem-solving patterns notes](4-problem-solving-patterns.md#divide-and-conquer-pattern).
 
+### Time complexity
+
+In the best case, the item you want is at the beginning of your data set, making binary search `O(1)`.
+
+In the worst *and* average case, the item you want is the final number remaining after you've continually halved your data set. That makes binary search `O(log 2 n)`, where `log 2 n` is the **power** required to reach `n`, i.e., the **number of times** you must multiply 2 against itself in order to get a data set of size `n`.
+
+In other words, **every doubling of the data set adds *one more step***.
+
+**Important**: `O(log n)` algorithms are so good that, given a large enough data set, they're practically just as good as `O(1)`.
+
 ## Naive String Searching Algorithm
 
+Sometimes you want to find the number of occurrences of a substring in a string. The naive approach goes like this:
+
+1. Loop over the string's characters.
+2. Nested loop over the substring's characters.
+3. Check that the current character of the substring matches the current character of the string (incrementing the string's current character for each match).
+4. If any of the characters don't match, break out of the nested loop and move onto the next iteration of the main loop.
+5. If the entire substring matches, increment a counter.
+6. Return count at the end.
+
+Here's the code:
+
+```js
+const naiveStringSearch = (str, subStr) => {
+  let count = 0
+  
+  for (let i = 0; i < str.length; i++) {
+    for (let j = 0; j < subStr.length; j++) {
+      if (str[i + j] !== subStr[j]) break
+      if (j === subStr.length - 1) count++
+    }
+  }
+ 
+ return count
+}
+```
+
 ## KMP String Searching Algorithm
+
+The content for this algorithm is being remade. Will return to it later.

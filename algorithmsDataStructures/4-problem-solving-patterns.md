@@ -201,4 +201,4 @@ In the divide and conquer solution, we perform **binary search**, which is `O(lo
    * *If it's equal, return its index!*
 3. Eventually, you either find the number or you run out of the ability to cut your data set in half, so you return `-1`.
 
-**Note**: Binary search is specifically `O(log 2 n)` because its halving the data set with each attempt (basically the opposite of doubling it with every step, which is is `2^x`).
+**Note**: Binary search is specifically `O(log 2 n)` because its halving the data set with each attempt (basically the opposite of doubling it with every step, which is `2^x`).
