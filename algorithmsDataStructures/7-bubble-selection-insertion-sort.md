@@ -21,7 +21,7 @@ To customize the behaviour of `sort`, simply provide a comparator callback funct
 
 ## Bubble Sort
 
-The basic idea of **bubble sort** is that you **compare** values, **swapping** their positions whenever a higher value is found. Through this process, the largest values will always **bubble to the top**.
+The basic idea of **bubble sort** is that you loop through an array, **compare** adjacent values, and **swap** their positions whenever a higher value is found. Through this process, the largest values will always **bubble to the top**.
 
 The pseudocode is as follows:
 
@@ -67,6 +67,18 @@ In the best-case scenario where the array is nearly sorted, bubble sort is `O(n)
 
 ## Selection Sort
 
+**Selection sort** works by looping through a subarray of an array, keeping tracking of the position of the smallest value, and then swapping its position to the front of the subarray. This subarray begins as the full array and then shifts to the right with each iteration.
+
+The pseudocode is as follows:
+
+1. Loop through the array.
+2. Store the index of the current element.
+3. Nested loop through the array starting at the current index *plus 1*. This is the subarray.
+4. Compare the items in the nested loop with the element at the stored index. If a smaller value is found, replace with *that* index.
+5. If the stored index is *not* the same as your first index, swap the values at those indices.
+
+The code implementation goes something like this:
+
 ```js
 const selectionSort = unsortedAr => {
   const swap = (arr, i, j) => {
@@ -89,8 +101,13 @@ const selectionSort = unsortedAr => {
 
   return arr
 }
+```
 
 ### Time complexity
+
+Just like bubble sort, selection sort uses nested loops, so it has a time complexity of `O(n^2)`.
+
+**Note**: Selection sort is sometimes the better algorithm when you care about *writing to memory*. Because selection sort only does 1 swap per iteration, the write to memory is smaller than, say, bubble sort, which performs `n^2` swaps.
 
 ## Insertion Sort
 
