@@ -119,12 +119,61 @@ The pseudocode is as follows:
 
 1. Start with the second element in the array. The first element is the sorted portion.
 2. From right to left, compare target element with the elements in the sorted portion.
-3. If the target element is ever *greater than or equal to* an element in the sorted portion, insert the target element *in front* of it.
-4. Repeat for the next element in the array, expanding the size of the sorted portion by 1 with each iteration.
+3. If the target element is *smaller than* the current element in the sorted portion, move the current element to the right.
+4. If the target element is *larger than* the current element, insert the target element to the right of the current element and break the loop.
+4. Repeat for the next element in the unsorted portion of the array, expanding the size of the sorted portion by 1 with each iteration.
 
 And code implementation goes something like this:
 
 ```js
+const insertionSort = unsortedArr => {
+  const arr = [...unsortedArr]
+
+  for (let i = 1; i < arr.length; i++) {
+    const currentVal = arr[i]
+
+    for (var j = i - 1; j >= 0; j--) {
+      if (currentVal < arr[j]) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+
+    // Insert where arr[j] USED to be
+    // Must be + 1 because j-- takes you down 1 
+    arr[j + 1] = currentVal
+  }
+
+  return arr
+}
+
+insertionSort([2, 4, 1])
+// [2, 4, 1] (first iteration)
+// [2, 2, 4] (second iteration)
+// [1, 2, 4]
 ```
 
 ### Time complexity
+
+Just like bubble and selection sort, insertion sort has a nested loop, making it `O(n^2)`.
+
+However, in the best case where the array is *nearly sorted*, the algorithm is `O(n)` because it only makes 1 comparison for each item that already sorted. When it hits an unsorted item, *then* it'll loop through the sorted portion. Example: `[1,2,3,4,-1]`.
+
+Inversely, if the array is sorted in reverse order, then sorting it will be *the hardest* because each nested loop will have to run its full course before completing. Example: `[4,3,2,1]`.
+
+**Pro tip**: Because insertion sort is great with nearly sorted arrays, it's excellent at *continnuously sorting on the fly*. For example, if you have sorted data where users are adding to it live (e.g. live stream), you could use insertion sort to insert what comes in *quickly*.
+
+## Comparing Time Complexity
+
+In general, bubble, selection, and insertion sort have a time complexity of `O(n^2)`.
+
+However, where they differ is when it comes to best case scenario: nearly sorted data. Specifically, selection sort sucks in compared to the others.
+
+* Bubble sort is best case `O(n)` because if only 1 item is unsorted, the second iteration will perform no swaps, which will stop the function.
+* Insertion sort is also best case `O(n)` because it will move onto the next item if the current item is already larger than the items to the left.
+* However, selection sort is still `O(n^2)` in the best case because it will still loop through the entire array, searching for the smallest item in each iteration (but never finding one).
+
+## Comparing Space Complexity
+
+Bubble, selection, and insertion sort all have a space complexity of `O(1)` because all data is stored in place and then removed in the next iteration.
