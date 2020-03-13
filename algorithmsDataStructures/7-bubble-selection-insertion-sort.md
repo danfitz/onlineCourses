@@ -111,4 +111,20 @@ Just like bubble sort, selection sort uses nested loops, so it has a time comple
 
 ## Insertion Sort
 
+**Insertion sort** builds up a sort by gradually *inserting* values into their sorted positions in a sorted left portion of the array.
+
+**Note**: Insertion sort is actually **practical** in that it's quite efficient. This is the most useful sort compared to bubble and selection sort.
+
+The pseudocode is as follows:
+
+1. Start with the second element in the array. The first element is the sorted portion.
+2. From right to left, compare target element with the elements in the sorted portion.
+3. If the target element is ever *greater than or equal to* an element in the sorted portion, insert the target element *in front* of it.
+4. Repeat for the next element in the array, expanding the size of the sorted portion by 1 with each iteration.
+
+And code implementation goes something like this:
+
+```js
+```
+
 ### Time complexity
