@@ -7,6 +7,8 @@
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
   * [Recursion](algorithmsDataStructures/5-recursion.md)
   * [Searching Algorithms](algorithmsDataStructures/6-searching-algorithms.md)
+  * [Bubble Selection And Insertion Sort](algorithmsDataStructures/7-bubble-selection-insertion-sort.md)
+  * [Merge Sort](algorithmsDataStructures/8-merge-sort.md)
 - [Complete Nodejs](completeNodejs/README.md)
   * [Understanding Node.js](completeNodejs/1-understanding-nodejs.md)
   * [REST AP Is And Mongoose](completeNodejs/10-rest-apis-and-mongoose.md)
@@ -19,7 +21,6 @@
   * [Application Deployment](completeNodejs/8-application-deployment.md)
   * [Mongo DB And Promises](completeNodejs/9-mongodb-and-promises.md)
 - [Fireship Firestore](fireshipFirestore/README.md)
-  - Firestore Test
   * [Firestore Queries And Data Modeling Course](fireshipFirestore/firestore-queries-and-data-modeling-course.md)
   * [Model Relational Data In Firestore No SQL](fireshipFirestore/relational-data-in-firestore.md)
 - [Fundamentals Math](fundamentalsMath/README.md)
