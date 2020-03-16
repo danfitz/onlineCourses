@@ -9,6 +9,7 @@
   * [Searching Algorithms](algorithmsDataStructures/6-searching-algorithms.md)
   * [Bubble Selection And Insertion Sort](algorithmsDataStructures/7-bubble-selection-insertion-sort.md)
   * [Merge Sort](algorithmsDataStructures/8-merge-sort.md)
+  * [Quick Sort](algorithmsDataStructures/9-quick-sort.md)
 - [Complete Nodejs](completeNodejs/README.md)
   * [Understanding Node.js](completeNodejs/1-understanding-nodejs.md)
   * [REST AP Is And Mongoose](completeNodejs/10-rest-apis-and-mongoose.md)
