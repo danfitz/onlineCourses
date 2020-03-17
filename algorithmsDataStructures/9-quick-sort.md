@@ -21,34 +21,9 @@ Here's how quick sort roughly works:
 
 1. Select any value. That's your pivot.
 2. Loop through the array.
-3. For any value smaller than the pivot, count it and move it in front of the pivot.
-4. When you're done looping, move the pivot to the index after all the smaller values (based on count). The pivot is now sorted.
+3. For any value smaller than the pivot, pivotIndex it and move it in front of the pivot.
+4. When you're done looping, move the pivot to the index after all the smaller values (based on pivotIndex). The pivot is now sorted.
 5. Recursively repeat this for the subarrays to the left and to the right of the pivot.
-
-```js
-const quickSort = arr => {
-  if (arr.length <= 1) return arr
-
-  const pivot = arr[0]
-  let count = 0
-
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < pivot) {
-      count++
-      const temp = arr[i]
-      arr[i] = arr[count]
-      arr[count] =  temp
-    }
-  }
-
-  const temp = arr[count]
-  arr[count] = pivot
-  arr[0] = temp
-
-  quickSort(arr.slice(0, count))
-  quickSort(arr.slice(count))
-}
-```
 
 ## Pivot Helper
 
@@ -73,5 +48,27 @@ const pivot = arr => {
   swap(arr, 0, pointer)
 
   return pointer
+}
+```
+
+## Implementation
+
+```js
+const quickSort = (arr, start=0, end=arr.length-1) => {
+  if (start >= end) return
+
+  const pivot = arr[start]
+  let pivotIndex = start
+
+  for (let i = start + 1; i <= end; i++) {
+    if (arr[i] < pivot) {
+      pivotIndex++
+      swap(arr, pivotIndex, i)
+    }
+  }
+  swap(arr, start, pivotIndex)
+
+  quickSort(arr, start, pivotIndex - 1)
+  quickSort(arr, pivotIndex + 1, end)
 }
 ```
