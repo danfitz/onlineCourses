@@ -17,6 +17,8 @@ By comparison, the more advanced **merge, quick, and radix sorts** can improve t
 
 Merge sort exploits the fact that arrays of 0 or 1 elements are *automatically* sorted: `[]` and `[1]`. (Insertion sort also exploits this in the beginning.)
 
+## Pseudocode
+
 Here's a rough outline of how it works:
 
 1. **Splitting up**: In a *divide and conquer pattern*, an array is continually split up into smaller and smaller subarrays until you get a bunch of *empty arrays* or *arrays with 1 element*. By default, these arrays are sorted.
