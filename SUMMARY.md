@@ -2,6 +2,7 @@
 
 - [Algorithms Data Structures](algorithmsDataStructures/README.md)
   * [Big O Notation](algorithmsDataStructures/1-big-o-notation.md)
+  * [Radix Sort](algorithmsDataStructures/10-radix-sort.md)
   * [Analyzing Performance Of Arrays And Objects](algorithmsDataStructures/2-analyzing-performance-of-arrays-and-objects.md)
   * [Problem Solving Approach](algorithmsDataStructures/3-problem-solving-approach.md)
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
