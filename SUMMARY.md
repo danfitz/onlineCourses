@@ -5,6 +5,8 @@
   * [Radix Sort](algorithmsDataStructures/10-radix-sort.md)
   * [Data Structures Introduction](algorithmsDataStructures/11-data-structures-introduction.md)
   * [Singly Linked Lists](algorithmsDataStructures/12-singly-linked-lists.md)
+  * [Doubly Linked Lists](algorithmsDataStructures/13-doubly-linked-lists.md)
+  * [Stacks And Queues](algorithmsDataStructures/14-stacks-and-queues.md)
   * [Analyzing Performance Of Arrays And Objects](algorithmsDataStructures/2-analyzing-performance-of-arrays-and-objects.md)
   * [Problem Solving Approach](algorithmsDataStructures/3-problem-solving-approach.md)
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
@@ -57,3 +59,5 @@
   * [Building A React App](reactCompleteGuide/7-building-a-react-app.md)
   * [Reaching Out To The Web](reactCompleteGuide/8-reaching-out-to-the-web.md)
   * [Routing](reactCompleteGuide/9-routing.md)
+- React Testing
+  * [Intro To Jest Enzyme And TDD](reactTesting/1-intro-to-jest-enzyme-tdd.md)
