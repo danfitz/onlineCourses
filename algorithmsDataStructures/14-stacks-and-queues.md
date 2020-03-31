@@ -25,9 +25,84 @@ A real-life example of this is a stack of plates: the last one you washed and pu
 
 ### Array implementation
 
+A stack is a **concept**: as long as you abide by LIFO, the data structure is considered a stack. For that reason, you could use **arrays** for stacks.
+
+The most efficient approach is to use `push` and `pop`:
+
+```js
+// Imagine this stack is for browser history
+const stack = []
+stack.push('https://google.ca')
+stack.push('https://youtube.com')
+stack.pop() // Returns google.ca
+```
+
+**Pro tip**: The trouble with arrays is that they're *indexed*, and this means more data. If you care about efficiency and are dealing with lots of data *but* don't need features like random access, an array isn't the best implementation of a stack. After all, all you need to achieve a stack is an order of what came before. This is why linked lists are often better.
+
 ### Custom class implementation
 
+If we want to avoid the bloat associated with arrays--like indices or all the built-in array methods--we can opt for a **linked list** implementation with 2 methods: one that adds to the list and one that removes from the list.
+
+```js
+class Node {
+  constructor(val) {
+    this.val = val
+    this.next = null
+  }
+}
+
+class Stack {
+  constructor() {
+    // These properties are just named this way to use the terminology of stacks
+    this.first = null
+    this.last = null
+    this.size = 0
+  }
+}
+```
+
+**Note**: Recall that `pop` is `O(n)` for singly liked lists because it traverses through ever node to get to the last node. As a result, this implementation will technically use `unshift` and `shift` since they're `O(1)`, but we'll call them `push` and `pop`.
+
+```js
+push(val) {
+  const node = new Node(val)
+
+  if (this.size === 0) {
+    this.first = node
+    this.last = node
+  } else {
+    const previousFirst = this.first
+    this.first = node
+    this.first.next = previousFirst
+  }
+
+  this.size++
+  return this.size
+}
+
+pop() {
+  if (this.size === 0) return null
+
+  const poppedNode = this.first
+
+  if (this.size === 1) {
+    this.first = null
+    this.last = null
+  } else { 
+    this.first = poppedNode.next
+    poppedNode.next = null
+  }
+
+  this.size--
+  return poppedNode
+}
+```
+
 ### Big O
+
+The two most important features of a stack are `push` and `pop`, which are `O(1)`.
+
+Search and access will be `O(n)` because you have to traverse using `next`. But if you need search and access, you probably don't want to use a stack.
 
 ## Queues
 

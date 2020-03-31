@@ -27,6 +27,7 @@
   * [Application Deployment](completeNodejs/8-application-deployment.md)
   * [Mongo DB And Promises](completeNodejs/9-mongodb-and-promises.md)
 - [Fireship Firestore](fireshipFirestore/README.md)
+  - Firestore Test
   * [Firestore Queries And Data Modeling Course](fireshipFirestore/firestore-queries-and-data-modeling-course.md)
   * [Model Relational Data In Firestore No SQL](fireshipFirestore/relational-data-in-firestore.md)
 - [Fundamentals Math](fundamentalsMath/README.md)
@@ -61,3 +62,4 @@
   * [Routing](reactCompleteGuide/9-routing.md)
 - React Testing
   * [Intro To Jest Enzyme And TDD](reactTesting/1-intro-to-jest-enzyme-tdd.md)
+  * [Basic Testing](reactTesting/2-basic-testing.md)
