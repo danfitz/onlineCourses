@@ -1,6 +1,6 @@
 ---
 title: 'Singly Linked Lists'
-part: 13
+part: 12
 date: '2020-03-19'
 categories: [compsci]
 tags: [js, algorithms]

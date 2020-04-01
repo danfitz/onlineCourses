@@ -1,6 +1,6 @@
 ---
 title: 'Doubly Linked Lists'
-part: 14
+part: 13
 date: '2020-03-20'
 categories: [compsci]
 tags: [js, algorithms]
