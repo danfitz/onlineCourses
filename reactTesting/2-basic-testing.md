@@ -20,6 +20,8 @@ import EnzymeAdapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 ```
 
+**Pro tip**: To save time, you can move this configuration into its own file and tell jest to run it *before* every jest test. In create-react-app, a designated `src/setupTests.js` is already set up for this.
+
 ## Writing Tests
 
 ### Empty Critical Tests
@@ -58,6 +60,24 @@ const findByTestAttr = (wrapper, val) => {
 }
 ```
 
+This function sets up and returns a `ShallowWrapper` component by encapsulating all configuration in a function:
+
+```js
+// Use this to easily instantiate your component in order to test it!
+// NOTE 1: The component is passed defaultProps that you can override
+// (especially useful when component has required propTypes)
+// NOTE 2: If state is provided, state is also set
+const defaultProps = { myProp: undefined }
+
+const setup = (props={}, state=null) => {
+  const setupProps = { ...defaultProps, ...props }
+
+  const wrapper = shallow(<MyComponent {...setupProps} />)
+  if (state) wrapper.setState(state)
+
+  return wrapper
+}
+```
 
 ### Finding child nodes, managing state, and simulating events
 
@@ -82,3 +102,30 @@ test('pressing button increments counter display', () => {
 ```
 
 **Note**: We use `toContain` because that allows you to change the text content inside `counterDisplay` without causing test failure.
+
+## propTypes testing
+
+If your component has `propTypes` set up, you can run tests using `check-prop-types` to check that your `propTypes` are doing their job by only accepting the correct props.
+
+```js
+import checkPropTypes from 'check-prop-types'
+
+// Helper function
+const checkProps = (component, props) => {
+  const propsError = checkPropTypes(
+    component.propTypes,
+    props,
+    'prop',
+    component.name
+  )
+
+  expect(propsError).toBeUndefined()
+}
+
+test('expected props don\'t throw error message', () => {
+  const expectedProps = { myProp: 'hello' }
+  checkProps(MyComponent, expectedProps)
+})
+```
+
+Using `checkPropTypes` inside `checkProps`, a `propsError` message is returned *if* the provided props don't adhere to `propTypes`. We then check to see if there is in fact an error message using `expect`.
