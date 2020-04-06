@@ -103,7 +103,7 @@ test('pressing button increments counter display', () => {
 
 **Note**: We use `toContain` because that allows you to change the text content inside `counterDisplay` without causing test failure.
 
-## propTypes testing
+### propTypes testing
 
 If your component has `propTypes` set up, you can run tests using `check-prop-types` to check that your `propTypes` are doing their job by only accepting the correct props.
 
@@ -129,3 +129,41 @@ test('expected props don\'t throw error message', () => {
 ```
 
 Using `checkPropTypes` inside `checkProps`, a `propsError` message is returned *if* the provided props don't adhere to `propTypes`. We then check to see if there is in fact an error message using `expect`.
+
+### Contexts, describe, and forEach
+
+We can wrap a set of `test` functions inside a `describe` function, creating a **context** in which all those tests fall under.
+
+For example, a counter may have a set of tests for testing the increment portion of the counter:
+
+```js
+describe('if increment button clicked', () => {
+  test('does not increment if counter is at 10', () => {
+    const wrapper = setup()
+    // Expects here
+  })
+  test('does increment if counter is below 10', () => {
+    const wrapper = setup()
+    // Expects here
+  })
+})
+```
+
+Notice how we write `const wrapper = setup()` before each test? For code that you're repeating, you can move this to a `beforeEach`. `beforeEach` will run the code *before* each test.
+
+```js
+// Refactor
+describe('if increment button clicked', () => {
+  let wrapper // <= accessible scope
+  beforeEach(() => {
+    wrapper = setup()
+  })
+
+  test('does not increment if counter is at 10', () => {
+    // Expects here
+  })
+  test('does increment if counter is below 10', () => {
+    // Expects here
+  })
+})
+```
