@@ -7,6 +7,8 @@
   * [Singly Linked Lists](algorithmsDataStructures/12-singly-linked-lists.md)
   * [Doubly Linked Lists](algorithmsDataStructures/13-doubly-linked-lists.md)
   * [Stacks And Queues](algorithmsDataStructures/14-stacks-and-queues.md)
+  * [Binary Search Trees](algorithmsDataStructures/15-binary-search-trees.md)
+  * [Tree Traversal](algorithmsDataStructures/16-tree-traversal.md)
   * [Analyzing Performance Of Arrays And Objects](algorithmsDataStructures/2-analyzing-performance-of-arrays-and-objects.md)
   * [Problem Solving Approach](algorithmsDataStructures/3-problem-solving-approach.md)
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
@@ -63,3 +65,5 @@
 - React Testing
   * [Intro To Jest Enzyme And TDD](reactTesting/1-intro-to-jest-enzyme-tdd.md)
   * [Basic Testing](reactTesting/2-basic-testing.md)
+  * [Redux Testing](reactTesting/3-redux-testing.md)
+  * [Redux Thunk Testing](reactTesting/4-redux-thunk-testing.md)
