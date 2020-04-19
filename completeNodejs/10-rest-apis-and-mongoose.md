@@ -155,10 +155,88 @@ Content-Type: application/json
 
 ## Resource Endpoints
 
-### Create
+Please refer to the code [here](resources/taskManager/src/index.js) to see how to structure resource endpoints. Things to note:
 
-### Read
+* We use clear status codes to communicate meaning.
+* When you provide a string `id` to Mongoose, it will convert it to an `ObjectId` for you.
 
-### Update
+**Pro tip**: For a list of all status codes, see [httpstatuses.com](https://httpstatuses.com).
 
-### Delete
+## Async/Await
+
+When you define a function as `async`, its invocation returns a *promise* with
+
+* The returned value as the resolved value or
+* Any thrown error or rejected promise's value as the rejected value.
+
+```js
+const resolvedAsync = async () => {
+  return 'I resolve'
+}
+
+// logs 'I resolve'
+resolvedAsync().then(console.log)
+
+const rejectedAsync = async () => {
+  throw new Error('I reject')
+  // OR
+  await badApiCall()
+}
+
+// logs error with 'I reject' message
+// OR rejected value of bad API call
+rejectedAsync().catch(console.log)
+```
+
+An extremely valuable bonus to `async` is that it provides the `await` operator *inside* of the function. `await` is basically syntactic sugar where code can look like it's running synchronously, making it easier to read. You can even store the *resolved* value in a variable.
+
+```js
+const awaitAsync = async () => {
+  const val = await apiCall()
+  const val2 = await apiCall(val)
+  const val3 = await apiCall(val2)
+}
+```
+
+**Note**: If one of your `await` functions gets rejected, the `async` function exits, and you can catch the rejected value.
+
+```js
+const awaitAsync = async () => {
+  await rejectedApiCall()
+  await goodApiCall() // Never runs
+}
+
+awaitAsync().catch(console.log)
+```
+
+**Pro tip**: A huge benefit of `await` is also the fact that your asynchronous calls are all in the same scope. That means that if you need to share values or variables, it's easy.
+
+### Common patterns
+
+With all of this information in mind, `async` functions form a coding pattern where you package together multiple asynchronous operations and use a `then` and `catch` to handle all of them together:
+
+```js
+const multipleApiCalls = async () => {
+  const result = await firstApiCall()
+  const result2 = await secondApiCall(result)
+  return result2
+}
+
+multipleApiCalls()
+  .then(result => console.log(result)) // <= only runs if all successful
+  .catch(error => console.log(error)) // <= catches any errors
+```
+
+Another pattern you can utilize is the `try/catch` block *inside* the `async` function. This is useful when you don't care about what is returned by the `async` function--like in a callback function!
+
+```js
+// Example with express
+app.get('/users', (req, res) => {
+  try {
+    const users = await getUsers()
+    res.send(users)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+```
