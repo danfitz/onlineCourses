@@ -155,7 +155,7 @@ Content-Type: application/json
 
 ## Resource Endpoints
 
-Please refer to the code [here](resources/taskManager/src/index.js) to see how to structure resource endpoints. Things to note:
+Please refer to the code [here](resources/taskManager/src/routers/user.js) to see how to structure resource endpoints. Things to note:
 
 * We use clear status codes to communicate meaning.
 * When you provide a string `id` to Mongoose, it will convert it to an `ObjectId` for you.
