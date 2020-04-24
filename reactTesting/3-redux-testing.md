@@ -76,7 +76,7 @@ The *benefit* of this approach is fewer tests to maintain and refactor when code
 
 **Rule of thumb**: At the very least, it's a good idea to unit test your action creators and reducers when they become *sufficiently complicated*. Dead simple ones may not be worth your time.
 
-## Testing Connected Components
+## Testing Redux Connected Components
 
 When testing components that access redux store via the `connect` higher-order wrapper, you don't automatically have access to store. That's because there's no parent `Provider` to provide the context.
 
@@ -104,3 +104,31 @@ const setup = (initialState={}) => {
 ```
 
 Now when you test your component, you should be able to test redux state.
+
+### Enzyme `dive` method
+
+When you provide a redux store in your tests, your component gets passed through a higher-order component, getting wrapped around a `Provider`.
+
+Since `shallow` only renders the outermost component and none of its children, you need to `dive` in order to reach the DOM nodes you care about.
+
+```js
+// What you get from shallow()
+<ContextProvider>
+  <Component />
+</ContextProvider>
+
+// What you want: contents of component
+<h1>Hello!</h1>
+
+// How to reach it: dive twice
+// Once to get to child component and a second time for contents of child component
+const wrapper = shallow(<Component store={store} />).dive().dive()
+```
+
+**Pro tip**: An alternative to the `dive` approach is to just export the unconnected component and test *that*.
+
+### Tradeoffs when testing redux
+
+**Do you want to test the actual store or a mock store?** You can use a library called `redux-mock-store`, which allows you to test *intermediate* actions that lead up to your final state. Whereas using the actual store only allows you to test the final state. On the other hand, the actual store is closer to the live app. This is tradeoff you want to think about.
+
+**Do you want to test connected or unconnected components?** Connected components are closer to the live app,and they allow you to test the store state. On the other hand, unconnected components allow you to pass action creators as props. (Why does that matter?) Again, this is a tradeoff decision.
