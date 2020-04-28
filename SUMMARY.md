@@ -71,3 +71,4 @@
 - Testing Javascript
   * [Fundamentals Of Testing](testingJavascript/1-fundamentals-of-testing.md)
   * [Static Analysis Testing](testingJavascript/2-static-analysis-testing.md)
+  * [Mocking Fundamentals](testingJavascript/3-mocking-fundamentals.md)
