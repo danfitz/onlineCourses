@@ -9,6 +9,7 @@
   * [Stacks And Queues](algorithmsDataStructures/14-stacks-and-queues.md)
   * [Binary Search Trees](algorithmsDataStructures/15-binary-search-trees.md)
   * [Tree Traversal](algorithmsDataStructures/16-tree-traversal.md)
+  * [Binary Heaps](algorithmsDataStructures/17-binary-heaps.md)
   * [Analyzing Performance Of Arrays And Objects](algorithmsDataStructures/2-analyzing-performance-of-arrays-and-objects.md)
   * [Problem Solving Approach](algorithmsDataStructures/3-problem-solving-approach.md)
   * [Problem Solving Patterns](algorithmsDataStructures/4-problem-solving-patterns.md)
@@ -20,6 +21,7 @@
 - [Complete Nodejs](completeNodejs/README.md)
   * [Understanding Node.js](completeNodejs/1-understanding-nodejs.md)
   * [REST AP Is And Mongoose](completeNodejs/10-rest-apis-and-mongoose.md)
+  * [API Authentication And Security](completeNodejs/11-api-authentication-and-security.md)
   * [Node.js Module System](completeNodejs/2-nodejs-module-system.md)
   * [File System And Command Line Args](completeNodejs/3-file-system-and-command-line-args.md)
   * [Debugging Node.js](completeNodejs/4-debugging-nodejs.md)
@@ -29,7 +31,6 @@
   * [Application Deployment](completeNodejs/8-application-deployment.md)
   * [Mongo DB And Promises](completeNodejs/9-mongodb-and-promises.md)
 - [Fireship Firestore](fireshipFirestore/README.md)
-  - Firestore Test
   * [Firestore Queries And Data Modeling Course](fireshipFirestore/firestore-queries-and-data-modeling-course.md)
   * [Model Relational Data In Firestore No SQL](fireshipFirestore/relational-data-in-firestore.md)
 - [Fundamentals Math](fundamentalsMath/README.md)
@@ -67,3 +68,6 @@
   * [Basic Testing](reactTesting/2-basic-testing.md)
   * [Redux Testing](reactTesting/3-redux-testing.md)
   * [Redux Thunk Testing](reactTesting/4-redux-thunk-testing.md)
+- Testing Javascript
+  * [Fundamentals Of Testing](testingJavascript/1-fundamentals-of-testing.md)
+  * [Static Analysis Testing](testingJavascript/2-static-analysis-testing.md)

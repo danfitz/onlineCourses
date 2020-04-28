@@ -89,6 +89,15 @@ userSchema.methods.generateAuthToken = async function() {
   return token
 }
 
+// Returns user information MINUS tokens
+userSchema.methods.toJSON = function() {
+  const user = this
+  const userObject = user.toObject() // Removes methods
+  const { password, tokens, ... publicUserInfo } = userObject
+
+  return publicUserInfo
+}
+
 const User = mongoose.model('User', userSchema)
 
 module.exports = User

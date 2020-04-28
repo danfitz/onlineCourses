@@ -36,6 +36,32 @@ router.post('/users/login', async (req, res) => {
   }
 })
 
+router.post('/users/logout', authMiddleware, async (req, res) => {
+  const { user, token } = req
+
+  try {
+    user.tokens = user.tokens.filter(someToken => someToken.token !== token)
+    await user.save()
+
+    res.status(200).send()
+  } catch (error) {
+    res.status(500).send()
+  }
+})
+
+router.post('/users/logoutAll', authMiddleware, async (req, res) => {
+  const { user } = req
+
+  try {
+    user.tokens = []
+    await user.save()
+
+    res.status(200).send()
+  } catch (error) {
+    res.status(500).send()
+  }
+})
+
 router.get('/users/me', authMiddleware, async (req, res) => {
   res.status(200).send(req.user)
 })

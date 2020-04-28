@@ -28,7 +28,7 @@ const hashAndCompare = async () => {
 
 ### Hashing in model middleware
 
-Object modelers ike Mongoose allow you to apply *middleware* that run before saving to the database. We can apply a hashing algorithm as middle in a Mongoose schema:
+Object modelers like Mongoose allow you to apply *middleware* that run before saving to the database. We can apply a hashing algorithm as middleware in a Mongoose schema:
 
 ```js
 const userSchema = mongoose.Schema(/* object */)
@@ -201,7 +201,7 @@ Authorization: Bearer 3202j3gj32j2309fj.230932jf2.23f092j3f
 ```js
 const authMiddleware = async (req, res, next) => {
   // Get token from header
-  const token = req.header('Authorization').replace('Bearer', '')
+  const token = req.header('Authorization').replace('Bearer ', '')
 
   // Decode payload
   const decoded = jwt.verify(token, 'secret')
@@ -209,8 +209,9 @@ const authMiddleware = async (req, res, next) => {
   // Find user using decoded._id AND token
   const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
 
-  // Attach user to request, allowing route handler to access user info
+  // Attach user and token to request, allowing route handler to access user info
   req.user = user
+  req.token = token
   next()
 })
 
@@ -219,3 +220,80 @@ router.get('/profile', authMiddleware, (req, res) => {
   // This only runs IF authentication succeeds
 })
 ```
+
+## Logging out Users
+
+Because our endpoints can include an `authMiddleware` that passes `user` and `token` information, setting up a logout endpoint is a breeze:
+
+1. Simply remove the token from `tokens`, then
+2. Save and send `200` response.
+
+```js
+app.post('/logout', authMiddleware, async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens(token => token.token !== req.token)
+    await req.user.save()
+    res.status(200).send()
+  } catch (error) {
+    res.status(500).send()
+  }
+})
+```
+
+## Hiding Private Data
+
+In our naive endpoints setup, any query to user information automatically returns everything, *including* password and tokens.
+
+One solution is to implement a `getPublicProfile` instance method:
+
+```js
+// In model user.js
+userSchema.methods.getPublicProfile = function() {
+  const user = this
+  const userObject = user.toObject() // removes methods
+  
+  // Strips away private data
+  delete userObject.password
+  delete userObject.tokens
+
+  return userObject
+}
+
+// In endpoint
+app.get('/users/:id', async (req, res) => {
+  const user = await User.findById(req.params.id)
+  res.send(user.getPublicProfile())
+})
+```
+
+**Pro tip**: Whenever you send a response, express automatically serializes the object into JSON using `JSON.stringify`. However, you can override what gets serialized by including a `toJSON` method in the object. By doing this, the return value of `toJSON` is instead serialized.
+
+Here's a simple example:
+
+```js
+const person = {
+  name: 'Dan',
+  age: 27,
+  toJSON: () => ({ message: 'I get serialized instead' })
+}
+
+console.log(JSON.stringify(person))
+// Logs { "message": "I get serialized instead" }
+```
+
+Applied to removing private data...
+
+```js
+// In model user.js
+userSchema.methods.toJSON = function() {
+  // Same stuff...
+}
+
+// In endpoint
+app.get('/users/:id', async (req, res) => {
+  const user = User.findById(req.params.id)
+  res.send(user) // AUTOMATICALLY removes private data now
+})
+```
+
+## Authenticating User Endpoints
