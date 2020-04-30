@@ -72,3 +72,5 @@
   * [Fundamentals Of Testing](testingJavascript/1-fundamentals-of-testing.md)
   * [Static Analysis Testing](testingJavascript/2-static-analysis-testing.md)
   * [Mocking Fundamentals](testingJavascript/3-mocking-fundamentals.md)
+  * [Configuring Jest](testingJavascript/4-configuring-jest.md)
+  * [Test React Components With Jest And React Testing Library](testingJavascript/5-test-react-components-with-jest-and-react-testing-library.md)
