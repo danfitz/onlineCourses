@@ -376,3 +376,57 @@ test('test something with the component', () => {
 ```
 
 ### Mocking animations with jest.mock
+
+Testing a component with an animation _could_ work by using `async/await` and the `wait` function. However, this still takes time, which is bad for our tests if we want to test the functionality of our tests instantly.
+
+To be able to test our components instantly without waiting for our animations to complete, we can _mock_ out the animation libraries we use. For example, here's how we mock out `react-transition-group`:
+
+```js
+// ToggleMessage.js
+import { CSSTransition } from 'react-transition-group';
+
+const ToggleMessage = ({ children }) => {
+  const [show, setShow] = useState(false)
+
+  return (
+    <>
+      <button onClick={() => setShow(!show)}>Toggle message</button>
+       <div>
+         <CSSTransition in={show} timeout={1000} unmountOnExit>
+           {children}
+         </CSSTransition>
+       </div>
+    </>
+  )
+}
+);
+
+// ToggleMessage.test.js
+jest.mock('react-transition-group', () => {
+  return {
+    CSSTransition: props => (props.in ? props.children : null),
+  };
+});
+
+test('Clicking toggle button toggle display of message', () => {
+  const message = 'Hello World';
+  const { getByText, queryByText } = render(<ToggleMessage>{message}</ToggleMessage>);
+
+  const button = getByText(/toggle message/i)
+
+  expect(queryByText(message)).not.toBeInTheDocument();
+  userEvent.click(button)
+  expect(queryByText(message)).toBeInTheDocument();
+  userEvent.click(button)
+  expect(queryByText(message)).not.toBeInTheDocument();
+});
+```
+
+Here's what's happening in the code above:
+
+- `CSSTransition` causes an element to fade in and out, each time taking 1 second to complete the animation.
+- To shorten this process, we mock out `CSSTransition`, turning it into a functional component that does the same thing but _instantly_.
+  - If the `in` is `true`, display the message.
+  - If `in` is `false`, don't display it.
+
+**Pro tip**: Be cautious when you mock your functions. They should capture the essence of what the real function is trying to do.
