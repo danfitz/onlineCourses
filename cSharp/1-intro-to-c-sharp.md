@@ -50,4 +50,16 @@ These namespaces could be for:
 
 Even higher level, applications also have **assemblies**. An assembly is a container for _related_ namespaces.
 
-Physically, an assembly is a file: either a DLL or EXE.
+Physically, an assembly is a file: either a DLL or EXE. A DLL is a file that includes code that can be reused across different programs. An EXE is a file that can be executed.
+
+## Common Files in C&#35; Application
+
+- `Properties/AssemblyInfo.cs`
+  - Identification for the assembly file that gets produced when your C# application gets compiled (title, description, company, etc.)
+- `References` directory
+  - These are any assemblies that the project references and uses
+- `App.config`
+  - XML where configuration is set up (example: SQL connection strings)
+- `Program.cs`
+  - At the top, there are `using X` statements where we import code from other assemblies/namespaces
+  - There is also usually a `class Program` with a `Main` function that acts the entry point to the application (when you run your application, `Main` execute)
