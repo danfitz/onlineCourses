@@ -1,7 +1,7 @@
 ---
-title: "Primitive Types and Expressions"
+title: 'Primitive Types and Expressions'
 part: 1
-date: "2020-09-12"
+date: '2020-09-12'
 categories: [backend]
 tags: [c#]
 source: [udemy]
@@ -68,6 +68,14 @@ There are 4 most common categories of data types each with their own size (this 
 
 **Pro tip**: The more precision you want with your numbers, th larger the data type you use.
 
+**Anotehr pro tip**: If you use `var` as your data type keyword, C# will make a best guess what data type you want.
+
+```cs
+var number = 2; // becomes int
+var character = 'hello'; // becomes char
+var boolean = true; // becomes bool
+```
+
 ### Non-primitive types
 
 There are also 4 main **non-primitive types** in C#:
@@ -119,3 +127,114 @@ Example:
   }
 }
 ```
+
+## Type Conversion
+
+### Implicit type conversion
+
+**Implicit type conversion** occurs when conversion between 2 data types leads to no data loss, so nothing extra needs to be done. (It's all done implicitly by the compiler.)
+
+```cs
+byte b = 1; // represented as 00000001
+int i = b; // represented as 00000000 00000000 00000000 00000001
+```
+
+In the example above, implicit type conversion works because bytes can be represented as ints: you just need to prepend a bunch of zeros.
+
+### Explicit type conversion or casting
+
+**Explicit type conversion** or **casting** requires explicitly writing that you want the type conversion to occur because the compiler believes the conversion will lead to data loss.
+
+```cs
+int i = 300;
+byte b = (byte)i;
+```
+
+In the example above, bytes can only represent numbers between 0 and 255. Because it was given a number outside of its range, you must prepend the data type like `byte(i)`. This tells the compiler that you're aware of the data loss and want to go through with it anyways.
+
+### Conversion between non-compatible types
+
+Sometimes data is represented in a different format than you want. The most common case is when a number is represented as a string.
+
+```cs
+string s = "1";
+int i = (int)s;
+```
+
+Casting doesn't work here.
+
+We need to use special methods to perform the conversion:
+
+```cs
+string s = "1";
+int i = Convert.ToInt32(s); // method from the Convert class
+int j = int.Parse(s); // method from the int data type
+```
+
+Here's some useful `Convert` methods:
+
+- `ToByte()`
+- `ToInt16()` (short)
+- `ToInt32()` (int)
+- `ToInt(64)` (long)
+
+Also, every data type has a `Parse` method. So you can run `char.Parse` or `float.Parse` too!
+
+## Operators
+
+We have 5 types of operators:
+
+- Arithmetic operators
+- Comparison operators
+- Assignment operators
+- Logical operators
+- Bitwise operators
+
+### Arithmetic operators
+
+- Addition +
+- Subtraction -
+- Multiplication \*
+- Division /
+- Remainder %
+- Increment ++
+- Decrement --
+
+**Note**: There is **postfix** and **prefix** incremenet and decrement
+
+```cs
+// Postfix
+int a = 1;
+int b = a++;
+// a = 2, b = 1
+
+// Prefix
+int a = 1;
+int b = ++a;
+// a = 2, b = 2
+```
+
+### Comparison operators
+
+- Equal ==
+- Not equal !=
+- > , <, >=, <=
+
+### Assignment operators
+
+- Assignment =
+- Addition assignment +=
+- Subtraction assignment -=
+- Multiplication assignment \*=
+- Division assignment /=
+
+### Logical operators
+
+- And &&
+- Or ||
+- Not !
+
+### Bitwise operators
+
+- And &
+- Or |
