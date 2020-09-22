@@ -68,7 +68,7 @@ There are 4 most common categories of data types each with their own size (this 
 
 **Pro tip**: The more precision you want with your numbers, th larger the data type you use.
 
-**Anotehr pro tip**: If you use `var` as your data type keyword, C# will make a best guess what data type you want.
+**Another pro tip**: If you use `var` as your data type keyword, C# will make a best guess what data type you want.
 
 ```cs
 var number = 2; // becomes int
