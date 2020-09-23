@@ -430,3 +430,157 @@ Here's what's happening in the code above:
   - If `in` is `false`, don't display it.
 
 **Pro tip**: Be cautious when you mock your functions. They should capture the essence of what the real function is trying to do.
+
+### Testing error boundary component
+
+There are a few things we usually want to test in any error boundary component:
+
+1. Test that the error is reported to some logging service
+2. Hide any unnecessary `console.error` messages
+3. Test that you can successfully recover from error
+
+To test if an error is reported, we mock the report function:
+
+```js
+import { reportError as mockReportError } from '../api';
+
+jest.mock('../api');
+afterEach(jest.clearAllMocks);
+
+test('calls reportError when there is a problem', () => {
+  mockReportError.mockResolvedValueOnce({ success: true });
+  render(
+    <ErrorBoundary>
+      <ThrowsError />
+    </ErrorBoundary>
+  );
+
+  const error = expect.any(Error); // asymmetric matcher
+  expect(mockReportError).toHaveBeenCalledWith(error);
+  expect(mockReportError).toHaveBeenCalledTimes(1);
+});
+```
+
+We don't want our tests to get cluttered up with `console.error` messages, which are generated automatically when an error is thrown. To fix this, we can mock `console.error`:
+
+```js
+// Before all tests, mock into an empty function
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+// After all tests, restore console.error
+afterAll(() => {
+  console.error.mockRestore();
+});
+
+// The trouble with mocking console.error is it will hide all USEFUL console.error messages
+// We can ensure no useful ones are called by testing number of calls:
+test('...', () => {
+  // ...
+  expect(console.error).toHaveBeenCalledTimes(2);
+});
+```
+
+To test that we can recover from an error, we will test that the content from the error boundary displays and can be interacted with. For example, maybe we have a "Try Again" button that re-renders the component:
+
+```js
+test('try again button appears and can be clicked to render content again', () => {
+  const { getByText, queryByText } = render(
+    <ErrorBoundary hasError>
+      <button>hello</button>
+    </ErrorBoundary>
+  );
+
+  expect(getByText(/try again/i)).toBeInTheDocument();
+  expect(queryByText(/hello/i)).not.toBeInTheDocument();
+
+  fireEvent.click(getByText(/try again/i));
+
+  expect(queryByText(/try again/i)).not.toBeInTheDocument();
+  expect(getByText(/hello/i)).toBeInTheDocument();
+});
+```
+
+### Simplifying rerender with wrapper option
+
+The `render` function has a helpful options object that you can pass where you provide a `wrapper` to simplify your `rerender` calls.
+
+So instead of this:
+
+```js
+const { rerender } = render(
+  <Parent>
+    <Child />
+  </Parent>
+);
+rerender(
+  <Parent>
+    <Child />
+  </Parent>
+);
+```
+
+We can do this:
+
+```js
+const { rerender } = render(<Child />, { wrapper: Parent });
+rerender(<Child />);
+```
+
+### Mocking components
+
+In our example, we can test that the `Redirect` component from react-router renders correctly. This component is used to redirect to another page upon render.
+
+```js
+const Component = () => {
+  const [redirect, setRedirect] = useState(false);
+  // Faking an async action like an API call
+  useEffect(() => {
+    setTimeout(() => setRedirect(true), 1000);
+  }, []);
+
+  if (redirect) {
+    return <Redirect to='/' />;
+  } else {
+    return null;
+  }
+};
+
+// In test file
+import { wait } from '@testing-library/react';
+import { Redirect as MockRedirect } from 'react-router';
+jest.mock('react-router', () => ({
+  Redirect: jest.fn(() => null),
+}));
+
+test('redirects asynchronously', async () => {
+  await wait(() => expect(MockRedirect).toHaveBeenCalledWith({ to: '/' }, {}));
+});
+```
+
+**Note**: We expect a 2nd argument to be passed because that's React automatically passing a context.
+
+### Testing dates in React
+
+Sometimes we want to store a date like when we are writing data to a database. On the frontend, we would simply create a `new Date()`. However, this becomes an issue in testing, as our mock payload will have its own `new Date()`, which may be off by milliseconds. So this would fail:
+
+```js
+test('...', () => {
+  render(<DatedComponent />);
+  expect(mockApiCall).toHaveBeenCalledWith({ date: new Date().getTime() });
+});
+```
+
+To solve this, we can test for a time range instead:
+
+```js
+const preDate = new Date().getTime();
+test('...', () => {
+  render(<DatedComponent />);
+
+  const postDate = new Date().getTime();
+  const date = mockApiCall.mock.calls[0][0].date;
+  expect(date).toBeGreaterThanOrEqual(preDate);
+  expect(date).toBeLessThanOrEqual(postDate);
+});
+```
