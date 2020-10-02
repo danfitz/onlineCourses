@@ -1,6 +1,6 @@
 ---
 title: 'Non-primitive Types'
-part: 1
+part: 3
 date: '2020-09-19'
 categories: [backend]
 tags: [c#]

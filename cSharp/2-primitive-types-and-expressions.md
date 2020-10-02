@@ -1,6 +1,6 @@
 ---
 title: 'Primitive Types and Expressions'
-part: 1
+part: 2
 date: '2020-09-12'
 categories: [backend]
 tags: [c#]

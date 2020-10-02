@@ -1,6 +1,6 @@
 ---
 title: 'Working with Dates'
-part: 1
+part: 6
 date: '2020-09-28'
 categories: [backend]
 tags: [c#]
