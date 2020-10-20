@@ -123,4 +123,94 @@ public class Customer
   - `char` becomes `''`
   - reference types like `string` and objects become `null`
 
-3:30
+Here's a constructor with actual parameters:
+
+```cs
+public class Customer
+{
+   public string Name;
+   public Customer(string name)
+   {
+      this.Name = name;
+   }
+}
+
+Customer customer = new Customer("Dan");
+```
+
+**Note**: The `this` keyword references the current object being initialized.
+
+### Constructor overloading
+
+In classes, you can utilize **constructor overloading** where you define _more than one_ constructor to account for different parameters.
+
+```cs
+public class Customer
+{
+   public Customer() {
+      // ...
+   }
+   public Customer(string name) {
+      // ...
+   }
+   public Customer(int id, string name) {
+      // ...
+   }
+}
+```
+
+Constructor overloading allows your class to be used more flexibly. For example, sometimes you don't know the `id` of a customer, their `name`, or both. You want to be able to create a customer in any of these cases.
+
+**Note**: When you constructor overload, your class won't automatically create the default parameter-less constructor _for you_, so you need to explicitly define it like above.
+
+**Important**: A constructor is considered unique based on the _order_ of the parameter data types.
+
+### Calling constructors inside other constructors
+
+Sometimes one of your class' constructors has all of the initialization you want in another constructor. In this case, it would be great to be able to re-use a constructor _inside_ another constructor.
+
+For example, whenever you create a field containing a data type like a `List`, you need to initialize it before it can be used (otherwise it will default to `null`).
+
+```cs
+public class Customer
+{
+   public List<int> Grades;
+
+   public Customer()
+   {
+      this.List = new List<int>();
+   }
+}
+```
+
+In cases like the above (and more), you don't want to have to explicitly initialize the `List` in every other constructor. Instead, you can re-use your constructors inside other constructors:
+
+```cs
+public class Customer
+{
+   public int Id;
+   public string Name;
+   public List<int> Grades;
+
+   public Customer()
+   {
+      this.List = new List<int>();
+   }
+
+   public Customer(int id)
+      : this()
+   {
+      this.Id = id;
+   }
+
+   public Customer(int id, string name)
+      : this(id)
+   {
+      this.Name = name;
+   }
+}
+```
+
+`this()` and `this(id)` always get called **before** the constructor runs. So in effect, you are _stacking_ constructor initialization.
+
+**Pro tip**: Stacking constructor initialization, although possible, is not recommended due to the way it requires you to trace what's going on. It's a better idea to limit this stacking to initialization that you _have_ to perform—like initializing a `List`.
