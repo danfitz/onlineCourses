@@ -1,7 +1,7 @@
 ---
-title: 'Classes'
+title: "Classes"
 part: 1
-date: '2020-10-05'
+date: "2020-10-05"
 categories: [backend]
 tags: [c#]
 source: [udemy]
@@ -214,3 +214,43 @@ public class Customer
 `this()` and `this(id)` always get called **before** the constructor runs. So in effect, you are _stacking_ constructor initialization.
 
 **Pro tip**: Stacking constructor initialization, although possible, is not recommended due to the way it requires you to trace what's going on. It's a better idea to limit this stacking to initialization that you _have_ to perform—like initializing a `List`.
+
+## Object Initializers
+
+**Object initializers** allow you to initialize an object _without_ using a class constructor.
+
+```cs
+var person = new Person
+{
+   FirstName = "Dan",
+   LastName = "Fitz"
+}
+```
+
+The reason object initializers were added to C# was they prevented the need to constructor overload to account for _every possible_ combination of initialized values.
+
+Instead, the idea is to restrict constructors to initialization that **must** happen in order for the object to work.
+
+**Note**: When you initialize an object using an object initializer, the default constructor _still_ runs first.
+
+## Methods
+
+### Signature of methods
+
+Methods consist of
+
+### Method overloading
+
+### Params modifier
+
+### Ref modifier
+
+### Out modifier
+
+## Fields
+
+## Access Modifiers
+
+## Properties
+
+## Indexers
