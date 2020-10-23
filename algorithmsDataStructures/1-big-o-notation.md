@@ -72,7 +72,7 @@ The above example _does_ demonstrate that the algorithm is much more efficient. 
 2. How do we label the speed of the function? Is it based on percentage of speed relative to the other? Is it the difference? This is unclear.
 3. Fast algorithms are sometimes so fast that you can't compare using time, since the time difference is so small or invisible due to the limitations of the computer.
 
-- **Pro tip**: Very often, you'll be comparing very fast algorithms. If time was your measurement, they'd all look identical.
+   - **Pro tip**: Very often, you'll be comparing very fast algorithms. If time was your measurement, they'd all look identical.
 
 4. Some code takes hours to run. It would be nice to be able to talk about the speed of our code without relying on these long tests.
 
