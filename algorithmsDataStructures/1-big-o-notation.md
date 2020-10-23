@@ -100,7 +100,7 @@ In the examples above, we might say:
 - Iterative approach is `5n + 2`
 - Formulaic approach is `3`
 
-However, with big O notation, we aren't really conceerned with whether it's `5n`, `20n`, or `10000n`. The important thing is that the number of operations grow **proportionally with n**.
+However, with big O notation, we aren't really concerned with whether it's `5n`, `20n`, or `10000n`. The important thing is that the number of operations grow **proportionally with n**.
 
 ## What is Big O Notation?
 
