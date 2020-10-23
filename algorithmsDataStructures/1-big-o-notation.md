@@ -138,7 +138,7 @@ How to simplify big O expressions:
 Rules of thumb:
 
 - Arithmetic operations (BEDMAS) are constant.
-  - If you have `n + 2`, the computer takes roughly the same about of time to perform `2 + 2` compared to `1,000,000 + 2`.
+  - If you have `n + 2`, the computer takes roughly the same amount of time to perform `2 + 2` compared to `1,000,000 + 2`.
 - Variable assignment is also constant.
   - The computer takes roughly the same about of time to assign `x = 2` compared to `x = 1,000,000`.
 - Accessing elements in an array or object is constant.

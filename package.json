@@ -4,7 +4,7 @@
   "description": "This is a roadmap of everything I'm learning now or interested in learning next.",
   "main": "index.js",
   "scripts": {
-    "summarize": "book sm -i resources,node_modules -t \"Dan Fitz's Notes\""
+    "summarize": "book sm"
   },
   "repository": {
     "type": "git",
