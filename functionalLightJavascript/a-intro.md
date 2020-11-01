@@ -1,7 +1,7 @@
 ---
 title: 'Intro'
 part: 1
-date: '2019-06-28'
+date: '2020-06-28'
 categories: [compsci]
 tags: [js]
 source: [frontend masters]
@@ -19,7 +19,7 @@ Coding isn’t done in a bubble. It’s done in teams. So if you want to impleme
 
 The first thing often said about the value of functional programming boils down to the distinction between imperative and declarative.
 
-**Imperative** programming is where your code says **how** something is to be done. You know some code is imperative if a reader has to *mentally execute* the code in their minds, pretending to think like a computer.
+**Imperative** programming is where your code says **how** something is to be done. You know some code is imperative if a reader has to _mentally execute_ the code in their minds, pretending to think like a computer.
 
 However, this is error prone, as humans aren’t great at thinking like computers. As a result, imperative code is harder to understand, making it harder to maintain, to fix, and to improve.
 
@@ -35,7 +35,7 @@ As a result of this confidence, you don't have to worry about a good chunk of yo
 
 ## Course Overview
 
-This course takes a **bottom-up** approach, focusing on the fundamental building blocks to get you *started* on your functional programming journey. (Contrast this with a top-down approach, which focuses on high-level theory first, making the content more inaccessible.)
+This course takes a **bottom-up** approach, focusing on the fundamental building blocks to get you _started_ on your functional programming journey. (Contrast this with a top-down approach, which focuses on high-level theory first, making the content more inaccessible.)
 
 The topics will be:
 

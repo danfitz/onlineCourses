@@ -13,9 +13,9 @@ source: [frontend masters]
 
 You use static code splitting in situations like:
 
-* **Heavy JS**: stuff that is a lot to download, parse, and execute, yet you don’t use it right away
-*  **Anything temporal**: things like modals, tooltips, etc. that don’t appear right away and aren’t needed right away (conditionally load)
-* **Routes**: the only code you need to load is the one related to the current route; every other route can be code split
+- **Heavy JS**: stuff that is a lot to download, parse, and execute, yet you don’t use it right away
+- **Anything temporal**: things like modals, tooltips, etc. that don’t appear right away and aren’t needed right away (conditionally load)
+- **Routes**: the only code you need to load is the one related to the current route; every other route can be code split
 
 Dynamic code splitting uses the `import()` function but places a variable inside of it. For example:
 
@@ -23,12 +23,12 @@ Dynamic code splitting uses the `import()` function but places a variable inside
 const getTheme = themeName => import(`./src/themes/${themeName}`);
 
 form.addEventListener('submit', e => {
-	e.preventDefault();
-	getTheme(e.target.theme.value).then(module => module.loadTheme());
+  e.preventDefault();
+  getTheme(e.target.theme.value).then(module => module.loadTheme());
 });
 ```
 
-**Note**: Technically, all code splitting is *static* because the directory resolves to a particular path, and webpack creates a unique bundle at build time for that path. It’s only really “dynamic” insofar as changes at runtime can influence what modules are lazily loaded. (In the example above, the dynamic part is the form value.)
+**Note**: Technically, all code splitting is _static_ because the directory resolves to a particular path, and webpack creates a unique bundle at build time for that path. It’s only really “dynamic” insofar as changes at runtime can influence what modules are lazily loaded. (In the example above, the dynamic part is the form value.)
 
 ## How Code Splitting Works
 
@@ -40,13 +40,13 @@ import component from './component';
 
 document.body.appendChild(button);
 button.addEventListener('click', e => {
-	document.body.appendChild(component);
+  document.body.appendChild(component);
 });
 ```
 
-However, the problem with this solution is that the `component` module *still* gets included in the bundle that webpack generates—even though it’s not being used!
+However, the problem with this solution is that the `component` module _still_ gets included in the bundle that webpack generates—even though it’s not being used!
 
-Here’s where **code splitting** comes in. Using a dynamic import, we can asynchronously load the module *only* when we need it:
+Here’s where **code splitting** comes in. Using a dynamic import, we can asynchronously load the module _only_ when we need it:
 
 ```js
 import button from './button';
@@ -54,9 +54,10 @@ const getComponent = () => import('./component');
 
 document.body.appendChild(button);
 button.addEventListener('click', e => {
-	getComponent().then(componentModule => { // dynamic import returns a promise
-		document.body.appendChild(componentModule.component);
-	});
+  getComponent().then(componentModule => {
+    // dynamic import returns a promise
+    document.body.appendChild(componentModule.component);
+  });
 });
 ```
 
@@ -77,8 +78,8 @@ In Vue, code splitting is a first-class citizen. All you have to do is this:
 
 ```html
 <script>
-   // import Component from './component';
-   const Component = () => import('./component');
+  // import Component from './component';
+  const Component = () => import('./component');
 </script>
 ```
 

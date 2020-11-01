@@ -15,8 +15,8 @@ source: [frontend masters]
 
 ```js
 import(
-	/* webpackChunkName: "footer" */
-	'./footer'
+  /* webpackChunkName: "footer" */
+  './footer'
 );
 ```
 
@@ -24,9 +24,9 @@ Then in your webpack config file:
 
 ```js
 {
-	output: {
-		chunkFilename: "[name].lazy-chunk.js"
-	}
+  output: {
+    chunkFilename: '[name].lazy-chunk.js';
+  }
 }
 ```
 
