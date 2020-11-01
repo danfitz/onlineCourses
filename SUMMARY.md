@@ -47,6 +47,9 @@
 - [Fireship Firestore](fireshipFirestore/README.md)
   * [Firestore Queries And Data Modeling Course](fireshipFirestore/firestore-queries-and-data-modeling-course.md)
   * [Model Relational Data In Firestore No SQL](fireshipFirestore/relational-data-in-firestore.md)
+- Functional Light Javascript
+  * [Intro](functionalLightJavascript/a-intro.md)
+  * [Function Purity](functionalLightJavascript/b-function-purity.md)
 - [Fundamentals Math](fundamentalsMath/README.md)
   * [Numbers And Negative Numbers](fundamentalsMath/1-numbers-and-negative-numbers.md)
   * [Factors And Multiples](fundamentalsMath/2-factors-and-multiples.md)
@@ -88,3 +91,7 @@
   * [Mocking Fundamentals](testingJavascript/3-mocking-fundamentals.md)
   * [Configuring Jest](testingJavascript/4-configuring-jest.md)
   * [Test React Components With Jest And React Testing Library](testingJavascript/5-test-react-components-with-jest-and-react-testing-library.md)
+- Web Performance With Webpack
+  * [Intro](webPerformanceWithWebpack/a-intro.md)
+  * [Code Splitting](webPerformanceWithWebpack/b-code-splitting.md)
+  * [Module Methods Magic Comments](webPerformanceWithWebpack/c-module-methods-and-magic-comments.md)
