@@ -50,6 +50,10 @@
 - Functional Light Javascript
   * [Intro](functionalLightJavascript/a-intro.md)
   * [Function Purity](functionalLightJavascript/b-function-purity.md)
+  * [Argument Adapters](functionalLightJavascript/c-argument-adapters.md)
+  * [Point Free](functionalLightJavascript/d-point-free.md)
+  * [Closure](functionalLightJavascript/e-closure.md)
+  * [Composition](functionalLightJavascript/f-composition.md)
 - [Fundamentals Math](fundamentalsMath/README.md)
   * [Numbers And Negative Numbers](fundamentalsMath/1-numbers-and-negative-numbers.md)
   * [Factors And Multiples](fundamentalsMath/2-factors-and-multiples.md)
