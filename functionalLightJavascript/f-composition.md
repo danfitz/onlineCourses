@@ -98,4 +98,17 @@ In other words, you don't have to know all the functions that are going to parti
 
 ## Composition with Currying
 
-Composition is better with unary functions because it's easier to pass the output of one function into the input of another when they're all unary.
+The natural way to compose a series of functions is for them all to be _unary_. After all, it's easier to pass the output of one function into the input of another when the input expected is always unary.
+
+So how can you compose functions that are _not_ unary? You can curry them, turning them _into_ unary functions.
+
+```js
+// divBy and sum are both binary
+divBy(2, triple(sum(3, 5))); // 12
+
+// By currying divBy and sum become unary
+divBy = curry(2, divBy);
+sum = curry(2, sum);
+const calc = compose(divBy(2), triple, sum(3));
+calc(5); // 12
+```
