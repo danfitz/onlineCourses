@@ -1,82 +1,112 @@
-"use strict";
+'use strict';
 
 // inception!
-curry = curry(2,curry);
+// curry = curry(2, curry);
 
 var nums = {
-	first: [3,5,2,4,9,1,12,3],
-	second: [5,7,7,9,10,4,2],
-	third: [1,1,3,2]
+  first: [3, 5, 2, 4, 9, 1, 12, 3],
+  second: [5, 7, 7, 9, 10, 4, 2],
+  third: [1, 1, 3, 2],
 };
 
-var filteredNums = filterObj(function(list){
-	return isOdd(listSum(list));
-},nums);
+var filteredNums = filterObj(function (list) {
+  return isOdd(listSum(list));
+}, nums);
 
-var filteredNumsProducts = mapObj(function(list){
-	return listProduct(list);
-},filteredNums);
+var filteredNumsProducts = mapObj(function (list) {
+  return listProduct(list);
+}, filteredNums);
 
-reduceObj(function(acc,v){
-	return acc + v;
-},0,filteredNumsProducts);
+const result = reduceObj(
+  function (acc, v) {
+    return acc + v;
+  },
+  0,
+  filteredNumsProducts
+);
 // 38886
+console.log(result);
 
-
-// ************************************
-
-function mapObj(mapperFn,o) {
-	var newObj = {};
-	var keys = Object.keys(o);
-	for (let key of keys) {
-		newObj[key] = mapperFn( o[key] );
-	}
-	return newObj;
-}
-
-function filterObj(predicateFn,o) {
-	// TODO
-}
-
-function reduceObj(reducerFn,initialValue,o) {
-	// TODO
-}
-
+const resulto = pipe(
+  curry(2, filterObj)(compose(isOdd, listSum)),
+  curry(2, mapObj)(listProduct),
+  curry(3, reduceObj)(sum)(0)
+)(nums);
+console.log(resulto);
 
 // ************************************
 
-function curry(arity,fn) {
-	return (function nextCurried(prevArgs){
-		return function curried(nextArg){
-			var args = prevArgs.concat([nextArg]);
-			if (args.length >= arity) {
-				return fn(...args);
-			}
-			else {
-				return nextCurried(args);
-			}
-		};
-	})([]);
+function mapObj(mapperFn, o) {
+  var newObj = {};
+  var keys = Object.keys(o);
+  for (let key of keys) {
+    newObj[key] = mapperFn(o[key]);
+  }
+  return newObj;
+}
+
+function filterObj(predicateFn, o) {
+  const newObj = {};
+  const keys = Object.keys(o);
+  for (let key of keys) {
+    if (predicateFn(o[key])) {
+      newObj[key] = o[key];
+    }
+  }
+  return newObj;
+}
+
+function reduceObj(reducerFn, initialValue, o) {
+  let result = initialValue;
+  const vals = Object.values(o);
+  for (let val of vals) {
+    result = reducerFn(result, val);
+  }
+  return result;
+}
+
+// ************************************
+
+function curry(arity, fn) {
+  return (function nextCurried(prevArgs) {
+    return function curried(nextArg) {
+      var args = prevArgs.concat([nextArg]);
+      if (args.length >= arity) {
+        return fn(...args);
+      } else {
+        return nextCurried(args);
+      }
+    };
+  })([]);
 }
 function compose(...fns) {
-	return function composed(arg) {
-		return fns.reduceRight((result,fn) => fn(result),arg);
-	};
+  return function composed(arg) {
+    return fns.reduceRight((result, fn) => fn(result), arg);
+  };
 }
 function pipe(...fns) {
-	return compose(...fns.reverse());
+  return compose(...fns.reverse());
 }
 function binary(fn) {
-	return function two(arg1,arg2){
-		return fn(arg1,arg2);
-	};
+  return function two(arg1, arg2) {
+    return fn(arg1, arg2);
+  };
 }
-
 
 // ************************************
 
-function isOdd(v) { return v % 2 == 1; }
-function sum(x,y) { return x + y; }
-function mult(x,y) { return x * y; }
-function listSum(list) { return list.reduce(sum,0); }
-function listProduct(list) { return list.reduce(mult,1); }
+function isOdd(v) {
+  return v % 2 == 1;
+}
+function sum(x, y) {
+  return x + y;
+}
+function mult(x, y) {
+  return x * y;
+}
+function listSum(list) {
+  return list.reduce(sum, 0);
+}
+function listProduct(list) {
+  return list.reduce(mult, 1);
+}
