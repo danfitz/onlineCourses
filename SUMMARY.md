@@ -58,6 +58,8 @@
   * [Recursion](functionalLightJavascript/h-recursion.md)
   * [List Operations](functionalLightJavascript/i-list-operations.md)
   * [Transduction](functionalLightJavascript/j-transduction.md)
+  * [Data Structure Operations](functionalLightJavascript/k-data-structure-operations.md)
+  * [Async](functionalLightJavascript/l-async.md)
 - [Fundamentals Math](fundamentalsMath/README.md)
   * [Numbers And Negative Numbers](fundamentalsMath/1-numbers-and-negative-numbers.md)
   * [Factors And Multiples](fundamentalsMath/2-factors-and-multiples.md)
