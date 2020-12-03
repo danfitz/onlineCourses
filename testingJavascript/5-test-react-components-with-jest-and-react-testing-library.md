@@ -362,7 +362,7 @@ With this coding pattern, the component doesn't need to be passed the function _
 
 ```js
 // component.js
-import { getStuff } from './api'
+import { getStuff } from './api';
 
 import Component = ({ asyncFunction = getStuff }) => {
   // ...
@@ -371,9 +371,39 @@ import Component = ({ asyncFunction = getStuff }) => {
 // component.test.js
 test('test something with the component', () => {
   const mockGetStuff = jest.fn()
-  const queries = render(<Component getStuff={mockGetStuff} />)
+  const queries = render(<Component asyncFunction={mockGetStuff} />)
 })
 ```
+
+### Mocking HTTP requests by intercepting them
+
+Instead of mocking out the functions that make the API call, we can allow our functions to behave normally but then **intercept** the requests.
+
+To do this, we need the `msw` package:
+
+```js
+import 'whatwg-fetch'; // polyfill for fetch on node
+import { setupServer } from 'msw/node';
+import { rest } from 'msw';
+
+// We're creating a mock REST API with the endpoints we need
+const server = setupServer(
+  rest.post('/greeting', (req, res, context) => {
+    return res(
+      context.json({ data: { greeting: `Hello ${req.body.subject}` } })
+    );
+  })
+);
+
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
+```
+
+**Notes**:
+
+- We include `onUnhandledRequest` so that all requests other than the ones we mocked will error out.
+- Like `jest.clearAllMocks`, `server.resetHandlers` clears out any handlers we created in specific tests.
 
 ### Mocking animations with jest.mock
 
@@ -584,3 +614,217 @@ test('...', () => {
   expect(date).toBeLessThanOrEqual(postDate);
 });
 ```
+
+### Custom render function to share between tests
+
+Sometimes our tests share the same initial code. In these cases, it's reasonable to create a custom render function for that repeated code.
+
+Things you can do in a custom render function include:
+
+- Set up the mock data you need,
+- Render the component itself,
+- Perform the initial interaction with the component that you need,
+- Get elements in the component using `getBy` or `queryBy` or `findBy`, and
+- Return any of the above for use in your tests.
+
+Example:
+
+```js
+// This custom render function is for a form
+const renderEditor = () => {
+  const fakeUser = userBuilder();
+  const utils = render(<Editor user={fakeUser} />);
+  const fakePost = userBuilder();
+
+  utils.getByLabelText(/title/i).value = fakePost.title;
+  utils.getByLabelText(/content/i).value = fakePost.content;
+  utils.getByLabelText(/tags/i).value = fakePost.tags.join(', ');
+  const submitButton = utils.getByText(/submit/i);
+
+  return {
+    ...utils,
+    submitButton,
+    fakeUser,
+    fakePost,
+  };
+};
+```
+
+### Test components that use react-router `Router` provider and `createMemoryHistory`
+
+Some components you test will have react-router components:
+
+```js
+const Main = () => (
+  <div>
+    <Link to='/'>Home</Link>
+    <Link to='/about'>About</Link>
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/about' component={About} />
+      <Route component={FourOhFour} />
+    </Switch>
+  </div>
+);
+```
+
+If you test the `Main` component on its own, it will error out because it must be wrapped in a `Router` provider. To test with this provider, you just need to wrap your component in the provider inside your `render` function.
+
+```js
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+test('main initially renders home', () => {
+  const history = createMemoryHistory({ initialEntries: ['/'] });
+  render(
+    <Provider history={history}>
+      <Main />
+    </Provider>
+  );
+});
+```
+
+**Pro tip**: You use `Router` and `createMemoryHistory` when you want to customize the user's history. When you don't need to customize, it's recommended to just use `BrowserRouter` from react-router-dom.
+
+### Test 404 route by passing a bad entry in `history` object
+
+In our routes, we had a `FourOhFour` route that acts as a fallback if no matching path is found.
+
+```js
+<Route component={FourOhFour} />
+```
+
+To test this, we can just pass a bad entry into `createMemoryHistory`:
+
+```js
+const history = createMemoryHistory({
+  initialEntries: ['/this-path-does-not-exist'],
+});
+```
+
+Now the `FourOhFour` component should render.
+
+### Custom render function for testing react-router components
+
+Our custom `render` function will have the following features:
+
+1. Ability to include custom initial route,
+2. Ability to pass custom `history` object,
+3. Ability to pass render options into React Testing Library's native `render` function, and
+4. Ability to use `rerender` and still automatically wrap the component in the `Router` provider.
+
+```js
+const render = (
+  ui,
+  {
+    route = '/',
+    history = createMemoryHistory({
+      initialEntries: [route],
+    }),
+    ...renderOptions
+  } = {}
+) => {
+  const Wrapper = ({ children }) => (
+    <Router history={history}>{children}</Router>
+  );
+  return {
+    ...rtlRender(ui, { wrapper: Wrapper, ...renderOptions }),
+    history,
+  };
+};
+```
+
+### Testing a redux-connected component
+
+Suppose you have a component that is connected to Redux:
+
+```js
+const Counter = () => {
+  const count = useSelector(state => state.count);
+  const dispatch = useDispatch();
+  const increment = () => dispatch({ type: 'INCREMENT' });
+  const decement = () => dispatch({ type: 'DECREMENT' });
+
+  return (
+    <div>
+      <span aria-label='count'>{count}</span>
+      <button onClick={decrement}>-</button>
+      <button onClick={increment}>+</button>
+    </div>
+  );
+};
+```
+
+All you need to do to test this component is wrap it in a `Provider` with `store` passed as a prop.
+
+```js
+test('renders with redux', () => {
+  const { getByText, getByLabelText } = render(
+    <Provider store={store}>
+      <Count />
+    </Provider>
+  );
+
+  const increment = getByText('+');
+  fireEvent.click(increment);
+  expect(getByLabelText(/count/)).toHaveTextContent('1');
+});
+```
+
+The magic of this approach is that
+
+1. You're testing the component _and_ redux at the same time, since they're integrated together, and
+2. You're testing the component as if redux doesn't exist (it's just an implementation detail), so if you ever stop using redux, it's not too hard to refactor it out of your tests.
+
+### Testing a redux-connected component with initialized state
+
+The key to passing initial state is to run your `createStore` in your tests:
+
+```js
+test('can render with redux with custom initial state', () => {
+  const initialState = { count: 3 };
+  const store = createStore(reducer, initialState);
+
+  const { getByText, getByLabelText } = render(
+    <Provider store={store}>
+      <Count />
+    </Provider>
+  );
+
+  const increment = getByText('+');
+  fireEvent.click(increment);
+  expect(getByLabelText(/count/)).toHaveTextContent('4');
+});
+```
+
+### Custom render function for redux-connected components
+
+If you're testing redux-connected components, you are going to be wrapping your component in a `Provider` and passing a `store` with a custom initialized state _a lot_. We can simplify this with a **custom render function**.
+
+```js
+import { render as rtlRender } from '@testing-library/react';
+
+const render = (
+  ui,
+  {
+    initialState,
+    store = createStore(reducer, initialState),
+    ...rtlOptions
+  } = {}
+) => {
+  const Wrapper = ({ children }) => (
+    <Provider store={store}>{children}</Provider>
+  );
+
+  return {
+    ...rtlRender(ui, { wrapper: Wrapper, ...rtlOptions }),
+    store,
+  };
+};
+```
+
+There's a few things to unpack in this custom `render` function:
+
+- We destructure out `initialState` and `store`, so we can pass the options specific to React Testing Library into `rtlRender`.
+- We pass a default initialization for `store`, so a user can pass their own custom store if they want.
+- We create a `Wrapper` function component that does the `Provider` wrapping for us and then pass it in options for `rtlRender`. That way if we use the `rerender` util, the `Provider` will always wrap around the component in the future. (We don't have to do it ourselves.)
+- We return the `store` itself in case we want some fine-tuned control of redux.
