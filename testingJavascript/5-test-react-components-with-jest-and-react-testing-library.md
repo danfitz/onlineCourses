@@ -828,3 +828,69 @@ There's a few things to unpack in this custom `render` function:
 - We pass a default initialization for `store`, so a user can pass their own custom store if they want.
 - We create a `Wrapper` function component that does the `Provider` wrapping for us and then pass it in options for `rtlRender`. That way if we use the `rerender` util, the `Provider` will always wrap around the component in the future. (We don't have to do it ourselves.)
 - We return the `store` itself in case we want some fine-tuned control of redux.
+
+### Test custom React hook
+
+If you use a React hook in isolation, you'll get an error stating that it must be called inside a function component. To circumvent this, we just call the hook inside a function component!
+
+```js
+test('exposes the count and increment/decrement functions', () => {
+  // We set an outer variable to store the hook's return value
+  let result = {};
+
+  const TestComponent = () => {
+    result = useCounter();
+    return null;
+  };
+
+  render(<TestComponent />);
+});
+```
+
+Our `result` has a `count` state and `increment` and `decrement` state updaters. The trouble now though is that we can't just invoke a state updater. We always have to wrap it in a callback in `act`.
+
+```js
+test('exposes the count and increment/decrement functions', () => {
+  let result = {};
+
+  const TestComponent = () => {
+    result = useCounter();
+    return null;
+  };
+
+  render(<TestComponent />);
+
+  expect(result.count).toBe(0);
+  act(result.increment);
+  expect(result.count).toBe(1);
+});
+```
+
+### Setup function to test custom React hooks
+
+If our custom React hook accepts arguments to customize its behaviour, we may want to create a custom `setup` function that handles all the setup required to test each scenario.
+
+```js
+const setup = (initialProps = {}) => {
+  const result = {};
+
+  const TestComponent = props => {
+    result.current = useCounter(props);
+    return null;
+  };
+  render(<TestComponent {...initialProps} />);
+
+  return result;
+};
+
+test('allows customization of step', () => {
+  const result = setup({ step: 2 });
+  expect(result.current.count).toBe(0);
+  act(result.current.increment);
+  expect(result.current.count).toBe(2);
+});
+```
+
+**Note**: Notice how we store the return value of `useCounter` in `result.current`? That's because if we store it directly in `result` and then return `result`, we only get back the initial state of `useCounter`. On every _re-render_, `useCounter` returns something new, so to access that new value every time, we store it inside an object.
+
+### Test custom React hook with `renderHook`
