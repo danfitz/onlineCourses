@@ -1,5 +1,8 @@
 ---
-title: 'Working with Content' part: 1 date: '2021-01-17' categories: [frontend, mobile]
+title: 'Working with Content'
+part: 1
+date: '2021-01-17'
+categories: [frontend, mobile]
 tags: [react native]
 source: [udemy]
 ---
