@@ -1,5 +1,8 @@
 ---
-title: 'Test React Components with Jest and React Testing Library' part: 5 date: '2020-04-30' categories: [tools]
+title: 'Test React Components with Jest and React Testing Library'
+part: 5
+date: '2020-04-30'
+categories: [tools]
 tags: [js, testing]
 source: [egghead]
 ---
