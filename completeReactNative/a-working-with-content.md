@@ -70,6 +70,3 @@ Now when you visit the app, it will be the first thing you see!
 
 **Note**: The `react-navigation` library tools just help us handle navigation and control the screens available to the
 user.
-
-## Rules of JSX
-
