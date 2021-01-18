@@ -1,8 +1,5 @@
 ---
-title: 'Test React Components with Jest and React Testing Library'
-part: 5
-date: '2020-04-30'
-categories: [tools]
+title: 'Test React Components with Jest and React Testing Library' part: 5 date: '2020-04-30' categories: [tools]
 tags: [js, testing]
 source: [egghead]
 ---
@@ -393,9 +390,7 @@ With this coding pattern, the component doesn't need to be passed the function _
 // component.js
 import {getStuff} from './api';
 
-import Component
-
-= ({asyncFunction = getStuff}) => {
+const Component = ({asyncFunction = getStuff}) => {
   // ...
 }
 
@@ -463,8 +458,6 @@ const ToggleMessage = ({children}) => {
     </>
   )
 }
-)
-;
 
 // ToggleMessage.test.js
 jest.mock('react-transition-group', () => {
@@ -975,7 +968,9 @@ from `renderHook`.
 
 ```js
 test('the step amount can be changed', () => {
-  const {result, rerender} = renderHook(useCounter, {initialProps: {step: 2}});
+  const {result, rerender} = renderHook(useCounter, {
+    initialProps: {step: 2},
+  });
   expect(result.current.count).toBe(0);
   act(result.current.increment);
   expect(result.current.count).toBe(2);
@@ -999,9 +994,9 @@ const Modal = ({children}) => {
     currentEl.setAttribute('id', 'modalRoot');
     document.body.appendChild(currentEl);
     return () => document.body.removeChild(currentEl);
-  }, [])
+  }, []);
   return ReactDOM.createPortal(children, el.current);
-}
+};
 ```
 
 How do you test for a component that appears outside a parent?
@@ -1011,11 +1006,13 @@ means you don't have to do anything special to test your portaled component!
 
 ```js
 test('Modal contents render', () => {
-  const {getByTestId} = render(<Modal>
-    <div data-testid="test"/>
-  </Modal>);
+  const {getByTestId} = render(
+    <Modal>
+      <div data-testid='test'/>
+    </Modal>
+  );
   expect(getByTestId('test')).toBeInTheDocument();
-})
+});
 ```
 
 If however we want to bind our test utils to a custom wrapper element (instead of `document.body`), we can use
@@ -1025,7 +1022,7 @@ the `within` function:
 test('Modal contents render', () => {
   const {getByTestId} = within(document.geElementById('modalRoot'));
   expect(getByTestId('test')).toBeInTheDocument();
-})
+});
 ```
 
 Or we can just pass the `modalRoot` as the `baseElement` inside `render`!
@@ -1033,7 +1030,7 @@ Or we can just pass the `modalRoot` as the `baseElement` inside `render`!
 ```js
 const {getByTestId} = render(
   <Modal>
-    <div data-testid="test"/>
+    <div data-testid='test'/>
   </Modal>,
   {baseElement: document.getElementById('modalRoot')}
 );
@@ -1041,3 +1038,117 @@ const {getByTestId} = render(
 
 ### Test unmounting a React component
 
+Suppose you have a component that uses `setInterval` to periodically update state. When this component unmounts then,
+you need to `clearInterval` because you can't have the interval continuing to try to update state of an _unmounted_
+component. In fact, React will throw an error if you do.
+
+```js
+const Counter = () => {
+  const [remainingTime, setRemainingTime] = useState(10000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newRemainingTime = remainingTime - 100;
+      if (newRemainingTime <= 0) {
+        clearInterval(interval);
+        setRemainingTime(0);
+      } else {
+        setRemainingTime(newRemainingTime);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  });
+
+  return <div>{remainingTime}</div>;
+};
+```
+
+To test that cleanup occurs when you unmount, you can use the `unmount` util:
+
+```js
+// We mock console.error so as not to muddy our console during tests
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {
+  });
+})
+afterAll(console.error.mockRestore);
+
+test('does not attempt to set state after unmount (to prevent memory leaks)', () => {
+  // We use fake timers because real timers are too slow during tests
+  jest.useFakeTimers();
+
+  const {unmount} = render(<Counter/>);
+  unmount();
+
+  act(jest.runOnlyPendingTimers);
+
+  // We test that an error doesn't occur
+  expect(console.error).not.toHaveBeenCalled();
+
+  jest.useRealTimers();
+})
+```
+
+### Writing integration tests
+
+Suppose we have a multi-page form where each step takes you to a new component/page. How do we test this?
+
+With React Testing Library, we can perform an **integration test** where we imitate what a user does:
+
+```js
+import {submitForm as mockSubmitForm} from './api';
+
+test('can fill out form across multiple pages', () => {
+  mockSubmitForm.mockResolvedValueOnce({success: true});
+
+  const testData = {food: 'test food', drink: 'test drink'};
+
+  const {getByLabelText, getByText} = render(<MultiPageForm/>);
+
+  // Food input
+  fireEvent.change(getByLabelText(/food/i), {target: {value: testData.food}});
+  fireEvent.click(getByText(/next/i))
+
+  // Drink input
+  fireEvent.change(getByLabelText(/drink/i), {target: {value: testData.drink}});
+  fireEvent.click(getByText(/review/i));
+
+  // Review
+  expect(getByLabelText(/food/i)).toHaveTextContent(testData.food);
+  expect(getByLabelText(/drink/i)).toHaveTextContent(testData.drink);
+
+  // Submission
+  fireEvent.click(getByText(/confirm/i), {selector: 'button'});
+  expect(mockSubmitForm).toHaveBeenCalledWith(testData);
+  expect(mockSubmitForm).toHaveBeenCalledTimes(1);
+  expect(getByText(/success/i)).toBeInTheDocument();
+})
+```
+
+### Improve reliability of integration tests using `find` queries
+
+With integration tests especially, there can be many variables that can break your tests in unexpected ways. For
+example, what if there are animations that slow down rendering of certain elements?
+
+To help separate the implementation details from your tests, it's a good idea to use `find` queries, so your tests don't
+automatically break if something doesn't immediately go as planned.
+
+```js
+expect(await findByText(/success/i)).toBeInTheDocument();
+```
+
+### Improve reliability of integration tests using User Event Module
+
+To help even further separate the implementation details from our tests, we can use the `user-event` module inside React
+Testing Library.
+
+This module gives us user actions that more closely represent how a user actually behaves. This is a much more accurate
+approach to testing than imperatively running `fireEvent` methods.
+
+For example, instead of `fireEvent.click`, we can use `user.click`. Or instead of `fireEvent.change`, we can
+use `user.type`.
+
+```js
+user.type(await findByLabelText(/food/i), testData.food);
+user.click(await findByText(/next/i));
+```
