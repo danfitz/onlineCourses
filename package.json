@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/danfitz/onlineCourses#readme",
   "devDependencies": {
-    "gitbook-summary": "^1.2.2"
+    "gitbook-summary": "^1.2.2",
+    "prettier": "^2.2.1"
   }
 }

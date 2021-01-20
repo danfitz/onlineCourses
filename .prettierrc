@@ -1,3 +1,7 @@
 {
+  "arrowParens": "avoid",
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
   "proseWrap": "never"
 }
