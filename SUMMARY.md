@@ -36,6 +36,8 @@
   * [Working With Content](completeReactNative/a-working-with-content.md)
   * [Building Lists](completeReactNative/b-building-lists.md)
   * [Navigating Users Between Screens](completeReactNative/c-navigating-users-between-screens.md)
+  * [State Management](completeReactNative/d-state-management.md)
+  * [Handling Screen Layout](completeReactNative/e-handling-screen-layout.md)
 - [C Sharp Fundamentals](cSharpFundamentals/README.md)
   * [Intro To C](cSharpFundamentals/1-intro-to-c-sharp.md)
   * [Primitive Types And Expressions](cSharpFundamentals/2-primitive-types-and-expressions.md)
