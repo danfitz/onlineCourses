@@ -10,15 +10,15 @@ const genRandRgb = () => {
 
 const ColorsScreen = () => {
   const [colors, setColors] = useState([]);
-  console.log(colors);
   const addColor = () => {
     setColors(prevColors => [...prevColors, genRandRgb()]);
   };
 
   return (
-    <View>
+    <View style={{ alignItems: 'center' }}>
       <Button title='Add Color' onPress={addColor} />
       <FlatList
+        numColumns={4}
         keyExtractor={a => a}
         data={colors}
         renderItem={({ item: color }) => (
