@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import R from 'ramda';
 import SearchBar from '../components/SearchBar';
 import RestaurantsList from '../components/RestaurantsList';
@@ -7,7 +7,7 @@ import useRestaurants from '../hooks/useRestaurants';
 
 const DEFAULT_TERM = 'food';
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation: { navigate } }) => {
   const [term, setTerm] = useState('');
   const [restaurants, getRestaurants, failed] = useRestaurants(DEFAULT_TERM);
 
@@ -15,7 +15,7 @@ const SearchScreen = () => {
     restaurants.filter(R.compose(R.equals(targetPrice), R.prop('price')));
 
   return (
-    <View>
+    <>
       <SearchBar
         term={term}
         onTermChange={setTerm}
@@ -24,8 +24,7 @@ const SearchScreen = () => {
       {failed ? (
         <Text style={{ color: 'red' }}>Unable to fetch restaurants</Text>
       ) : (
-        <>
-          <Text>We have found {restaurants.length} restaurants</Text>
+        <ScrollView>
           <RestaurantsList
             title='Cost Effective'
             restaurants={filterRestaurantsByPrice('$')}
@@ -38,9 +37,9 @@ const SearchScreen = () => {
             title='Big Spender!'
             restaurants={filterRestaurantsByPrice('$$$')}
           />
-        </>
+        </ScrollView>
       )}
-    </View>
+    </>
   );
 };
 

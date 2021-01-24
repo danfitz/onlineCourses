@@ -1,30 +1,48 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
+import { withNavigation } from 'react-navigation';
 import R from 'ramda';
+import RestaurantCard from './RestaurantCard';
 
-const renderRestaurantTitle = R.compose(
-  name => <Text>{name}</Text>,
-  R.prop('name'),
-  R.prop('item')
-);
+const RestaurantsList = ({ title, restaurants, navigation: { navigate } }) => {
+  const renderRestaurant = R.compose(
+    item => (
+      <TouchableOpacity onPress={() => navigate('Details', { id: item.id })}>
+        <RestaurantCard {...item} />
+      </TouchableOpacity>
+    ),
+    R.prop('item')
+  );
 
-const RestaurantsList = ({ title, restaurants }) => (
-  <View>
-    <Text style={styles.title}>{title}</Text>
-    <FlatList
-      data={restaurants}
-      keyExtractor={R.prop('id')}
-      renderItem={renderRestaurantTitle}
-      horizontal
-    />
-  </View>
-);
+  if (!restaurants.length) return null;
 
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
+      <FlatList
+        data={restaurants}
+        keyExtractor={R.prop('id')}
+        renderItem={renderRestaurant}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
+  );
+};
 const styles = StyleSheet.create({
+  container: { marginBottom: 10 },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginLeft: 15,
+    marginBottom: 5,
   },
 });
 
-export default RestaurantsList;
+export default withNavigation(RestaurantsList);
