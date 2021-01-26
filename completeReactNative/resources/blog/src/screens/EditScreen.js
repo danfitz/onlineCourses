@@ -1,16 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import R from 'ramda';
 import { Context as BlogContext } from '../context/BlogContext';
 import BlogPostForm from '../components/BlogPostForm';
 
-const CreateScreen = ({ navigation: { navigate } }) => {
-  const { addBlogPost } = useContext(BlogContext);
+const EditScreen = ({ navigation: { getParam, pop } }) => {
+  const { state, editBlogPost } = useContext(BlogContext);
+  const id = getParam('id');
+  const post = state.find(R.propEq('id', id));
 
   return (
-    <View style={styles.container}>
+    <View>
       <BlogPostForm
-        onSubmit={addBlogPost(R.__, R.__, () => navigate('Index'))}
+        initialValues={post}
+        onSubmit={editBlogPost(id, R.__, R.__, pop)}
       />
     </View>
   );
@@ -28,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateScreen;
+export default EditScreen;
