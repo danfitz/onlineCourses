@@ -1,19 +1,13 @@
 import createDataContext from './createDataContext';
 import R from 'ramda';
+import jsonServer from '../api/jsonServer';
 
 const notEquals = R.complement(R.equals);
 
 const blogReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_BLOG_POST':
-      return [
-        ...state,
-        {
-          id: Math.floor(Math.random() * 999999),
-          title: action.payload.title,
-          content: action.payload.content,
-        },
-      ];
+    case 'GET_BLOG_POSTS':
+      return action.payload;
     case 'DELETE_BLOG_POST':
       const notId = R.compose(notEquals(action.payload), R.prop('id'));
       return state.filter(notId);
@@ -29,25 +23,49 @@ const blogReducer = (state, action) => {
   }
 };
 
+const getBlogPosts = dispatch =>
+  R.curry(async () => {
+    try {
+      const { data } = await jsonServer.get('/blogposts');
+      dispatch({ type: 'GET_BLOG_POSTS', payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
 const addBlogPost = dispatch =>
-  R.curry((title, content, callback) => {
-    dispatch({ type: 'ADD_BLOG_POST', payload: { title, content } });
-    if (callback) callback();
+  R.curry(async (title, content, callback) => {
+    try {
+      await jsonServer.post('/blogposts', { title, content });
+      if (callback) callback();
+    } catch (error) {
+      console.log(error);
+    }
   });
 
 const deleteBlogPost = dispatch =>
-  R.curry(id => {
-    dispatch({ type: 'DELETE_BLOG_POST', payload: id });
+  R.curry(async id => {
+    try {
+      await jsonServer.delete(`/blogposts/${id}`);
+      dispatch({ type: 'DELETE_BLOG_POST', payload: id });
+    } catch (error) {
+      console.log(error);
+    }
   });
 
 const editBlogPost = dispatch =>
-  R.curry((id, title, content, callback) => {
-    dispatch({ type: 'EDIT_BLOG_POST', payload: { id, title, content } });
-    if (callback) callback();
+  R.curry(async (id, title, content, callback) => {
+    try {
+      await jsonServer.put(`/blogposts/${id}`, { title, content });
+      dispatch({ type: 'EDIT_BLOG_POST', payload: { id, title, content } });
+      if (callback) callback();
+    } catch (error) {
+      console.log(error);
+    }
   });
 
 export const { Context, Provider } = createDataContext(
   blogReducer,
-  { addBlogPost, deleteBlogPost, editBlogPost },
+  { getBlogPosts, addBlogPost, deleteBlogPost, editBlogPost },
   [{ id: 1, title: 'Test Post', content: 'Test Content' }]
 );

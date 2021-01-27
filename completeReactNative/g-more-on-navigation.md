@@ -60,3 +60,21 @@ IndexScreen.navigationOptions = ({ navigation: { navigate } }) => ({
 ```
 
 **Note**: Notice how `navigationOptions` has access to the same props as `IndexScreen`.
+
+## `navigation.addListener`
+
+The `navigation` object has the useful ability to add event listeners for navigation-related events. One very useful one would be: `'didFocus'`:
+
+```js
+useEffect(() => {
+  getBlogPosts();
+
+  const listener = navigation.addListener('didFocus', getBlogPosts);
+  return listener.remove; // cleanup
+}, []);
+```
+
+In the above code snippet, we fetch a list of blog posts
+
+- On mount, and
+- Whenever the target component is in focus.

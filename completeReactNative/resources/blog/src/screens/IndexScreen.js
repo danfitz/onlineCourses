@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,12 +11,21 @@ import { Feather } from '@expo/vector-icons';
 import R from 'ramda';
 import { Context as BlogContext } from '../context/BlogContext';
 
-const IndexScreen = ({ navigation: { navigate } }) => {
-  const { state, deleteBlogPost } = useContext(BlogContext);
+const IndexScreen = ({ navigation }) => {
+  const { state, getBlogPosts, deleteBlogPost } = useContext(BlogContext);
+
+  useEffect(() => {
+    getBlogPosts();
+
+    const listener = navigation.addListener('didFocus', getBlogPosts);
+    return listener.remove;
+  }, []);
 
   const renderPost = R.compose(
     item => (
-      <TouchableOpacity onPress={() => navigate('Show', { id: item.id })}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Show', { id: item.id })}
+      >
         <View style={styles.row}>
           <Text style={styles.title}>{item.title}</Text>
           <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
