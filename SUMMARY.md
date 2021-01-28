@@ -41,6 +41,8 @@
   * [Setting Up An App](completeReactNative/f-setting-up-an-app.md)
   * [More On Navigation](completeReactNative/g-more-on-navigation.md)
   * [Advanced Statement Management With Context](completeReactNative/h-advanced-state-management-with-context.md)
+  * [Building A Custom Express API](completeReactNative/i-building-a-custom-express-api.md)
+  * [In App Authentication](completeReactNative/j-in-app-authentication.md)
 - [C Sharp Fundamentals](cSharpFundamentals/README.md)
   * [Intro To C](cSharpFundamentals/1-intro-to-c-sharp.md)
   * [Primitive Types And Expressions](cSharpFundamentals/2-primitive-types-and-expressions.md)
