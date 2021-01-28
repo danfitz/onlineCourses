@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
 
     const { userId } = payload;
     const user = await User.findById(userId);
+    if (!user) return res.status(500).send();
     req.user = user;
     next();
   });
