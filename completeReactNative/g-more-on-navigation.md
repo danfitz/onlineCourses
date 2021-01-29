@@ -78,3 +78,37 @@ In the above code snippet, we fetch a list of blog posts
 
 - On mount, and
 - Whenever the target component is in focus.
+
+## Types of Navigators
+
+`react-navigation` provides a bunch of navigator types out of the box:
+
+- Stack navigator
+  - Places each screen on top of each other in a stack, creating transitions between screens
+- Drawer navigator
+  - Places screens in a drawer, where you pull it out with a touch gesture
+- Bottom tab navigator
+  - Creates a navigation tab at the bottom for each screen
+- Switch navigator
+  - Creates a sharp contrast between screens (good for when the screens are unrelated)
+
+### Combining navigators
+
+When your app uses multiple navigators at the same time, it looks something like this (based on v4 of `react-navigation`):
+
+```js
+const switchNavigator = createSwitchNavigator({
+  loginFlow: createStackNavigator({
+    SignUp: SignUpScreen,
+    SignIn: SignInScreen,
+  }),
+  mainFlow: createBottomTabNavigator({
+    Account: AccountScreen,
+    TrackCreate: TrackCreateScreen,
+    trackListFlow: createStackNavigator({
+      TrackList: TrackListScreen,
+      TrackDetail: TrackDetailScreen,
+    }),
+  }),
+});
+```
