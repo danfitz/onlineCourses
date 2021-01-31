@@ -22,6 +22,11 @@ const authReducer = (state, action) => {
         ...state,
         errorMessage: action.payload,
       };
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        errorMessage: '',
+      };
     default:
       return state;
   }
@@ -36,7 +41,6 @@ const signUp = dispatch => async ({ email, password }) => {
     dispatch({ type: 'SIGN_IN', payload: token });
     navigate('TrackList');
   } catch (error) {
-    // If signing up fails, reflect an error message somewhere
     dispatch({
       type: 'AUTH_ERROR',
       payload: 'Something went wrong with sign up',
@@ -44,15 +48,41 @@ const signUp = dispatch => async ({ email, password }) => {
   }
 };
 
-const signIn = dispatch => ({ email, password }) => {
-  // Make API request
-  // If successful, modify state
-  // If signing in fails, reflect an error message somewhere
+const signIn = dispatch => async ({ email, password }) => {
+  try {
+    const {
+      data: { token },
+    } = await trackerApi.post('/signin', { email, password });
+    await AsyncStorage.setItem('token', token);
+    dispatch({ type: 'SIGN_IN', payload: token });
+    navigate('TrackList');
+  } catch (error) {
+    dispatch({
+      type: 'AUTH_ERROR',
+      payload: 'Something went wrong with sign in',
+    });
+  }
 };
-const signOut = dispatch => () => dispatch({ type: 'SIGN_OUT' });
+const signOut = dispatch => async () => {
+  await AsyncStorage.removeItem('token');
+  dispatch({ type: 'SIGN_OUT' });
+  navigate('SignIn');
+};
+
+const clearError = dispatch => () => dispatch({ type: 'CLEAR_ERROR' });
+
+const tryLocalSignIn = dispatch => async () => {
+  const token = await AsyncStorage.getItem('token');
+  if (token) {
+    dispatch({ type: 'SIGN_IN', payload: token });
+    navigate('TrackList');
+  } else {
+    navigate('loginFlow');
+  }
+};
 
 export const { Context, Provider } = createDataContext(
   authReducer,
-  { signUp, signIn, signOut },
+  { signUp, signIn, signOut, clearError, tryLocalSignIn },
   { token: null, errorMessage: '' }
 );
