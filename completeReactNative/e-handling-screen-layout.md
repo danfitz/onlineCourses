@@ -109,7 +109,7 @@ Here's the order of processing roughly:
 
 ## `SafeAreaView`
 
-`react-navigation` provides a useful `SafeAreaView` wrapper component that automatically adds the correct spacing around your screens to prevent content from being cut off depending on the device. (For example, modern iPhones have a status bar athe top. You want your content to begin _below_ that.)
+`react-navigation` provides a useful `SafeAreaView` wrapper component that automatically adds the correct spacing around your screens to prevent content from being cut off depending on the device. (For example, modern iPhones have a status bar at the top. You want your content to begin _below_ that.)
 
 ```js
 import { SafeAreaView } from 'react-navigation';
