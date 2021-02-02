@@ -112,3 +112,36 @@ const switchNavigator = createSwitchNavigator({
   }),
 });
 ```
+
+## Navigation Events
+
+When a screen is part of a navigator _and_ you are in that navigator, it doesn't really unmount when you navigate to another screen. As a result, in order to make changes to content, you will need to listen for **navigation events**.
+
+There are at least 2 ways to do this (probably more):
+
+- `NavigationEvents` component appended into JSX
+- `navigation.addListener`
+
+```js
+// `NavigationEvents` approach
+const MyScreen = () => (
+  <View>
+    <NavigationEvents onWillFocus={() => console.log('Do something!')} />
+    <Text>My Screen</Text>
+  </View>
+);
+
+// `navigation.addListener` approach
+const MyScreen = ({ navigation }) => {
+  useEffect(() => {
+    const listener = navigation.addListener('focus', () =>
+      console.log('Do something!')
+    );
+    return listener.remove;
+  }, []);
+
+  return <Text>My Screen</Text>;
+};
+```
+
+**Note**: The exact syntax may be different, as React Native is always changing.
