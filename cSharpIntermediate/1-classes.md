@@ -1,7 +1,7 @@
 ---
-title: "Classes"
+title: 'Classes'
 part: 1
-date: "2020-10-05"
+date: '2020-10-05'
 categories: [backend]
 tags: [c#]
 source: [udemy]
@@ -97,7 +97,7 @@ var person = Person.Parse("Dan");
 
 Notice how we use the `static` access modifier to set a static member!
 
-**Pro tip**: We use static members when the concept we are representing is a **singleton**,i.e., it only needs one place in memory and not duplicates. For example, `DateTime.Now` only needs one instance. It's redundant to duplicate the current time in different objects.
+**Pro tip**: We use static members when the concept we are representing is a **singleton**, i.e., it only needs one place in memory and not duplicates. For example, `DateTime.Now` only needs one instance. It's redundant to duplicate the current time in different objects.
 
 ## Constructors
 
@@ -237,15 +237,129 @@ Instead, the idea is to restrict constructors to initialization that **must** ha
 
 ### Signature of methods
 
-Methods consist of
+The **signature** of a method is basically its
+
+1. Name, plus
+2. The number and type of parameters
+
+```cs
+public class Point
+{
+    // This method is characterized by name "Move" and int x and int y
+    public void Move(int x, int y) {}
+}
+```
 
 ### Method overloading
 
+Just like how you can overload constructors, you can **overload methods**.
+
+This is especially useful when you want to give the consumer of your class more options around that method.
+
+```cs
+public class Point
+{
+    // When you have 2 coordinates
+    public void Move(int x, int y) {}
+
+    // When you have a Point instance
+    public void Move(Point newLocation) {}
+
+    // When you have a Point instance and a speed!
+    public void Move(Point newLocation, int speed) {}
+}
+```
+
 ### Params modifier
+
+Suppose you have a method that could take a varying number of parameters. For example, the `Add` method might need that.
+
+```cs
+public class Calculator
+{
+    public int Add(int a, int b) {}
+    public int Add(int a, int b, int c) {}
+    public int Add (int a, int b, int c, int d) {}
+}
+```
+
+Overloading, like in the case above, wouldn't work because there's an infinite number of cases to consider.
+
+Well, what if you passed an _array_ instead?
+
+```cs
+public class Calculator
+{
+    public int Add(int[] numbers) {}
+}
+
+int result = calculator.Add(new int[] { 1, 2, 3, 4 });
+```
+
+This works! But there's only one downside: every single time you want to pass arguments to `Add`, you have to place the data in an array. That's a bit awkward.
+
+To solve this, C# gives us the **params modifier**. This modifier collects all of your method's parameters _into_ an array for you.
+
+```cs
+public class Calculator
+{
+    public int Add(params int[] numbers) {}
+}
+
+// Supports passing an array
+var result = calculator.Add(new int[] { 1, 2, 3, 4 });
+// Or passing individual arguments
+var result = calculator.Add(1, 2, 3, 4);
+```
 
 ### Ref modifier
 
+The **ref modifier** allows you to pass the reference for a variable, so you can update the value of that variable inside your method.
+
+```cs
+public class MyClass
+{
+    public void MyMethod(ref int a)
+    {
+        a += 2;
+    }
+}
+
+var a = 1;
+classInstance.MyMethod(ref a);
+Console.WriteLine(a); // 3
+```
+
+Notice how `ref` is used for the argument _and_ the parameter. This is required.
+
+**Note**: The ref modifier is not best practice, so please try to avoid it.
+
 ### Out modifier
+
+The **out modifier** is pretty much identical to the ref modifier with the exception that you don't have to initialize the variable before passing it into the method. However, you _do_ have to initialize the variable _inside_ the method.
+
+```cs
+public class MyClass
+{
+    public void MyMethod(out int a)
+    {
+        a = 3; // initialization required
+    }
+}
+
+int a; // not initialized
+classInstance.MyMethod(out a);
+Console.WriteLine(a); // 3
+```
+
+You may use the out modifier at times though, so it's good to know. One common use case is with `int.TryParse`. This method allows you to convert a string into an int without throwing an exception if it fails.
+
+```cs
+int number;
+var result = int.TryParse("abc", out number);
+if (result)
+    Console.WriteLine(number);
+```
 
 ## Fields
 
