@@ -2,9 +2,18 @@
 title: 'Classes'
 part: 1
 date: '2020-10-05'
-categories: [backend]
-tags: [c#]
-source: [udemy]
+? categories
+: [
+    backend,
+  ]
+? tags
+: [
+    c#,
+  ]
+? source
+: [
+    udemy,
+  ]
 ---
 
 # Classes
@@ -245,8 +254,8 @@ The **signature** of a method is basically its
 ```cs
 public class Point
 {
-    // This method is characterized by name "Move" and int x and int y
-    public void Move(int x, int y) {}
+  // This method is characterized by name "Move" and int x and int y
+  public void Move(int x, int y) {}
 }
 ```
 
@@ -259,14 +268,14 @@ This is especially useful when you want to give the consumer of your class more 
 ```cs
 public class Point
 {
-    // When you have 2 coordinates
-    public void Move(int x, int y) {}
+  // When you have 2 coordinates
+  public void Move(int x, int y) {}
 
-    // When you have a Point instance
-    public void Move(Point newLocation) {}
+  // When you have a Point instance
+  public void Move(Point newLocation) {}
 
-    // When you have a Point instance and a speed!
-    public void Move(Point newLocation, int speed) {}
+  // When you have a Point instance and a speed!
+  public void Move(Point newLocation, int speed) {}
 }
 ```
 
@@ -277,9 +286,9 @@ Suppose you have a method that could take a varying number of parameters. For ex
 ```cs
 public class Calculator
 {
-    public int Add(int a, int b) {}
-    public int Add(int a, int b, int c) {}
-    public int Add (int a, int b, int c, int d) {}
+  public int Add(int a, int b) {}
+  public int Add(int a, int b, int c) {}
+  public int Add (int a, int b, int c, int d) {}
 }
 ```
 
@@ -290,7 +299,7 @@ Well, what if you passed an _array_ instead?
 ```cs
 public class Calculator
 {
-    public int Add(int[] numbers) {}
+  public int Add(int[] numbers) {}
 }
 
 int result = calculator.Add(new int[] { 1, 2, 3, 4 });
@@ -303,7 +312,7 @@ To solve this, C# gives us the **params modifier**. This modifier collects all o
 ```cs
 public class Calculator
 {
-    public int Add(params int[] numbers) {}
+  public int Add(params int[] numbers) {}
 }
 
 // Supports passing an array
@@ -319,10 +328,10 @@ The **ref modifier** allows you to pass the reference for a variable, so you can
 ```cs
 public class MyClass
 {
-    public void MyMethod(ref int a)
-    {
-        a += 2;
-    }
+  public void MyMethod(ref int a)
+  {
+    a += 2;
+  }
 }
 
 var a = 1;
@@ -341,10 +350,10 @@ The **out modifier** is pretty much identical to the ref modifier with the excep
 ```cs
 public class MyClass
 {
-    public void MyMethod(out int a)
-    {
-        a = 3; // initialization required
-    }
+  public void MyMethod(out int a)
+  {
+    a = 3; // initialization required
+  }
 }
 
 int a; // not initialized
@@ -358,13 +367,215 @@ You may use the out modifier at times though, so it's good to know. One common u
 int number;
 var result = int.TryParse("abc", out number);
 if (result)
-    Console.WriteLine(number);
+  Console.WriteLine(number);
 ```
 
 ## Fields
 
+If you recall, fields are like variables inside of a class.
+
+### Initialization
+
+You've seen that initialization of a field can happen inside a constructor:
+
+```cs
+public class Customer
+{
+  List<Order> Orders;
+
+  public Customer()
+  {
+    Orders = new List<Order>();
+  }
+}
+```
+
+However, some developers believe constructors should be reserved for only when you want to initialize fields based on values passed from the _outside_.
+
+To preserve this approach to constructors, we can initialize inline:
+
+```cs
+public class Customer
+{
+  List<Order> Orders = new List<Order>();
+}
+```
+
+**Pro tip**: Both approaches are reasonable. Just make sure you're consistent.
+
+### Read-only fields
+
+The `readonly` modifier sets it so that a field can only be **initialized once** (either inline or in the constructor).
+
+```cs
+public class Customer
+{
+  readonly List<Order> Orders = new List<Order>();
+}
+```
+
+This is useful when you want to make sure some data doesn't get overwritten by accident.
+
 ## Access Modifiers
+
+An **access modifier** controls access to a class and its members. You've seen some like `public` before. Here is a list of all of them:
+
+- `public`
+- `private`
+- `protected`
+- `internal`
+- `protected internal`
+
+We only care about `public` and `private` here. The others have more to do with _inheritance_.
+
+**Why access matters**: Just like the `readonly` modifier, it improves safety of our code, preventing bugs.
+
+### Encapsulation
+
+In the modern factory approach to work, we separate out responsibilities and _encapsulate_ it to roles. A chef doesn't need to know what a waitress is responsible for and vice versa, but they help each other.
+
+In software, especially object-oriented programming, each **class** is similarly encapsulated. One class shouldn't need to know how another class does what it's responsible for. It should just be able to use that class like a black box.
+
+Also known as _information hiding_, **encapsulation** is the hiding of data (fields) or behaviour/functionality (methods) in classes.
+
+### Encapsulation in practice
+
+In practice, encapsulation in C# means 2 things:
+
+1. Hide fields using `private`, and
+2. Access them through getter and setter methods that are `public`.
+
+We want to hide fields because they are considered an **implementation detail**. We don't want to give access to _how_ the class works, only what will make it work.
+
+```cs
+public class Person
+{
+  private string _name;
+
+  public void SetName(string name)
+  {
+    if (!String.IsNullOrEmpty(name))
+      this._name = name;
+  }
+  public string GetName()
+  {
+    return _name;
+  }
+}
+```
+
+**Note**: One of the benefits of the setter/getter pattern is you can perform _logic checks_ before initializing or retrieving fields. In the example above, we don't initialize name unless it has a real value.
+
+**Note on convention**:
+
+- Notice how we name the private field `_name`. By convention, private fields are always formatted as camel case prepended with a `_`.
+- Whereas the class itself and its methods are formatted as pascal case.
 
 ## Properties
 
+**Properties** are class members that encapsulate a setter and getter for accessing a field. It basically allows you to create a setter and getter with **less code**.
+
+```cs
+public class Person
+{
+  // Field
+  private string _name;
+
+  // Property
+  public string Name
+  {
+    get { return _name; }
+    set { _name = value; }
+  }
+}
+```
+
+**Note on convention**: The property is pascal case as well!
+
+To shorten this code even more, C# can automatically set the private field for us and implement the property's setter and getter. This is known as an **auto-implemented property**. Just follow this syntax:
+
+```cs
+public class Person
+{
+  public string Name { get; set; }
+}
+
+var person = new Person();
+person.Name = "Dan"; // setter
+Console.WriteLine(person.Name); // getter
+```
+
+**Note**: Notice how it looks like we're directly updating a field. This isn't true. Behind the scenes, C# is using the getter and setter to update the field internally.
+
+### Customizing the setter in a Property
+
+If you want to only be able to set a property once and never again, you can (1) initialize the property in a constructor plus (2) set the setter to `private`.
+
+```cs
+public class Person
+{
+  public string Name { get; private set; }
+
+  public Person(string name)
+  {
+    Name = name;
+  }
+}
+
+var person = new Person("Dan");
+person.Name = "John"; // throws an error!
+```
+
+On the other hand, if you want a property to be dynamically determined without the ability to manually set it, you can (1) customize how the getter works plus (2) not create a setter.
+
+```cs
+public class Person
+{
+  public string FirstName { get; set; }
+  public string LastName { get; set; }
+  public string FullName
+  {
+    get
+    {
+      return FirstName + " " + LastName;
+    }
+  }
+}
+
+var person = new Person();
+person.FirstName = "Dan";
+person.LastName = "Fitz";
+Console.WriteLine(person.FullName); // "Dan Fitz"
+```
+
 ## Indexers
+
+An **indexer** is a way to access elements in a class that represents a _list of values_.
+
+You've seen indexers before in arrays and lists:
+
+```cs
+var array = new int[5];
+array[0] = 1; // indexer
+
+var list = new List<int>();
+list[0] = 1; // indexer
+```
+
+To build your own indexer in a class, it's literally just like building a property:
+
+```cs
+public class HttpCookie
+{
+  public string this[string key]
+  {
+    get {}
+    set {}
+  }
+}
+```
+
+**Things to note**:
+
+- Notice how we use `this` because the indexer doesn't have a name.
+- `string key` is the indexer.

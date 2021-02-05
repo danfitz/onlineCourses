@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Fields/obj/Debug/Fields.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Fields/obj/Debug/Fields.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Fields/bin/Debug/Fields.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Fields/bin/Debug/Fields.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Fields/obj/Debug/Fields.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Fields/obj/Debug/Fields.pdb
