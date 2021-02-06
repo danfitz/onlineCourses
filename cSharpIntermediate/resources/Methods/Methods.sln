@@ -14,6 +14,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stopwatch", "Stopwatch\Stop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflow", "StackOverflow\StackOverflow.csproj", "{7D6ACF94-3181-459B-B176-EB7BBAAEBF56}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClassCoupling", "ClassCoupling", "{0CD23C3A-9AB8-431A-9AC1-36509D637B43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inheritance", "Inheritance\Inheritance.csproj", "{76AE03C9-7EC4-43BC-A0A1-B753C8B820DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composition", "Composition\Composition.csproj", "{C8D8793C-6D14-4855-B539-6243B0A5A041}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +54,17 @@ Global
 		{7D6ACF94-3181-459B-B176-EB7BBAAEBF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D6ACF94-3181-459B-B176-EB7BBAAEBF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D6ACF94-3181-459B-B176-EB7BBAAEBF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76AE03C9-7EC4-43BC-A0A1-B753C8B820DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76AE03C9-7EC4-43BC-A0A1-B753C8B820DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76AE03C9-7EC4-43BC-A0A1-B753C8B820DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76AE03C9-7EC4-43BC-A0A1-B753C8B820DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D8793C-6D14-4855-B539-6243B0A5A041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D8793C-6D14-4855-B539-6243B0A5A041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D8793C-6D14-4855-B539-6243B0A5A041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D8793C-6D14-4855-B539-6243B0A5A041}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{76AE03C9-7EC4-43BC-A0A1-B753C8B820DE} = {0CD23C3A-9AB8-431A-9AC1-36509D637B43}
+		{C8D8793C-6D14-4855-B539-6243B0A5A041} = {0CD23C3A-9AB8-431A-9AC1-36509D637B43}
 	EndGlobalSection
 EndGlobal

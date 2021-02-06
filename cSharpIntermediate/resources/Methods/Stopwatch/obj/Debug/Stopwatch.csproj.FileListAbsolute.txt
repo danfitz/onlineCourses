@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Stopwatch/bin/Debug/Stopwatch.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Stopwatch/bin/Debug/Stopwatch.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Stopwatch/obj/Debug/Stopwatch.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Stopwatch/obj/Debug/Stopwatch.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Stopwatch/obj/Debug/Stopwatch.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Stopwatch/obj/Debug/Stopwatch.pdb

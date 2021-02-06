@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/bin/Debug/Inheritance.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/bin/Debug/Inheritance.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/obj/Debug/Inheritance.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/obj/Debug/Inheritance.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/obj/Debug/Inheritance.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/obj/Debug/Inheritance.pdb

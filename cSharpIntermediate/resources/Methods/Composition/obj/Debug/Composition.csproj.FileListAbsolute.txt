@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Composition/bin/Debug/Composition.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Composition/bin/Debug/Composition.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Composition/obj/Debug/Composition.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Composition/obj/Debug/Composition.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Composition/obj/Debug/Composition.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Composition/obj/Debug/Composition.pdb
