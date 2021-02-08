@@ -55,6 +55,8 @@
   * [Debugging Applications](cSharpFundamentals/9-debugging-applications.md)
 - [C Sharp Intermediate](cSharpIntermediate/README.md)
   * [Classes](cSharpIntermediate/1-classes.md)
+  * [Association Between Classes](cSharpIntermediate/2-association-between-classes.md)
+  * [Inheritance](cSharpIntermediate/3-inheritance.md)
 - [Fireship Firestore](fireshipFirestore/README.md)
   * [Firestore Queries And Data Modeling Course](fireshipFirestore/firestore-queries-and-data-modeling-course.md)
   * [Model Relational Data In Firestore No SQL](fireshipFirestore/relational-data-in-firestore.md)
