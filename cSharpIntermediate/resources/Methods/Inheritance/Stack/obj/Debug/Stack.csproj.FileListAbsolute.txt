@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Stack/obj/Debug/Stack.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Stack/obj/Debug/Stack.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Stack/bin/Debug/Stack.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Stack/bin/Debug/Stack.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Stack/obj/Debug/Stack.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Stack/obj/Debug/Stack.pdb
