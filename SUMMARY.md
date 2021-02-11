@@ -110,6 +110,7 @@
   * [Redux Thunk Testing](reactTesting/4-redux-thunk-testing.md)
 - Serverless Bootcamp
   * [Introduction](serverlessBootcamp/a-introduction.md)
+  * [Auction Service Part 1](serverlessBootcamp/b-auction-service-part-1.md)
 - Testing Javascript
   * [Fundamentals Of Testing](testingJavascript/1-fundamentals-of-testing.md)
   * [Static Analysis Testing](testingJavascript/2-static-analysis-testing.md)

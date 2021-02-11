@@ -2,11 +2,8 @@
 title: 'Inheritance'
 part: 3
 date: '2021-02-06'
-# prettier-ignore
 categories: [backend]
-# prettier-ignore
 tags: [c#]
-# prettier-ignore
 source: [udemy]
 ---
 

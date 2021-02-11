@@ -2,18 +2,9 @@
 title: 'Classes'
 part: 1
 date: '2020-10-05'
-? categories
-: [
-    backend,
-  ]
-? tags
-: [
-    c#,
-  ]
-? source
-: [
-    udemy,
-  ]
+categories: [backend]
+tags: [c#]
+source: [udemy]
 ---
 
 # Classes

@@ -2,18 +2,9 @@
 title: 'Association Between Classes'
 part: 2
 date: '2021-02-05'
-? categories
-: [
-    backend,
-  ]
-? tags
-: [
-    c#,
-  ]
-? source
-: [
-    udemy,
-  ]
+categories: [backend]
+tags: [c#]
+source: [udemy]
 ---
 
 # Association Between Classes
