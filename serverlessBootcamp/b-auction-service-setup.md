@@ -1,13 +1,13 @@
 ---
-title: 'Auction Service: Part 1'
-part: 1
+title: 'Auction Service: Setup'
+part: 2
 date: '2021-02-10'
 categories: [backend]
 tags: [aws]
 source: [udemy]
 ---
 
-# Auction Service: Part 1
+# Auction Service: Setup
 
 ## Anatomy of a Serverless Project
 
@@ -412,3 +412,71 @@ provider:
 **Note**: `file` accepts a relative path from your `serverless.yml`. Then you access the object attached to the name `AuctionsTableIAM`.
 
 ### Intrinsic functions and custom variables
+
+To make our AWS configuration even more dynamic, we want a few things:
+
+- Append the stage name to the table name (like `AuctionsTable-dev`), so we can run a unique table for each stage
+- Dynamically obtain the (a) table name and (b) ARN from CloudFormation
+- Dynamically use the table name in our lambda function
+
+To achieve this, here are a few more tricks we'll use:
+
+- Referencing contents of the `serverless.yml` file
+- Custom variables in the `custom` section
+- Intrinsic functions provided by CloudFormation
+- Setting environment variables
+
+To append the stage to the table name, all we have to do is reference `provider.stage` found in the `serverless.yml` file. You do this with the keyword `self`, which is a reference to that file.
+
+```yaml
+TableName: AuctionsTable-${self:provider.stage}
+```
+
+To dynamically obtain the DynamoDB table name and ARN from CloudFormation, we have access to **intrinsic functions** that we can use as our resources are being deployed. We will set them in the `custom` section for easy access.
+
+```yaml
+# Docs for intrinsic functions are online
+custom:
+  AuctionsTable:
+    name: !Ref AuctionsTable
+    arn: !GetAtt AuctionsTable.Arn
+```
+
+Now that we have these set, we can use `arn` to dynamically set the ARN in our IAM role:
+
+```yaml
+Resource:
+  - ${self:custom.AuctionsTable.arn}
+```
+
+Finally, to dynamically set the table name in our lambda function, we can use `custom.AuctionsTable.name` and set it as an **environment variable**:
+
+```yaml
+environment:
+  AUCTIONS_TABLE_NAME: ${self:custom.AuctionsTable.name}
+```
+
+Then we just reference the variable in the lambda function:
+
+```js
+await dynamoDb
+  .put({
+    TableName: process.env.AUCTIONS_TABLE_NAME,
+    Item: auction,
+  })
+  .promise();
+```
+
+**Note**: You can set the `environment` either globally inside `provider`, or you can set it locally inside your lambda function's configuration.
+
+## Is Serverless Offline Worth It?
+
+**Serverless Offline** emulates AWS Lambda and API Gateway (using Express), allowing you to run your application locally.
+
+**Pro tip**:
+
+- As soon as your application gets more complex and brings in more and more resources, you're going to find you'll have to mock them too.
+- This puts dependency on community-maintained libraries, which often times don't match how AWS actually works.
+- These libraries also take a lot of effort to make them work together, turning your configuration into a mess.
+
+**Solution**: Embrace Serverless framework until Serverless Offline gets better.
