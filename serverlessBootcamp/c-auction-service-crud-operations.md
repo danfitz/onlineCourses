@@ -66,4 +66,24 @@ Similarly, you want to update the `serverless.yml`:
 - Include a lambda function for the new endpoint
 - Include operation type `dynamodb:GetItem` in the IAM config
 
-##
+## PATCH Request: Updating
+
+To **update** an item, you query by key and provide the properties you want to change. Here's the rough syntax:
+
+```js
+const params = {
+  TableName: 'MY_TABLE_NAME',
+  Key: { id: 'MY_ID' },
+  // Special language for updating
+  UpdateExpression: 'set firstName = :firstName',
+  // Attributes you want to update
+  ExpressionAttributeValues: {
+    ':firstName': 'Daniel',
+  },
+  // What you want to return (in this case the updated item)
+  ReturnValues: 'ALL_NEW',
+};
+
+const result = await dynamoDb.update(params).promise();
+console.log(result.Attributes); // { firstName: "Daniel" }
+```
