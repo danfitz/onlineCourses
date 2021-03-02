@@ -1,5 +1,4 @@
 function one() {
-  debugger;
   console.log("Hello from function one!");
   two();
   three();
@@ -14,7 +13,7 @@ function three() {
   four();
 }
 
-function four() {
+function four(add) {
   console.log("Hello from function four!");
 }
 
