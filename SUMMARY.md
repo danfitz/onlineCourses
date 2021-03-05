@@ -83,6 +83,16 @@
   * [Objects And Functions](jsWeirdParts/3-objects-and-functions.md)
   * [Object Oriented Java Script And Prototypal Inheritance](jsWeirdParts/4-object-oriented-javascript-and-prototypal-inheritance.md)
   * [Defining Objects](jsWeirdParts/5-defining-objects.md)
+- Mastering Chrome Dev Tools
+  * [Introduction](masteringChromeDevTools/a-introduction.md)
+  * [Editing](masteringChromeDevTools/b-editing.md)
+  * [Debugging](masteringChromeDevTools/c-debugging.md)
+  * [Networking](masteringChromeDevTools/d-networking.md)
+  * [Auditing](masteringChromeDevTools/e-auditing.md)
+  * [Node.js Profiling](masteringChromeDevTools/f-nodejs-profiling.md)
+  * [Performance Monitoring](masteringChromeDevTools/g-performance-monitoring.md)
+  * [Image Performance](masteringChromeDevTools/h-image-performance.md)
+  * [Memory](masteringChromeDevTools/j-memory.md)
 - Mysql Bootcamp
   * [Overview And Installation](mysqlBootcamp/1-overview-and-installation.md)
   * [Creating Databases And Tables](mysqlBootcamp/2-creating-databases-and-tables.md)
@@ -110,7 +120,9 @@
   * [Redux Thunk Testing](reactTesting/4-redux-thunk-testing.md)
 - Serverless Bootcamp
   * [Introduction](serverlessBootcamp/a-introduction.md)
-  * [Auction Service Part 1](serverlessBootcamp/b-auction-service-part-1.md)
+  * [Auction Service Setup](serverlessBootcamp/b-auction-service-setup.md)
+  * [Auction Service CRUD Operations](serverlessBootcamp/c-auction-service-crud-operations.md)
+  * [Auction Service Processing Auctions](serverlessBootcamp/d-auction-service-processing-auctions.md)
 - Testing Javascript
   * [Fundamentals Of Testing](testingJavascript/1-fundamentals-of-testing.md)
   * [Static Analysis Testing](testingJavascript/2-static-analysis-testing.md)
