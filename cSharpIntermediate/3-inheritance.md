@@ -25,9 +25,7 @@ To create the black box and public interface of a class, we have **access modifi
 
 ### `public`
 
-###### Makes a field/property/method \*\*accessible
-
-###### everywhere\*\*. You use `public` when you want your field/property/method to be part of the public interface of the class.
+Makes a field/property/method **accessible everywhere**. You use `public` when you want your field/property/method to be part of the public interface of the class.
 
 ```cs
 public class Customer
