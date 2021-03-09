@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/AbstractClasses/bin/Debug/AbstractClasses.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/AbstractClasses/bin/Debug/AbstractClasses.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/AbstractClasses/obj/Debug/AbstractClasses.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/AbstractClasses/obj/Debug/AbstractClasses.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/AbstractClasses/obj/Debug/AbstractClasses.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/AbstractClasses/obj/Debug/AbstractClasses.pdb
