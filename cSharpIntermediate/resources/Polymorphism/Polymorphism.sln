@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodOverriding", "MethodO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractClasses", "AbstractClasses\AbstractClasses.csproj", "{81F012B3-E98B-48E7-82D7-CBF410DC56F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbExercise", "DbExercise\DbExercise.csproj", "{72DCE6F1-0CBC-43FC-88E7-4B8068986242}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{81F012B3-E98B-48E7-82D7-CBF410DC56F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F012B3-E98B-48E7-82D7-CBF410DC56F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F012B3-E98B-48E7-82D7-CBF410DC56F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72DCE6F1-0CBC-43FC-88E7-4B8068986242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72DCE6F1-0CBC-43FC-88E7-4B8068986242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72DCE6F1-0CBC-43FC-88E7-4B8068986242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72DCE6F1-0CBC-43FC-88E7-4B8068986242}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
