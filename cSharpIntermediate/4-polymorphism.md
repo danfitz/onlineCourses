@@ -9,6 +9,8 @@ source: [udemy]
 
 # Polymorphism
 
+**Polymorphism** in C# is the idea that a variable, function, or object can take on **many forms** but still share the *same name*.
+
 ## Method Overriding
 
 **Method overriding** is _modifying_ the implementation of an inherited method (from a base class).
@@ -45,10 +47,7 @@ foreach (var shape in shapes)
 
 **Note**: `base` gives us access to the base class. We can (but are not required to) perform the original implementation using `base.Draw()`!
 
-**Value of method overriding**:
-
-* Known as **polymorphism**, different classes get to share the same interface (like same fields/properties/methods).
-* Then by overriding inherited methods with `virtual` and `override`, we can add new features in encapsulated classes.
+**Value of method overriding**: It encourages polymorphism. By overriding inherited methods with `virtual` and `override`, we can add new features in encapsulated classes.
 
 For example, if we want to one day add a brand new `Triangle` class, we can just append the class without changing any other code:
 
