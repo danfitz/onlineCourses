@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testability", "Testability\Testability.csproj", "{66140AD2-BFBC-4AC8-B5A3-1C533611C4C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow", "Workflow\Workflow.csproj", "{F6EA8AE8-DDCD-4261-B3A1-18B5434E9545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{66140AD2-BFBC-4AC8-B5A3-1C533611C4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66140AD2-BFBC-4AC8-B5A3-1C533611C4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66140AD2-BFBC-4AC8-B5A3-1C533611C4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6EA8AE8-DDCD-4261-B3A1-18B5434E9545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EA8AE8-DDCD-4261-B3A1-18B5434E9545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EA8AE8-DDCD-4261-B3A1-18B5434E9545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EA8AE8-DDCD-4261-B3A1-18B5434E9545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
