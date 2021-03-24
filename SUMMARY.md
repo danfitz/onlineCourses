@@ -1,7 +1,5 @@
 # Dan Fitz's Notes
 
-- Aws Solutions Architect
-  * [AWS Fundamentals IAM EC 2](awsSolutionsArchitect/1-aws-fundamentals-iam-ec2.md)
 - Csharp
   - C Sharp Advanced
     * [Advanced Topics](csharp/cSharpAdvanced/a-advanced-topics.md)
@@ -21,10 +19,6 @@
     * [Inheritance](csharp/cSharpIntermediate/3-inheritance.md)
     * [Polymorphism](csharp/cSharpIntermediate/4-polymorphism.md)
     * [Interfaces](csharp/cSharpIntermediate/5-interfaces.md)
-- [Fundamentals Math](fundamentalsMath/README.md)
-  * [Numbers And Negative Numbers](fundamentalsMath/1-numbers-and-negative-numbers.md)
-  * [Factors And Multiples](fundamentalsMath/2-factors-and-multiples.md)
-  * [Fractions](fundamentalsMath/3-fractions.md)
 - Javascript
   - [Algorithms Data Structures](javascript/algorithmsDataStructures/README.md)
     * [Big O Notation](javascript/algorithmsDataStructures/a-big-o-notation.md)
@@ -129,13 +123,20 @@
     * [Intro](javascript/webPerformanceWithWebpack/a-intro.md)
     * [Code Splitting](javascript/webPerformanceWithWebpack/b-code-splitting.md)
     * [Module Methods Magic Comments](javascript/webPerformanceWithWebpack/c-module-methods-and-magic-comments.md)
-- Mysql Bootcamp
-  * [Overview And Installation](mysqlBootcamp/1-overview-and-installation.md)
-  * [Creating Databases And Tables](mysqlBootcamp/2-creating-databases-and-tables.md)
-  * [Inserting Data](mysqlBootcamp/3-inserting-data.md)
-  * [CRUD Commands](mysqlBootcamp/4-crud-commands.md)
-  * [The World Of String Functions](mysqlBootcamp/5-the-world-of-string-functions.md)
-  * [Refining Our Selections](mysqlBootcamp/6-refining-our-selections.md)
-  * [The Magic Of Aggregate Functions](mysqlBootcamp/7-the-magic-of-aggregate-functions.md)
-- Random Notes
-  * [Understanding React Hooks](randomNotes/understanding-react-hooks.md)
+- Other
+  - Aws Solutions Architect
+    * [AWS Fundamentals IAM EC 2](other/awsSolutionsArchitect/1-aws-fundamentals-iam-ec2.md)
+  - [Fundamentals Math](other/fundamentalsMath/README.md)
+    * [Numbers And Negative Numbers](other/fundamentalsMath/1-numbers-and-negative-numbers.md)
+    * [Factors And Multiples](other/fundamentalsMath/2-factors-and-multiples.md)
+    * [Fractions](other/fundamentalsMath/3-fractions.md)
+  - Mysql Bootcamp
+    * [Overview And Installation](other/mysqlBootcamp/1-overview-and-installation.md)
+    * [Creating Databases And Tables](other/mysqlBootcamp/2-creating-databases-and-tables.md)
+    * [Inserting Data](other/mysqlBootcamp/3-inserting-data.md)
+    * [CRUD Commands](other/mysqlBootcamp/4-crud-commands.md)
+    * [The World Of String Functions](other/mysqlBootcamp/5-the-world-of-string-functions.md)
+    * [Refining Our Selections](other/mysqlBootcamp/6-refining-our-selections.md)
+    * [The Magic Of Aggregate Functions](other/mysqlBootcamp/7-the-magic-of-aggregate-functions.md)
+  - Random Notes
+    * [Understanding React Hooks](other/randomNotes/understanding-react-hooks.md)
