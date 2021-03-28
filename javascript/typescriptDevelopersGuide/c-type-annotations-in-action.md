@@ -52,7 +52,7 @@ const logNumber: (i: number) => void = (i: number) => {
 };
 ```
 
-**Note**: `(i: number) => void` is the syntax for type annotating a function. The left-hand side tells TypeScript the types for the arguments, while the right-hand side tells TypeScript the type for the return value.
+**Note**: `(i: number) => void` is the syntax for type annotating a _variable storing a function_. (You'll learn how to annotate a _function itself_ later.) The left-hand side tells TypeScript the types for the arguments, while the right-hand side tells TypeScript the type for the return value.
 
 ## Understanding Type Inference
 
