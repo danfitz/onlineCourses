@@ -119,6 +119,13 @@
     * [Mocking Fundamentals](javascript/testingJavascript/3-mocking-fundamentals.md)
     * [Configuring Jest](javascript/testingJavascript/4-configuring-jest.md)
     * [Test React Components With Jest And React Testing Library](javascript/testingJavascript/5-test-react-components-with-jest-and-react-testing-library.md)
+  - Typescript Developers Guide
+    * [Getting Started With Type Script](javascript/typescriptDevelopersGuide/a-getting-started-with-typescript.md)
+    * [What Is A Type System](javascript/typescriptDevelopersGuide/b-what-is-a-type-system.md)
+    * [Type Annotations In Action](javascript/typescriptDevelopersGuide/c-type-annotations-in-action.md)
+    * [Annotations With Functions And Objects](javascript/typescriptDevelopersGuide/d-annotations-with-functions-and-objects.md)
+    * [Mastering Typed Arrays](javascript/typescriptDevelopersGuide/e-mastering-typed-arrays.md)
+    * [Tuples In Type Script](javascript/typescriptDevelopersGuide/f-tuples-in-typescript.md)
   - Web Performance With Webpack
     * [Intro](javascript/webPerformanceWithWebpack/a-intro.md)
     * [Code Splitting](javascript/webPerformanceWithWebpack/b-code-splitting.md)
