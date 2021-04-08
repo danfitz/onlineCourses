@@ -126,6 +126,8 @@
     * [Annotations With Functions And Objects](javascript/typescriptDevelopersGuide/d-annotations-with-functions-and-objects.md)
     * [Mastering Typed Arrays](javascript/typescriptDevelopersGuide/e-mastering-typed-arrays.md)
     * [Tuples In Type Script](javascript/typescriptDevelopersGuide/f-tuples-in-typescript.md)
+    * [The All Important Interface](javascript/typescriptDevelopersGuide/g-the-all-important-interface.md)
+    * [Building Functionality With Classes](javascript/typescriptDevelopersGuide/h-building-functionality-with-classes.md)
   - Web Performance With Webpack
     * [Intro](javascript/webPerformanceWithWebpack/a-intro.md)
     * [Code Splitting](javascript/webPerformanceWithWebpack/b-code-splitting.md)
