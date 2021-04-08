@@ -6,8 +6,8 @@ AuctionsTable:
     AttributeDefinitions:
       - AttributeName: id
         AttributeType: S # string
-       - AttributeName: status
-         AttributeType: S
+      - AttributeName: status
+        AttributeType: S
       - AttributeName: endingAt
         AttributeType: S
     KeySchema:

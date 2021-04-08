@@ -34,13 +34,13 @@ Serverless gives you the `sls log` command to be able to view CloudWatch logs fr
 To view a trailing number of logs for your lambda function:
 
 ```
-sls log -f processAuctions -t
+sls logs -f processAuctions -t
 ```
 
 To view logs from a chunk of the past:
 
 ```
-sls log -f processAuctions --startTime 1h
+sls logs -f processAuctions --startTime 1h
 ```
 
 ### Executing functions manually for testing
@@ -71,8 +71,8 @@ To add a global secondary index, we add this under `Properties` in the DynamoDB 
 AttributeDefinitions:
   - AttributeName: id
     AttributeType: S # string
-   - AttributeName: status
-     AttributeType: S
+  - AttributeName: status
+    AttributeType: S
   - AttributeName: endingAt
     AttributeType: S
 KeySchema:
@@ -98,3 +98,108 @@ The main thing to note in this config is that we set the global secondary index 
 - `HASH` sets the attribute to a partition key (or hash attribute)
 - `RANGE` sets the attribute to a sort key (where the database stores items in sorted order)
 - `ProjectionType: ALL` projects all attributes into the global secondary index.
+
+**Pro tip**: Behind the scenes, when you create a global secondary index, DynamoDB creates a _virtual copy_ of your table, making it possible to query efficiently based on the global secondary index.
+
+## Querying by Global Secondary Index
+
+### Setup
+
+We now can begin using `Query` to efficiently get auctions that we want to close.
+
+To begin, we need to (1) give query permissions in IAM and (2) add the new table used by the global secondary index `statusAndEndDate`.
+
+```yaml
+AuctionsTableIAM:
+  Effect: Allow
+  Action:
+    # ...
+    - dynamodb:Query
+  Resource:
+    - ${self:custom.AuctionsTable.arn}
+    # The ARN for a GSI table is usually the main ARN
+    # ending with /index/globalSecondaryIndexName
+    - !Join [
+        '/',
+        ['${self:custom.AuctionsTable.arn}', 'index', 'statusAndEndDate'],
+      ]
+```
+
+### Query syntax
+
+The actual query has a few parts:
+
+```js
+const params = {
+  TableName: process.env.AUCTIONS_TABLE_NAME,
+  IndexName: 'statusAndEndDate',
+  KeyConditionExpression: '#status = :status AND endingAt <= :now',
+  ExpressionAttributeValues: {
+    ':status': 'OPEN',
+    ':now': new Date().toISOString(),
+  },
+  ExpressionAttributeNames: {
+    '#status': 'status',
+  },
+};
+
+const result = await dynamoDb.query(params).promise();
+```
+
+**Things to note**:
+
+- `KeyConditionExpression` uses DynamoDB's query syntax
+- The variables `:status` and `:now` are set inside `ExpressionAttributeValues`
+- `#status` begins with a `#` because `status` is a reserved keyword; we resolve `#status` to mean `status` in `ExpressionAttributeNames`
+
+### Processing auctions by closing them
+
+Now that we have a list of auctions that we want to close, we can flesh out our `processAuctions` handler/lambda.
+
+```js
+async function processAuctions(event, context) {
+  try {
+    const auctionsToClose = await getEndedAuctions();
+    const closePromises = auctionsToClose.map(closeAuction);
+    await Promise.all(closePromises);
+    return { closed: closePromises.length };
+  } catch (error) {
+    console.error(error);
+    throw new createError.InternalServerError(error);
+  }
+}
+```
+
+High-level, here's what `processAuctions` is doing:
+
+1. Gets all auctions to close
+2. Asynchronously closes each auction.
+3. Waits for all closures to resolve.
+4. Returns number of closed auctions.
+   - Notice that the return object isn't an HTTP response. That's because this lambda isn't triggered by API Gateway.
+
+To flesh out `closeAuction` some more, it just contains an `Update` operation to the DynamoDB table. Specifically, it sets `status` to `'CLOSED'`.
+
+```js
+async function closeAuction(auction) {
+  const params = {
+    TableName: process.env.AUCTIONS_TABLE_NAME,
+    Key: { id: auction.id },
+    UpdateExpression: 'set #status = :status',
+    ExpressionAttributeValues: {
+      ':status': 'CLOSED',
+    },
+    ExpressionAttributeNames: {
+      '#status': 'status',
+    },
+  };
+
+  return await dynamoDb.update(params).promise();
+}
+```
+
+## JSON Schema Validation
+
+The course spends some time explaining how to use `@middy/validator` to create schemas that help you error handle missing user inputs for API endpoints.
+
+The [`@middy/validator`](https://middy.js.org/packages/validator/) documentation explains it well enough.
