@@ -112,7 +112,93 @@ In our case, we can constrain `T` to an `IComparable`, giving us access to the `
 // = T is a reference type
 
 // where T : new()
-// = T is an object with a default parameter-less constructor
+// = T is any object with a default parameter-less constructor
 ```
 
 For example, here's a constraint for a class:
+
+```csharp
+public class DiscountCalculator<TProduct> where TProduct : Product
+{
+    public float CalculateDiscount(TProduct product)
+    {
+        return product.Price * product.Discount; // these properties come from Product
+    }
+}
+```
+
+Here's another example constraint for a struct:
+
+```csharp
+// This class allows a value type to be nullable (they aren't by default)
+public class Nullable<T> where T : struct
+{
+    private object _value;
+    public Nullable {}
+    public Nullable(T value)
+    {
+        _value = value;
+    }
+    
+    public bool HasValue
+    {
+        get { return _value != null; }
+    }
+    
+    public T GetValueOrDefault()
+    {
+        if (HasValue)
+            return _value;
+        return default(T);
+    }
+}
+```
+
+## Delegates
+
+A **delegate** is a reference/pointer to a function or set of functions, allowing you to invoke methods coming from another object.
+
+Delegates are most useful when you want to make your code extensible or reusable. For example, suppose you are building a photo processing library. Instead of defining every process you can apply to a photo (resize, increase contrast, etc.), you can use a delegate where the user provides the processes *at runtime*.
+
+This approach saves you time because you don't have to add new processes to your code and recompile everything. Instead, the user can define the processes themselves and provide them to your processor.
+
+Similar to interfaces, delegates just accept a **signature** for your method(s).
+
+```csharp
+// Defining a delegate
+public class PhotoProcessor
+{
+    public delegate void PhotoFilterHandler(Photo photo);
+    
+    public void Process(string path, PhotoFilterHandler filterHandler)
+    {
+        var photo = Photo.Load(path);
+        
+        // Old approach:
+        // var filters = new PhotoFilters();
+        // filters.ApplyBrightness(photo);
+        // filters.Resize(photo);
+        
+        // New approach:
+        filterHandler(photo);
+        
+        photo.Save();
+    } 
+}
+
+// Using a delegate
+var processor = new PhotoProcessor();
+var filters = new PhotoFilters();
+PhotoProcessor.PhotoFilterHandler filterHandler = filters.ApplyBrightness;
+filterHandler += filters.Resize; // adding extra methods
+
+processor.Process("photo.jpg", filterHandler);
+```
+
+Now if the user wants to add their own custom process like `RemoveRedEye`, they can just tack it onto `filterHandler`.
+
+```csharp
+filterHandler += RemoveRedEye;
+```
+
+7:11
