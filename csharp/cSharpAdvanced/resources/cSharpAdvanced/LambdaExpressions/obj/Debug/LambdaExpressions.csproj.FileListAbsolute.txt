@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/LambdaExpressions/bin/Debug/LambdaExpressions.exe
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/LambdaExpressions/bin/Debug/LambdaExpressions.pdb
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/LambdaExpressions/obj/Debug/LambdaExpressions.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/LambdaExpressions/obj/Debug/LambdaExpressions.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/LambdaExpressions/obj/Debug/LambdaExpressions.exe
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/LambdaExpressions/obj/Debug/LambdaExpressions.pdb

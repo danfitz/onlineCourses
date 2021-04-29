@@ -1,5 +1,5 @@
 ---
-title: 'Advanced Topics'
+title: 'Generics'
 part: 1
 date: '2021-03-24'
 categories: [backend]
@@ -7,9 +7,9 @@ tags: [c#]
 source: [udemy]
 ---
 
-# Classes
+# Generics
 
-## Generics
+## Value of Generics
 
 In the past, if we wanted to create a custom `List` of, say, `Book` instances, you had to create a dedicated `BookList` class:
 
@@ -64,7 +64,7 @@ public class GenericDictionary<TKey, TValue>
 
 In .NET, all the generics can be found in `System.Collection.Generic.XXXXX`.
 
-### Applying constraints to accepted types
+## Applying Constraints to Accepted Types
 
 It's valuable to be able to constrain the accepted types that can be passed in as `T` for two reasons:
 
@@ -153,52 +153,3 @@ public class Nullable<T> where T : struct
     }
 }
 ```
-
-## Delegates
-
-A **delegate** is a reference/pointer to a function or set of functions, allowing you to invoke methods coming from another object.
-
-Delegates are most useful when you want to make your code extensible or reusable. For example, suppose you are building a photo processing library. Instead of defining every process you can apply to a photo (resize, increase contrast, etc.), you can use a delegate where the user provides the processes *at runtime*.
-
-This approach saves you time because you don't have to add new processes to your code and recompile everything. Instead, the user can define the processes themselves and provide them to your processor.
-
-Similar to interfaces, delegates just accept a **signature** for your method(s).
-
-```csharp
-// Defining a delegate
-public class PhotoProcessor
-{
-    public delegate void PhotoFilterHandler(Photo photo);
-    
-    public void Process(string path, PhotoFilterHandler filterHandler)
-    {
-        var photo = Photo.Load(path);
-        
-        // Old approach:
-        // var filters = new PhotoFilters();
-        // filters.ApplyBrightness(photo);
-        // filters.Resize(photo);
-        
-        // New approach:
-        filterHandler(photo);
-        
-        photo.Save();
-    } 
-}
-
-// Using a delegate
-var processor = new PhotoProcessor();
-var filters = new PhotoFilters();
-PhotoProcessor.PhotoFilterHandler filterHandler = filters.ApplyBrightness;
-filterHandler += filters.Resize; // adding extra methods
-
-processor.Process("photo.jpg", filterHandler);
-```
-
-Now if the user wants to add their own custom process like `RemoveRedEye`, they can just tack it onto `filterHandler`.
-
-```csharp
-filterHandler += RemoveRedEye;
-```
-
-7:11
