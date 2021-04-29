@@ -13,9 +13,9 @@ source: [udemy]
 
 A **delegate** is a reference/pointer to a function or set of functions, allowing you to invoke methods coming from another object.
 
-Delegates are most useful when you want to make your code *extensible* and *flexible*.
+Delegates are most useful when you want to make your code _extensible_ and _flexible_.
 
-For example, suppose you are building a photo processing library. Instead of defining every process you can apply to a photo (resize, increase contrast, etc.), you can use a delegate where the user provides the processes *at runtime*.
+For example, suppose you are building a photo processing library. Instead of defining every process you can apply to a photo (resize, increase contrast, etc.), you can use a delegate where the user provides the processes _at runtime_.
 
 This approach saves you time because you don't have to add new processes to your code and recompile everything. Instead, the user can define the processes themselves and provide them to your processor.
 
@@ -27,21 +27,21 @@ public class PhotoProcessor
 {
     // Signature: return type of void, parameter of Photo
     public delegate void PhotoFilterHandler(Photo photo);
-    
+
     public void Process(string path, PhotoFilterHandler filterHandler)
     {
         var photo = Photo.Load(path);
-        
+
         // Old approach:
         // var filters = new PhotoFilters();
         // filters.ApplyBrightness(photo);
         // filters.Resize(photo);
-        
+
         // New approach:
         filterHandler(photo);
-        
+
         photo.Save();
-    } 
+    }
 }
 
 // Using a delegate
@@ -81,7 +81,7 @@ public class PhotoProcessor
         var photo = Photo.Load(path);
         filterHandler(photo);
         photo.Save();
-    } 
+    }
 }
 ```
 
@@ -91,4 +91,4 @@ In practice, interfaces can serve the same benefits as delegates. So when do you
 
 This doesn't make sense to me now, but here are the situations where delegates are preferred according to the MSDN docs:
 
-* An eventing design pattern is used
+- An eventing design pattern is used

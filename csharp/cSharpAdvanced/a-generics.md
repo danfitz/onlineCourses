@@ -68,15 +68,15 @@ In .NET, all the generics can be found in `System.Collection.Generic.XXXXX`.
 
 It's valuable to be able to constrain the accepted types that can be passed in as `T` for two reasons:
 
-1. By default, a user could pass in *any* `T` type they want, which could be too wild.
-2. If you don't constrain the accepted types, C# will assume `T` is an object, so C# will error out when you try to perform invalid operations or invoke invalid methods that objects don't have. 
+1. By default, a user could pass in _any_ `T` type they want, which could be too wild.
+2. If you don't constrain the accepted types, C# will assume `T` is an object, so C# will error out when you try to perform invalid operations or invoke invalid methods that objects don't have.
 
 Suppose you're creating a generic class with a `Max` method that finds the max between 2 inputs:
 
 ```csharp
     public class Utilities<T>
     {
-        public T Max(T a, T b) 
+        public T Max(T a, T b)
         {
             return a > b ? a : b;
         }
@@ -92,7 +92,7 @@ In our case, we can constrain `T` to an `IComparable`, giving us access to the `
 ```csharp
   public class Utilities<T> where T : IComparable
   {
-    public T Max(T a, T b) 
+    public T Max(T a, T b)
     {
       return a.CompareTo(b) > 0 ? a : b;
     }
@@ -139,12 +139,12 @@ public class Nullable<T> where T : struct
     {
         _value = value;
     }
-    
+
     public bool HasValue
     {
         get { return _value != null; }
     }
-    
+
     public T GetValueOrDefault()
     {
         if (HasValue)
