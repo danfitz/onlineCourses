@@ -2,7 +2,10 @@
 
 - Csharp
   - C Sharp Advanced
-    * [Advanced Topics](csharp/cSharpAdvanced/a-advanced-topics.md)
+    * [Generics](csharp/cSharpAdvanced/a-generics.md)
+    * [Delegates](csharp/cSharpAdvanced/b-delegates.md)
+    * [Lambda Expressions](csharp/cSharpAdvanced/c-lambda-expressions.md)
+    * [Events](csharp/cSharpAdvanced/d-events.md)
   - [C Sharp Fundamentals](csharp/cSharpFundamentals/README.md)
     * [Intro To C](csharp/cSharpFundamentals/1-intro-to-c-sharp.md)
     * [Primitive Types And Expressions](csharp/cSharpFundamentals/2-primitive-types-and-expressions.md)
@@ -61,6 +64,9 @@
     * [Advanced Statement Management With Context](javascript/completeReactNative/h-advanced-state-management-with-context.md)
     * [Building A Custom Express API](javascript/completeReactNative/i-building-a-custom-express-api.md)
     * [In App Authentication](javascript/completeReactNative/j-in-app-authentication.md)
+  - Epic React
+    * [React Fundamentals](javascript/epicReact/a-react-fundamentals.md)
+    * [React Hooks](javascript/epicReact/b-react-hooks.md)
   - [Fireship Firestore](javascript/fireshipFirestore/README.md)
     * [Firestore Queries And Data Modeling Course](javascript/fireshipFirestore/firestore-queries-and-data-modeling-course.md)
     * [Model Relational Data In Firestore No SQL](javascript/fireshipFirestore/relational-data-in-firestore.md)
