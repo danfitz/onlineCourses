@@ -16,3 +16,6 @@ source: [epic react]
 - When you interact with React's events, it actually returns a `SyntheticEvent` created inside React. It's not coming from the actual DOM (but is pretty darn close).
   - React does this for performance reasons (e.g. event delegation).
   - If you need to access the native event, just type `event.nativeEvent`.
+- A change in the `key` prop tells React that a component needs to be re-mounted.
+  - This is useful when you're working with lists where the order and contents can change.
+  - However, it's useful for _intentionally_ re-mounting too. If you need to restart a component based on some changing variable, you can just make that changing variable the `key` of that component.
