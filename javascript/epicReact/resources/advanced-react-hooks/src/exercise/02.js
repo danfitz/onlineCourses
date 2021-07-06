@@ -10,6 +10,26 @@ import {
   PokemonErrorBoundary,
 } from '../pokemon'
 
+const useSafeDispatch = unsafeDispatch => {
+  const mountedRef = React.useRef(false)
+
+  React.useLayoutEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  }, [])
+
+  return React.useCallback(
+    (...args) => {
+      if (mountedRef.current) {
+        unsafeDispatch(...args)
+      }
+    },
+    [unsafeDispatch],
+  )
+}
+
 function asyncReducer(state, action) {
   switch (action.type) {
     case 'pending': {
@@ -28,37 +48,35 @@ function asyncReducer(state, action) {
 }
 
 const useAsync = initialState => {
-  const [state, dispatch] = React.useReducer(asyncReducer, {
+  const [state, unsafeDispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
     data: null,
     error: null,
     ...initialState,
   })
 
-  const run = React.useCallback(promise => {
-    dispatch({type: 'pending'})
-    promise.then(
-      data => {
-        dispatch({type: 'resolved', data})
-      },
-      error => {
-        dispatch({type: 'rejected', error})
-      },
-    )
-  }, [])
+  const safeDispatch = useSafeDispatch(unsafeDispatch)
+
+  const run = React.useCallback(
+    promise => {
+      safeDispatch({type: 'pending'})
+      promise
+        .then(data => safeDispatch({type: 'resolved', data}))
+        .catch(error => safeDispatch({typ: 'rejected', error}))
+    },
+    [safeDispatch],
+  )
 
   return {...state, run}
 }
 
 function PokemonInfo({pokemonName}) {
-  const {status, data, error, run} = useAsync({
+  const {data: pokemon, status, error, run} = useAsync({
     status: pokemonName ? 'pending' : 'idle',
   })
 
   React.useEffect(() => {
-    if (!pokemonName) {
-      return
-    }
+    if (!pokemonName) return
     run(fetchPokemon(pokemonName))
   }, [pokemonName, run])
 
@@ -69,7 +87,7 @@ function PokemonInfo({pokemonName}) {
   } else if (status === 'rejected') {
     throw error
   } else if (status === 'resolved') {
-    return <PokemonDataView pokemon={data} />
+    return <PokemonDataView pokemon={pokemon} />
   }
 
   throw new Error('This should be impossible')
