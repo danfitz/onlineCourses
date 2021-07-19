@@ -104,6 +104,18 @@ One of the benefits of context providers is that you can choose which parts of t
 
 ## `useLayoutEffect`
 
+`useLayoutEffect` differs from `useEffect` in that it runs _before_ the browser paints the DOM (whereas `useEffect` runs _after_).
+
+Most of the time you just want `useEffect`. But because of their slight difference, there are a few legitimate use cases for `useLayoutEffect`:
+
+- Your side effect mutates the DOM in a perceivable way.
+  - When you're mutating the DOM, you want to ensure your changes apply _before_ browser paint. Otherwise, it could cause a flicker of content where the change takes effect (which can happen with `useEffect`).
+- You are interacting with something in the DOM that could change _after_ browser paint, but you need to know its details _before_ browser paint.
+  - One example of this is a `ref`. Maybe you need to know the `ref.current` value before a re-render happens and changes the value.
+  - Another example is a scroll position. Maybe you need to know a DOM node's scroll position before a re-render since that re-render could change the position.
+- You want to make sure a side effect runs _before_ any other side effect.
+  - Maybe your side effect affects all your other side effects, so you need to make sure it happens _first_ to guarantee that the other side effects run accurately.
+
 ## `useImperativeHandle`
 
 ## `useDebugValue`
