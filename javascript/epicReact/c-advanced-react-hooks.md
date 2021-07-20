@@ -118,4 +118,57 @@ Most of the time you just want `useEffect`. But because of their slight differen
 
 ## `useImperativeHandle`
 
+Sometimes you want to expose imperative methods inside a component for a parent component to use. To do this, you would use a combination of `forwardRef` and `useImperativeHandle`.
+
+```js
+const Input = React.forwardRef(({ value }, parentRef) => {
+  const internalRef = React.useRef();
+  React.useImperativeHandle(parentRef, () => ({
+    focus: () => internalRef.current.focus(),
+  }));
+
+  return <input ref={internalRef} type='text' value={value} />;
+});
+
+const Parent = () => {
+  const ref = React.useRef();
+
+  return (
+    <>
+      <Input ref={ref} value='hello' />
+      <button onClick={() => ref.current.focus()}>Focus on input</button>
+    </>
+  );
+};
+```
+
+**Note**: In most cases, `useImperativeHandle` is not the best idea. That's because imperative APIs are just not nearly as good as declarative ones. Only use this hook in situations where it really makes sense.
+
 ## `useDebugValue`
+
+When you make custom hooks, you use `useDebugValue` to expose the values you want your custom hook to show in React DevTools.
+
+```js
+const useCount = ({ initialCount = 0, step = 1 } = {}) => {
+  React.useDebugValue({ initialCount, step });
+  const [count, setCount] = React.useState(0);
+  const increment = () => setCount(c => c + step);
+  return [count, increment];
+};
+```
+
+In the example above, any user using `useDebugValue` will see `initialCount` and `step` when debugging on React DevTools.
+
+**Bonus**: `useDebugValue` accepts an optional formatter function as a second argument. This allow you to format the debug values you pass. (It's only really useful when your formatting is computationally expensive, so you only want to run it when the user actually opens React DevTools and not every time the hook runs.)
+
+```js
+const formatCountValues = ({ initialCount, step }) =>
+  `${initialCount} - ${step}`;
+
+const useCount = ({ initialCount = 0, step = 1 } = {}) => {
+  React.useDebugValue({ initialCount, step }, formatCountValues);
+  const [count, setCount] = React.useState(0);
+  const increment = () => setCount(c => c + step);
+  return [count, increment];
+};
+```
