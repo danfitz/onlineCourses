@@ -100,6 +100,98 @@ In doing so, these helper functions don't have to worry about memoization, and t
 
 ## Compound Components
 
+**Compound components** are components that work together to form a complete UI. In HTML, think of the combination of `select` and `option`:
+
+```html
+<select>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+</select>
+```
+
+`select` and `option` can't be used separately, but _together_ they form a dropdown input.
+
+More specifically, `select` handles the management of state of the UI, while `option` handles configuration for how the select should operate (its options and their values).
+
+### A naive React implementation
+
+In React world, if we wanted to create a `select` and `option`, it's common to create a `CustomSelect` with an `options` prop:
+
+```js
+// This component would implement `select` and `option`s behind the scenes
+<CustomSelect
+  options={[
+    { value: '1', display: 'Option 1' },
+    { value: '2', display: 'Option 2' },
+  ]}
+/>
+```
+
+The trouble comes when we want to extend our `CustomSelect`. Maybe we need to add additional attributes to the `option`s rendered. Or maybe we need the `display` to change style based on whether it's selected.
+
+We could add to the API surface area by introducing more props, but that just means more to code and more for users to learn! (This could blow up and get very messy in a real-world application.)
+
+### Compound components as a solution
+
+Suppose we want to create a `Toggle` that contains a toggle button and that shows different content when the toggle is on vs. when it's off.
+
+In a compound components approach, it would look something like this:
+
+```js
+<Toggle>
+  <ToggleOn>Content that appears when toggle is on</ToggleOn>
+  <ToggleOff>Content that appears when toggle is off</ToggleOff>
+  <ToggleButton />
+</Toggle>
+```
+
+`Toggle` should manage the state (just like `select` does). But how do we work with that state inside of `ToggleOn`, `ToggleOff`, and `ToggleButton`? From the perspective of the user, we don't see any of the state sharing.
+
+**Answer**: You can **implicitly pass props** to the children of `Toggle` using a combination of `React.Children.map` and `React.cloneElement`.
+
+```js
+const Toggle = ({ children }) => {
+  // Internal state management
+  const [on, setOn] = React.useState(false);
+  const toggle = () => setOn(!on);
+
+  return React.Children.map(children, child => {
+    // Built-in DOM components
+    if (typeof child.type === 'string') return child;
+    // Custom composite components
+    return React.cloneElement(child, { on, toggle });
+  });
+};
+
+const ToggleOn = ({ on, children }) => (on ? children : null);
+const ToggleOff = ({ on, children }) => (!on ? children : null);
+const ToggleButton = ({ on, toggle }) => <Switch on={on} onClick={toggle} />;
+```
+
+There's a few things going on in the code above:
+
+- `Toggle` manages the `on` state and creates a helper function `toggle` for switching that state.
+- We map over `children` using `React.Children.map`. (This is required when mapping over React components. A simple `Array.map` wouldn't do.)
+- If the child is a DOM component like `<div />` or `<span />`, we just return it.
+- Otherwise, we clone the child with `React.cloneElement` and pass along the internal state of `Toggle` to the child in the form of props.
+- Finally, the child components just access the props `on` and `toggle` that we passed like normal.
+
+**Pro tip**: One concern with this approach is that a user could create a `CustomToggleButton` that accepts `on` and `toggle` props, and `Toggle` _will_ pass those props along. If you want to stop this, you can just create a `allowedTypes` array to filter out components that you don't want to share internal state with.
+
+```js
+const allowedTypes = [ToggleOn, ToggleOff, ToggleButton];
+
+const Toggle = ({ children }) => {
+  return React.Children.map(children, child => {
+    // Don't pass along internal state to children that we don't allow
+    // Added benefit of this is it also handles the built-in DOM components too!
+    if (!allowedTypes.includes(child.type)) return child;
+
+    return React.cloneElement(child, { on, toggle });
+  });
+};
+```
+
 ## Flexible Compound Components
 
 ## Prop Collections and Getters
