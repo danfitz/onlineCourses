@@ -194,7 +194,159 @@ const Toggle = ({ children }) => {
 
 ## Flexible Compound Components
 
+What happens if you want to wrap your compound components inside your own custom parent components (like for style reasons)? In other words, how do you share state with compound components that are _grandchildren_?
+
+```js
+<Toggle>
+  <ToggleOn>Content that appears when toggle is on</ToggleOn>
+  <ToggleOff>Content that appears when toggle is off</ToggleOff>
+  <div>
+    <ToggleButton />
+  </div>
+</Toggle>
+```
+
+**Answer**: Use **context**!
+
+```js
+const ToggleContext = React.createContext();
+ToggleContext.displayName = 'ToggleContext';
+
+function Toggle({ children }) {
+  const [on, setOn] = React.useState(false);
+  const toggle = () => setOn(!on);
+
+  return (
+    <ToggleContext.Provider value={{ on, toggle }}>
+      {children}
+    </ToggleContext.Provider>
+  );
+}
+
+const useToggle = () => {
+  const context = React.useContext(ToggleContext);
+  if (!context) {
+    throw new Error('You must wrap your components in <Toggle />');
+  }
+  return context;
+};
+
+// Children now access internal state using context (not props passing)!
+function ToggleOn({ children }) {
+  const { on } = useToggle();
+  return on ? children : null;
+}
+function ToggleOff({ children }) {
+  const { on } = useToggle();
+  return on ? null : children;
+}
+function ToggleButton(props) {
+  const { on, toggle } = useToggle();
+  return <Switch on={on} onClick={toggle} {...props} />;
+}
+```
+
+Now you can nest your `Toggle` child components as deep as you want, and they should still work.
+
 ## Prop Collections and Getters
+
+### Prop collections
+
+**Prop collections** are basically just objects of props that you maintain for components that have a lot of props you need to keep track of. Common components that would benefit from prop collections are complex interactive elements like toggles or accordions. These components usually require props like `onClick`, `onKeyDown`, `onFocus`,`aria-pressed`, `aria-expanded`, etc.
+
+The basic idea with prop collections is that you pass them to the user, so they can spread the props over UI components. The benefit of this approach is that the user doesn't have to wire it all up themselves. Returning to the `Toggle` case:
+
+```js
+const useToggle = () => {
+  const [on, setOn] = React.useState(false);
+  const toggle = () => setOn(!on);
+
+  // We maintain a list of common props needed for the toggler
+  // This can expand as requirements get added
+  const togglerProps = {
+    'aria-pressed': on,
+    onClick: toggle,
+  };
+
+  return { on, toggle, togglerProps };
+};
+
+const App = () => {
+  const { togglerProps } = useToggle();
+
+  return (
+    <Toggle>
+      <ToggleOn />
+      <ToggleOff />
+      <button {...togglerProps}>Toggle</button>
+    </Toggle>
+  );
+};
+```
+
+### Prop getters
+
+Just like prop collections, **prop getters** help you maintain a list of common props for your UI components. However, they are functions that _return_ props, so you can allow your user to extend, customize, and combine props.
+
+For example, suppose the user needs to trigger analytics when the toggle button is pressed.
+
+```js
+const App = () => {
+  const { on, togglerProps } = useToggle();
+
+  return (
+    <Toggle>
+      <ToggleOn />
+      <ToggleOff />
+      <button {...togglerProps} onClick={triggerAnalytics}>
+        {on ? 'on' : 'off'}
+      </button>
+    </Toggle>
+  );
+};
+```
+
+The above code _overrides_ the `onClick` that provides the toggle functionality, so the toggle stops working. We need a way of _combining_ the built-in `onClick` functionality with the custom `onClick` analytics functionality. This is where prop getters comes in:
+
+```js
+// Simple helper function for calling multiple functions at once
+const callAll = (...fns) => (...args) =>
+  fns.forEach(fn => typeof fn === 'function' && fn(...args));
+
+function useToggle() {
+  const [on, setOn] = React.useState(false);
+  const toggle = () => setOn(!on);
+
+  // This is the prop getter
+  const getTogglerProps = ({ onClick, ...props } = {}) => ({
+    'aria-pressed': on,
+    onClick: callAll(toggle, onClick),
+    ...props,
+  });
+
+  return { on, toggle, getTogglerProps };
+}
+
+const App = () => {
+  const { on, getTogglerProps } = useToggle();
+
+  return (
+    <Toggle>
+      <ToggleOn />
+      <ToggleOff />
+      <button
+        {...getTogglerProps({
+          'aria-label': 'custom-button',
+          onClick: () => console.info('onButtonClick'),
+          id: 'custom-button-id',
+        })}
+      >
+        {on ? 'on' : 'off'}
+      </button>
+    </Toggle>
+  );
+};
+```
 
 ## State Reducers
 
