@@ -348,6 +348,79 @@ const App = () => {
 };
 ```
 
-## State Reducers
+## State Reducers and Inversion of Control
+
+Suppose you have a complex input component like a `Autocomplete` where you need to handle all kinds of interactions. **State reducers** are a way of managing all the state of these kinds of components using the reducer pattern via `useReducer`.
+
+```js
+const autocompleteReducer = (state, action) => {
+  switch (action.type) {
+    case 'change':
+    // Handle input change
+    case 'reset':
+    // Handle clearing input
+    case 'submit':
+    // Handle pressing enter
+  }
+};
+
+// This hook uses the state reducer to manage state
+const useAutocomplete = () => {
+  const [state, dispatch] = useReducer(autocompleteReducer);
+  const onChange = value => dispatch({ type: 'change', payload: value });
+  const onReset = () => dispatch({ type: 'reset' });
+  const onSubmit = payload => dispatch({ type: 'submit', payload });
+
+  return {
+    state,
+    onChange,
+    onReset,
+    onSubmit,
+  };
+};
+```
+
+Suppose someone else now consumes your `Autocomplete` component. Sometimes their requirements can get very complex and layered, so how do we build an API that covers all these use cases?
+
+**Answer**: You don't. It's near impossible to account for every possible use case. You can code for the most common use cases, but there are always going to be edge cases.
+
+**Solution**: Instead, you implement **inversion of control**. This just means that you **give the consumer back some control of the internals**, so they can decide for themselves how to implement their unique requirements.
+
+In practice, this means that you can give the user the option to pass their own reducer to `useAutocomplete`, so they can code their own use cases:
+
+```js
+const useAutocomplete = (reducer = autocompleteReducer) => {
+  const [state, dispatch] = useReducer(reducer);
+  // ...
+
+  return {
+    state,
+    onChange,
+    onReset,
+    onSubmit,
+  };
+};
+
+const App = () => {
+  const customAutocompleteReducer = (state, action) => {
+    // NEW REQUIREMENT: do not allow non-alphanumeric characters
+    if (action.type === 'change' && !isAlphanumeric(action.payload)) {
+      return state;
+    }
+
+    // Fall back to default logic otherwise
+    return autocompleteReducer(state, action);
+  };
+
+  const { state, onChange } = useAutocomplete(customAutocompleteReducer);
+
+  return <Input onChange={onChange} value={state.value} />;
+};
+```
+
+There are a few things to note that are clever in this code snippet:
+
+- We default to `autocompleteReducer` if the user doesn't provide a custom reducer to `useAutocomplete` because this helps cover the majority of times where the user doesn't need to make any customizations to our default logic.
+- We expose the default `autocompleteReducer` to the user, so they can use it as the fallback in their `customAutocompleteReducer`. The advantage of this is that the user doesn't have to build the reducer from the ground up. They can customize what they want and fall back to default logic for the rest.
 
 ## Control Props
