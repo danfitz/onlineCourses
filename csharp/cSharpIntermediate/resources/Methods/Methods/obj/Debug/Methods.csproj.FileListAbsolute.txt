@@ -1,0 +1,12 @@
+/Users/dfitz/Coding/Methods/Methods/obj/Debug/Methods.csprojAssemblyReference.cache
+/Users/dfitz/Coding/Methods/Methods/obj/Debug/Methods.csproj.CoreCompileInputs.cache
+/Users/dfitz/Coding/Methods/Methods/bin/Debug/Methods.exe
+/Users/dfitz/Coding/Methods/Methods/bin/Debug/Methods.pdb
+/Users/dfitz/Coding/Methods/Methods/obj/Debug/Methods.exe
+/Users/dfitz/Coding/Methods/Methods/obj/Debug/Methods.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Methods/bin/Debug/Methods.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Methods/bin/Debug/Methods.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Methods/obj/Debug/Methods.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Methods/obj/Debug/Methods.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Methods/obj/Debug/Methods.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Methods/obj/Debug/Methods.pdb

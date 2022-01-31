@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Constructors/bin/Debug/Constructors.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Constructors/bin/Debug/Constructors.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Constructors/obj/Debug/Constructors.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Constructors/obj/Debug/Constructors.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Constructors/obj/Debug/Constructors.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Constructors/obj/Debug/Constructors.pdb

@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/StackOverflow/bin/Debug/StackOverflow.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/StackOverflow/bin/Debug/StackOverflow.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/StackOverflow/obj/Debug/StackOverflow.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/StackOverflow/obj/Debug/StackOverflow.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/StackOverflow/obj/Debug/StackOverflow.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/StackOverflow/obj/Debug/StackOverflow.pdb

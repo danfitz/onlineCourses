@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Indexers/bin/Debug/Indexers.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Indexers/bin/Debug/Indexers.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Indexers/obj/Debug/Indexers.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Indexers/obj/Debug/Indexers.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Indexers/obj/Debug/Indexers.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Indexers/obj/Debug/Indexers.pdb

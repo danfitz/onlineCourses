@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/MethodOverriding/bin/Debug/MethodOverriding.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/MethodOverriding/bin/Debug/MethodOverriding.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/MethodOverriding/obj/Debug/MethodOverriding.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/MethodOverriding/obj/Debug/MethodOverriding.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/MethodOverriding/obj/Debug/MethodOverriding.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/MethodOverriding/obj/Debug/MethodOverriding.pdb

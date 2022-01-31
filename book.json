@@ -1,0 +1,5 @@
+{
+  "title": "Dan Fitz's Notes",
+  "ignores": ["resources", "node_modules"],
+  "sortedBy": "num-"
+}

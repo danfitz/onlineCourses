@@ -1,0 +1,8 @@
+extends ../layout.pug
+
+block content
+    h1 This image is a lot bigger than most screens
+    p Can you figure out how to provide a small, medium and large version using the srcset attribute?
+    p (hint: start in srcset.pug)
+    div.
+        <img srcset="http://via.placeholder.com/300x300 300w, http://via.placeholder.com/700x700 700w, http://via.placeholder.com/1000x1000 1000w" />

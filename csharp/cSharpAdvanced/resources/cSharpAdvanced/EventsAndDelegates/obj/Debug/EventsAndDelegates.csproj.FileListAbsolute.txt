@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/EventsAndDelegates/bin/Debug/EventsAndDelegates.exe
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/EventsAndDelegates/bin/Debug/EventsAndDelegates.pdb
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/EventsAndDelegates/obj/Debug/EventsAndDelegates.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/EventsAndDelegates/obj/Debug/EventsAndDelegates.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/EventsAndDelegates/obj/Debug/EventsAndDelegates.exe
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/EventsAndDelegates/obj/Debug/EventsAndDelegates.pdb

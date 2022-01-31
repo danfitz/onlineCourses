@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/AccessModifiers/bin/Debug/AccessModifiers.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/AccessModifiers/bin/Debug/AccessModifiers.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/AccessModifiers/obj/Debug/AccessModifiers.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/AccessModifiers/obj/Debug/AccessModifiers.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/AccessModifiers/obj/Debug/AccessModifiers.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/AccessModifiers/obj/Debug/AccessModifiers.pdb

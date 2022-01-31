@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/DbExercise/bin/Debug/DbExercise.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/DbExercise/bin/Debug/DbExercise.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/DbExercise/obj/Debug/DbExercise.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/DbExercise/obj/Debug/DbExercise.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/DbExercise/obj/Debug/DbExercise.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Polymorphism/DbExercise/obj/Debug/DbExercise.pdb

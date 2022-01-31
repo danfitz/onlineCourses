@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Properties/obj/Debug/Properties.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Properties/obj/Debug/Properties.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Properties/bin/Debug/Properties.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Properties/bin/Debug/Properties.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Properties/obj/Debug/Properties.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Properties/obj/Debug/Properties.pdb

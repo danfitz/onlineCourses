@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Interfaces/Workflow/bin/Debug/Workflow.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Interfaces/Workflow/bin/Debug/Workflow.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Interfaces/Workflow/obj/Debug/Workflow.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Interfaces/Workflow/obj/Debug/Workflow.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Interfaces/Workflow/obj/Debug/Workflow.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Interfaces/Workflow/obj/Debug/Workflow.pdb

@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/cSharpAdvanced/bin/Debug/cSharpAdvanced.exe
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/cSharpAdvanced/bin/Debug/cSharpAdvanced.pdb
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/cSharpAdvanced/obj/Debug/cSharpAdvanced.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/cSharpAdvanced/obj/Debug/cSharpAdvanced.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/cSharpAdvanced/obj/Debug/cSharpAdvanced.exe
+/Users/dfitz/Notes/onlineCourses/csharp/cSharpAdvanced/resources/cSharpAdvanced/cSharpAdvanced/obj/Debug/cSharpAdvanced.pdb

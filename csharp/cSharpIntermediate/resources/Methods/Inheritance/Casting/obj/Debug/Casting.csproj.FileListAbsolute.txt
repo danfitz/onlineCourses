@@ -1,0 +1,6 @@
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Casting/bin/Debug/Casting.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Casting/bin/Debug/Casting.pdb
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Casting/obj/Debug/Casting.csprojAssemblyReference.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Casting/obj/Debug/Casting.csproj.CoreCompileInputs.cache
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Casting/obj/Debug/Casting.exe
+/Users/dfitz/Notes/onlineCourses/cSharpIntermediate/resources/Methods/Inheritance/Casting/obj/Debug/Casting.pdb
