@@ -65,8 +65,11 @@
     * [Building A Custom Express API](javascript/completeReactNative/i-building-a-custom-express-api.md)
     * [In App Authentication](javascript/completeReactNative/j-in-app-authentication.md)
   - Epic React
+<<<<<<< HEAD
     * [React Fundamentals](javascript/epicReact/a-react-fundamentals.md)
     * [React Hooks](javascript/epicReact/b-react-hooks.md)
+=======
+>>>>>>> master
   - [Fireship Firestore](javascript/fireshipFirestore/README.md)
     * [Firestore Queries And Data Modeling Course](javascript/fireshipFirestore/firestore-queries-and-data-modeling-course.md)
     * [Model Relational Data In Firestore No SQL](javascript/fireshipFirestore/relational-data-in-firestore.md)
