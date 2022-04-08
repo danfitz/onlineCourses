@@ -62,6 +62,57 @@ In this refactor, we `loadBiggie` when the user hovers over the "Show" button, w
 
 **Pro tip**: `loadBiggie` could get invoked multiple times by the user, but that's okay because bundlers like webpack come with **caching** of dynamic imports. So, the browser won't repeatedly fetch `BigComponent`. It will just give you back the results of the initial fetch.
 
+### Prefetching
+
+When you `prefetch` a chunk of JS, that means the browser will automatically load the code for you as soon as it has a spare moment.
+
+This feature is best implemented when you want to lazy load some code that you're very confident the user will use right away. So this code is fetched _after_ all the necessary code but _before_ the user is likely to interact with it.
+
+You can add this functionality through webpack by adding a `/* webpackPrefetch: true */` comment in your dynamic import.
+
+```js
+import(/* webpackPrefetch: true */ '../bigComponent');
+```
+
+### Position of `React.Suspense`
+
+Every lazily loaded component inside a `React.Suspense` renders the same `fallback`. In other words, `React.Suspense` is shared.
+
+```js
+const App = () => (
+  <React.Suspense fallback='Loading...'>
+    <LazyComponent1 />
+    <LazyComponent2 />
+  </React.Suspense>
+);
+```
+
+When you wrap a bunch of children inside `React.Suspense` and a component starts lazily loading, _everything_ inside of `React.Suspense` gets replaced by `fallback`. This includes any components that aren't lazily loaded as well.
+
+```js
+const App = () => (
+  <React.Suspense fallback='Loading...'>
+    <h1>This heading disappears while LazyComponent loads</h1>
+    <LazyComponent />
+  </React.Suspense>
+);
+```
+
+**Best practice**: Try to keep `React.Suspense` wrapped around the components that actually are related to the lazy loading.
+
+```js
+const App = () => (
+  <>
+    <h1>This heading disappears while LazyComponent loads</h1>
+    <React.Suspense fallback='Loading...'>
+      <LazyComponent />
+    </React.Suspense>
+  </>
+);
+```
+
+**Pro tip**: You can manually display the `fallback` for a component by selecting your lazy component and clicking the stopwatch icon in React DevTools.
+
 ## `useMemo` for Expensive Calculations
 
 ## `React.memo` for Reducing Re-renders
