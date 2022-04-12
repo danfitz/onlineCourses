@@ -22,6 +22,9 @@
     * [Inheritance](csharp/cSharpIntermediate/3-inheritance.md)
     * [Polymorphism](csharp/cSharpIntermediate/4-polymorphism.md)
     * [Interfaces](csharp/cSharpIntermediate/5-interfaces.md)
+- Java
+  - Intro To Java
+    * [Introduction To Java Classes And Eclipse](java/introToJava/a-introduction-to-java-classes-eclipse.md)
 - Javascript
   - [Algorithms Data Structures](javascript/algorithmsDataStructures/README.md)
     * [Big O Notation](javascript/algorithmsDataStructures/a-big-o-notation.md)
@@ -65,11 +68,11 @@
     * [Building A Custom Express API](javascript/completeReactNative/i-building-a-custom-express-api.md)
     * [In App Authentication](javascript/completeReactNative/j-in-app-authentication.md)
   - Epic React
-<<<<<<< HEAD
     * [React Fundamentals](javascript/epicReact/a-react-fundamentals.md)
     * [React Hooks](javascript/epicReact/b-react-hooks.md)
-=======
->>>>>>> master
+    * [Advanced React Hooks](javascript/epicReact/c-advanced-react-hooks.md)
+    * [Advanced React Patterns](javascript/epicReact/d-advanced-react-patterns.md)
+    * [React Performance](javascript/epicReact/e-react-performance.md)
   - [Fireship Firestore](javascript/fireshipFirestore/README.md)
     * [Firestore Queries And Data Modeling Course](javascript/fireshipFirestore/firestore-queries-and-data-modeling-course.md)
     * [Model Relational Data In Firestore No SQL](javascript/fireshipFirestore/relational-data-in-firestore.md)
@@ -142,6 +145,8 @@
     * [Code Splitting](javascript/webPerformanceWithWebpack/b-code-splitting.md)
     * [Module Methods Magic Comments](javascript/webPerformanceWithWebpack/c-module-methods-and-magic-comments.md)
 - Other
+  - Algo Expert
+    * [Data Structures Crash Course](other/algoExpert/a-data-structures-crash-course.md)
   - Aws Solutions Architect
     * [AWS Fundamentals IAM EC 2](other/awsSolutionsArchitect/1-aws-fundamentals-iam-ec2.md)
   - [Fundamentals Math](other/fundamentalsMath/README.md)
@@ -158,3 +163,13 @@
     * [The Magic Of Aggregate Functions](other/mysqlBootcamp/7-the-magic-of-aggregate-functions.md)
   - Random Notes
     * [Understanding React Hooks](other/randomNotes/understanding-react-hooks.md)
+- Python
+  - Data Analysis Using Python
+    * [Loading Querying And Filtering Data Using The Csv Module](python/dataAnalysisUsingPython/a-loading-querying-filtering-data-csv-module.md)
+    * [Loading Querying Joining And Filtering Data Using Pandas](python/dataAnalysisUsingPython/b-loading-querying-joining-filtering-data-pandas.md)
+    * [Summarizing And Visualizing Data](python/dataAnalysisUsingPython/c-summarizing-visualizing-data.md)
+  - Intro To Python
+    * [Course Introduction Intro To Programming And The Python Language Variables Conditionals Jupyter Notebook And IDLE](python/introToPython/a-course-introduction.md)
+    * [Intro To Lists Loops And Functions](python/introToPython/b-lists-loops-functions.md)
+    * [More With Lists Strings Tuples Sets And Py Charm](python/introToPython/c-lists-strings-tuples-sets-pycharm.md)
+    * [Dictionaries And Files](python/introToPython/d-dictionaries-files.md)
