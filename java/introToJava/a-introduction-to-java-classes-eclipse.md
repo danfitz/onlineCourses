@@ -94,6 +94,22 @@ To print data, you have the following options:
 * `System.out.println(x)` prints something and ends the line
 * `System.out.print(x)` prints something and doesn't end the line
 
+**Important**: If you create your own custom Objects, you will need to create a custom `toString` method in your class, so the `System.out` methods know how to print your Objects.
+
+```java
+public class Customer {
+  String name;
+  public Customer(String name) {
+    this.name = name;
+  }
+  
+  // must return string
+  public String toString() {
+    return this.name;
+  }
+}
+```
+
 ### Iteration
 
 `while` loops and `for` loops are just like JavaScript:
@@ -128,6 +144,14 @@ if (isEven) {
   // ...
 }
 ```
+
+**Note**: When comparing Objects like Strings, you need to use the `equals` method instead.
+
+`"abc".equals("abc");`
+
+**Pro tip**: When using the `equals` method, it's best to use the known String first. If you do it to an unknown String (i.e. a String that might be null), you'll get an error because the `equals` method won't exist.
+
+**Pro tip 2**: When you're building custom Objects, it's for this reason that you usually want to build out your own custom `equals` methods for them.
 
 ### Getting input
 
@@ -219,6 +243,30 @@ Here's some basic casting operations you are likely to perform:
   * `String.valueOf(int)`
 * `String` to `int`
   * `Integer.parseInt(str)`
+
+Alternatively, you can cast using the following syntax: `(typeToCast) value`.
+
+### Widening vs. narrowing
+
+Some data types are subsets of other data types. For example, integers are a subset of doubles. That means all integers are doubles, but not all doubles are integers.
+
+**Widening** is the act of casting a sub-data type to a wider data type: an integer to a double. **Narrowing** is casting a data type to one of its subsets: a double to an integer.
+
+Widening and narrowing typically happens when passing arguments to methods:
+
+```java
+public class Customer {
+  public static void buy(int i) {
+    // ...
+  }
+  
+  public static void main(String args[]) {
+    Customer.buy(5.0); // example of narrowing!
+  }
+}
+```
+
+In Java, widening is legal, while narrowing is illegal.
 
 ## Classes
 
