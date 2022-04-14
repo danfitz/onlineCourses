@@ -25,6 +25,8 @@
 - Java
   - Intro To Java
     * [Introduction To Java Classes And Eclipse](java/introToJava/a-introduction-to-java-classes-eclipse.md)
+    * [Unit Testing Arrays And Array Lists](java/introToJava/b-unit-testing-arrays-arraylists.md)
+    * [Static Variables Methods And Polymorphism Using Overloading](java/introToJava/c-static-variables-methods-polymorphism-using-overloading.md)
 - Javascript
   - [Algorithms Data Structures](javascript/algorithmsDataStructures/README.md)
     * [Big O Notation](javascript/algorithmsDataStructures/a-big-o-notation.md)
@@ -146,7 +148,13 @@
     * [Module Methods Magic Comments](javascript/webPerformanceWithWebpack/c-module-methods-and-magic-comments.md)
 - Other
   - Algo Expert
-    * [Data Structures Crash Course](other/algoExpert/a-data-structures-crash-course.md)
+    * [Defining Data Structures And Complexity Analysis](other/algoExpert/a-defining-data-structures-complexity-analysis.md)
+    * [Memory](other/algoExpert/b-memory.md)
+    * [Big O Notation](other/algoExpert/c-big-o-notation.md)
+    * [Logarithm](other/algoExpert/d-logarithm.md)
+    * [Arrays](other/algoExpert/e-arrays.md)
+    * [Linked Lists](other/algoExpert/f-linked-lists.md)
+    * [Hash Tables](other/algoExpert/g-hash-tables.md)
   - Aws Solutions Architect
     * [AWS Fundamentals IAM EC 2](other/awsSolutionsArchitect/1-aws-fundamentals-iam-ec2.md)
   - [Fundamentals Math](other/fundamentalsMath/README.md)
