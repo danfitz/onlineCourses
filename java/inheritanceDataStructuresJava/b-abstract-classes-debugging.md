@@ -118,3 +118,7 @@ class Circle extends Shape {
 ## Interfaces
 
 ## Eclipse Debugger
+
+**Debugging** allows you to run a program while watching the source code during execution.
+
+Eclipse allows you to switch out of the Java perspective and into the **Debug perspective**, a set of views that make debugging easier.
