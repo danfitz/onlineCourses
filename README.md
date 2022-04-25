@@ -12,7 +12,7 @@ All notes are written in Markdown and are constantly evolving.
 
 Example note for of a module/topic in a course:
 
-* [Big O Notation](https://notes.danfitz.com/javascript/algorithmsdatastructures/a-big-o-notation) from [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)
+* [Big O Notation](https://notes.danfitz.com/javascript/algorithmsdatastructures/a-big-o-notation) (part of [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) course)
 
 ## On `SUMMARY.md`
 
