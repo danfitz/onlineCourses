@@ -1,2 +1,0 @@
-# Typescript Developers Guide
-

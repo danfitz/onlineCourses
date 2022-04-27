@@ -1,2 +1,0 @@
-# Mastering Chrome Dev Tools
-

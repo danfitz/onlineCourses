@@ -1,2 +1,0 @@
-# Aws Solutions Architect
-
