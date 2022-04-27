@@ -1,7 +1,6 @@
 # Dan Fitz's Notes
 
 - [Csharp](csharp/README.md)
-  - [C Sharp Advanced](csharp/c-sharp-advanced/README.md)
   - C Sharp Advanced
     * [Generics](csharp/cSharpAdvanced/a-generics.md)
     * [Delegates](csharp/cSharpAdvanced/b-delegates.md)
@@ -29,7 +28,6 @@
     * [Abstract Classes And Debugging](java/inheritanceDataStructuresJava/b-abstract-classes-debugging.md)
     * [File I O And Exceptions](java/inheritanceDataStructuresJava/c-file-io-exceptions.md)
     * [Collections Maps And Regular Expressions](java/inheritanceDataStructuresJava/d-collections-maps-regular-expressions.md)
-  - [Intro To Java](java/intro-to-java/README.md)
   - Intro To Java
     * [Introduction To Java Classes And Eclipse](java/introToJava/a-introduction-to-java-classes-eclipse.md)
     * [Unit Testing Arrays And Array Lists](java/introToJava/b-unit-testing-arrays-arraylists.md)
@@ -53,7 +51,6 @@
     * [Binary Search Trees](javascript/algorithmsDataStructures/o-binary-search-trees.md)
     * [Tree Traversal](javascript/algorithmsDataStructures/p-tree-traversal.md)
     * [Binary Heaps](javascript/algorithmsDataStructures/q-binary-heaps.md)
-  - [Complete React Native](javascript/complete-react-native/README.md)
   - [Complete Nodejs](javascript/completeNodejs/README.md)
     * [Understanding Node.js](javascript/completeNodejs/1-understanding-nodejs.md)
     * [REST AP Is And Mongoose](javascript/completeNodejs/10-rest-apis-and-mongoose.md)
@@ -77,7 +74,6 @@
     * [Advanced Statement Management With Context](javascript/completeReactNative/h-advanced-state-management-with-context.md)
     * [Building A Custom Express API](javascript/completeReactNative/i-building-a-custom-express-api.md)
     * [In App Authentication](javascript/completeReactNative/j-in-app-authentication.md)
-  - [Epic React](javascript/epic-react/README.md)
   - Epic React
     * [React Fundamentals](javascript/epicReact/a-react-fundamentals.md)
     * [React Hooks](javascript/epicReact/b-react-hooks.md)
@@ -87,7 +83,6 @@
   - [Fireship Firestore](javascript/fireshipFirestore/README.md)
     * [Firestore Queries And Data Modeling Course](javascript/fireshipFirestore/firestore-queries-and-data-modeling-course.md)
     * [Model Relational Data In Firestore No SQL](javascript/fireshipFirestore/relational-data-in-firestore.md)
-  - [Functional Light Javascript](javascript/functional-light-javascript/README.md)
   - Functional Light Javascript
     * [Intro](javascript/functionalLightJavascript/a-intro.md)
     * [Function Purity](javascript/functionalLightJavascript/b-function-purity.md)
@@ -101,14 +96,12 @@
     * [Transduction](javascript/functionalLightJavascript/j-transduction.md)
     * [Data Structure Operations](javascript/functionalLightJavascript/k-data-structure-operations.md)
     * [Async](javascript/functionalLightJavascript/l-async.md)
-  - [Js Weird Parts](javascript/js-weird-parts/README.md)
   - Js Weird Parts
     * [Execution Contexts And Lexical Environments](javascript/jsWeirdParts/1-execution-contexts-and-lexical-environments.md)
     * [Types And Operators](javascript/jsWeirdParts/2-types-and-operators.md)
     * [Objects And Functions](javascript/jsWeirdParts/3-objects-and-functions.md)
     * [Object Oriented Java Script And Prototypal Inheritance](javascript/jsWeirdParts/4-object-oriented-javascript-and-prototypal-inheritance.md)
     * [Defining Objects](javascript/jsWeirdParts/5-defining-objects.md)
-  - [Mastering Chrome Dev Tools](javascript/mastering-chrome-dev-tools/README.md)
   - Mastering Chrome Dev Tools
     * [Introduction](javascript/masteringChromeDevTools/a-introduction.md)
     * [Editing](javascript/masteringChromeDevTools/b-editing.md)
@@ -119,7 +112,6 @@
     * [Performance Monitoring](javascript/masteringChromeDevTools/g-performance-monitoring.md)
     * [Image Performance](javascript/masteringChromeDevTools/h-image-performance.md)
     * [Memory](javascript/masteringChromeDevTools/j-memory.md)
-  - [React Testing](javascript/react-testing/README.md)
   - [React Complete Guide](javascript/reactCompleteGuide/README.md)
     * [What Is React](javascript/reactCompleteGuide/1-what-is-react.md)
     * [React Basics](javascript/reactCompleteGuide/2-react-basics.md)
@@ -135,20 +127,17 @@
     * [Basic Testing](javascript/reactTesting/2-basic-testing.md)
     * [Redux Testing](javascript/reactTesting/3-redux-testing.md)
     * [Redux Thunk Testing](javascript/reactTesting/4-redux-thunk-testing.md)
-  - [Serverless Bootcamp](javascript/serverless-bootcamp/README.md)
   - Serverless Bootcamp
     * [Introduction](javascript/serverlessBootcamp/a-introduction.md)
     * [Auction Service Setup](javascript/serverlessBootcamp/b-auction-service-setup.md)
     * [Auction Service CRUD Operations](javascript/serverlessBootcamp/c-auction-service-crud-operations.md)
     * [Auction Service Processing Auctions](javascript/serverlessBootcamp/d-auction-service-processing-auctions.md)
-  - [Testing Javascript](javascript/testing-javascript/README.md)
   - Testing Javascript
     * [Fundamentals Of Testing](javascript/testingJavascript/1-fundamentals-of-testing.md)
     * [Static Analysis Testing](javascript/testingJavascript/2-static-analysis-testing.md)
     * [Mocking Fundamentals](javascript/testingJavascript/3-mocking-fundamentals.md)
     * [Configuring Jest](javascript/testingJavascript/4-configuring-jest.md)
     * [Test React Components With Jest And React Testing Library](javascript/testingJavascript/5-test-react-components-with-jest-and-react-testing-library.md)
-  - [Typescript Developers Guide](javascript/typescript-developers-guide/README.md)
   - Typescript Developers Guide
     * [Getting Started With Type Script](javascript/typescriptDevelopersGuide/a-getting-started-with-typescript.md)
     * [What Is A Type System](javascript/typescriptDevelopersGuide/b-what-is-a-type-system.md)
@@ -158,13 +147,11 @@
     * [Tuples In Type Script](javascript/typescriptDevelopersGuide/f-tuples-in-typescript.md)
     * [The All Important Interface](javascript/typescriptDevelopersGuide/g-the-all-important-interface.md)
     * [Building Functionality With Classes](javascript/typescriptDevelopersGuide/h-building-functionality-with-classes.md)
-  - [Web Performance With Webpack](javascript/web-performance-with-webpack/README.md)
   - Web Performance With Webpack
     * [Intro](javascript/webPerformanceWithWebpack/a-intro.md)
     * [Code Splitting](javascript/webPerformanceWithWebpack/b-code-splitting.md)
     * [Module Methods Magic Comments](javascript/webPerformanceWithWebpack/c-module-methods-and-magic-comments.md)
 - [Other](other/README.md)
-  - [Algo Expert](other/algo-expert/README.md)
   - Algo Expert
     * [Defining Data Structures And Complexity Analysis](other/algoExpert/a-defining-data-structures-complexity-analysis.md)
     * [Memory](other/algoExpert/b-memory.md)
@@ -173,14 +160,12 @@
     * [Arrays](other/algoExpert/e-arrays.md)
     * [Linked Lists](other/algoExpert/f-linked-lists.md)
     * [Hash Tables](other/algoExpert/g-hash-tables.md)
-  - [Aws Solutions Architect](other/aws-solutions-architect/README.md)
   - Aws Solutions Architect
     * [AWS Fundamentals IAM EC 2](other/awsSolutionsArchitect/1-aws-fundamentals-iam-ec2.md)
   - [Fundamentals Math](other/fundamentalsMath/README.md)
     * [Numbers And Negative Numbers](other/fundamentalsMath/1-numbers-and-negative-numbers.md)
     * [Factors And Multiples](other/fundamentalsMath/2-factors-and-multiples.md)
     * [Fractions](other/fundamentalsMath/3-fractions.md)
-  - [Mysql Bootcamp](other/mysql-bootcamp/README.md)
   - Mysql Bootcamp
     * [Overview And Installation](other/mysqlBootcamp/1-overview-and-installation.md)
     * [Creating Databases And Tables](other/mysqlBootcamp/2-creating-databases-and-tables.md)
@@ -189,16 +174,13 @@
     * [The World Of String Functions](other/mysqlBootcamp/5-the-world-of-string-functions.md)
     * [Refining Our Selections](other/mysqlBootcamp/6-refining-our-selections.md)
     * [The Magic Of Aggregate Functions](other/mysqlBootcamp/7-the-magic-of-aggregate-functions.md)
-  - [Random Notes](other/random-notes/README.md)
   - Random Notes
     * [Understanding React Hooks](other/randomNotes/understanding-react-hooks.md)
 - [Python](python/README.md)
-  - [Data Analysis Using Python](python/data-analysis-using-python/README.md)
   - Data Analysis Using Python
     * [Loading Querying And Filtering Data Using The Csv Module](python/dataAnalysisUsingPython/a-loading-querying-filtering-data-csv-module.md)
     * [Loading Querying Joining And Filtering Data Using Pandas](python/dataAnalysisUsingPython/b-loading-querying-joining-filtering-data-pandas.md)
     * [Summarizing And Visualizing Data](python/dataAnalysisUsingPython/c-summarizing-visualizing-data.md)
-  - [Intro To Python](python/intro-to-python/README.md)
   - Intro To Python
     * [Course Introduction Intro To Programming And The Python Language Variables Conditionals Jupyter Notebook And IDLE](python/introToPython/a-course-introduction.md)
     * [Intro To Lists Loops And Functions](python/introToPython/b-lists-loops-functions.md)
