@@ -38,12 +38,6 @@ Rather, individual elements can be stored *anywhere* in memory as **nodes**, and
 * Copying linked list
   * `O(n)` time (because you have to traverse the linked list to copy all of its contents)
   * `O(n)` space (because you're asking the operating system to store a brand new copy)
-* Removing an item at the end of an array
-  * `O(1)` time (because you just take the value out of the end of the series of memory slots)
-  * `O(1)` space (because you're just moving the value to another location in memory)
-* Removing an item at the beginning or middle of an array
-  * `O(n)` time (because the operating system has to shift the position of every other element in the array to fill the gap)
-  * `O(1)` space (because you're just moving the value to another location in memory)
 
 ## Spacetime complexity of insertion
 
