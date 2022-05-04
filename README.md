@@ -14,7 +14,9 @@ Example note for of a module/topic in a course:
 
 * [Big O Notation](https://notes.danfitz.com/javascript/algorithmsdatastructures/a-big-o-notation) (part of [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) course)
 
-## On `SUMMARY.md`
+## Technical Notes (for My Own Use)
+
+### On `SUMMARY.md`
 
 Currently, these notes are hosted using GitBook. When GitBook renders the `.md` files into HTML, it dynamically generates a Table of Contents sidebar containing navigation through all notes. However, it's out of order.
 
