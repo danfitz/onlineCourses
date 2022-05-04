@@ -160,6 +160,10 @@
     * [Arrays](other/algoExpert/e-arrays.md)
     * [Linked Lists](other/algoExpert/f-linked-lists.md)
     * [Hash Tables](other/algoExpert/g-hash-tables.md)
+    * [Stacks And Queues](other/algoExpert/h-stacks-and-queues.md)
+    * [Strings](other/algoExpert/i-strings.md)
+    * [Graphs](other/algoExpert/j-graphs.md)
+    * [Trees](other/algoExpert/k-trees.md)
   - Aws Solutions Architect
     * [AWS Fundamentals IAM EC 2](other/awsSolutionsArchitect/1-aws-fundamentals-iam-ec2.md)
   - [Fundamentals Math](other/fundamentalsMath/README.md)
