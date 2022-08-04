@@ -16,7 +16,7 @@ Recall that *instance variables* are defined for each instance of a class. This 
 * Any instance can have unique variable values
 * An instance *must* be created in order to make use of instance variables
 
-In contrast, **static variables** are the same for every instance of a class. You don't event need to instantiate a class to use them.
+In contrast, **static variables** are the same for every instance of a class. You don't even need to instantiate a class to use them.
 
 ```java
 public class Employee {
@@ -67,7 +67,7 @@ Static methods:
 
 * Can only access static variables, not instance variables
 * Can call other static methods
-* Have no access to `thisr
+* Have no access to `this`
 
 In contrast, instance methods:
 
@@ -154,7 +154,7 @@ public class Printer {
 
 **Best practice**: Use constructor overloading when you want to do essentially the same thing but with different parameters. For example:
 
-```java```
+```java
 public class Point {
   int x;
   int y;
