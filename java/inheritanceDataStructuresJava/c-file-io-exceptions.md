@@ -142,7 +142,7 @@ try {
   // Do your normal code
 } catch (Exception1 e1) {
   // Handle one kind of exception 
-} catch {Exception2 e2) {
+} catch (Exception2 e2) {
   // Handle another kind of exception
 } finally {
   // This runs at the end no matter what
