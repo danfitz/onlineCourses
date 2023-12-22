@@ -41,9 +41,9 @@ Courses 1 and 2 focus on supervised learning, while course 3 focuses on the rest
 
 ### Supervised learning
 
-**Supervised learning** is a set of machine learning algorithms that learn $f(x) = y$ input-output mappings. The key way it learns these mappings is by providing a set of input examples, where the "right" output for each example is known upfront.
+**Supervised learning** is a set of machine learning algorithms that learn $f(x) = y$ input-output mappings. The key way it learns these mappings is by being given _labeled data_. In other words, we provide a set of input examples, where the "right" output for each example is known upfront to teach the learning algorithm.
 
-Eventually, the supervised learning algorithm learns to accept input $x$ alone and can return a reasonably accurate prediction of output $y$.
+Eventually, the goal of the supervised learning algorithm is to learn to accept input $x$ alone and return a reasonably accurate prediction of output $y$.
 
 **Note**: The function $f$ is the learning algorithm that you use.
 
@@ -61,14 +61,30 @@ For example, we may have a set of tumors, where inputs are sizes and outputs are
 
 ![](assets/breast-cancer-detection-example.png)
 
-You can use more than one input value!
+**Important**: It's possible to use more than one input. In practice, many machine learning algorithms use _many_ inputs.
 
-4:30
+For example, instead of just using tumor size as the only input, we can also include age as an input too.
 
-When should you use it?
+![](assets/multiple-inputs-example.png)
+
+> In this scenario, the learning algorithm may try to figure out a boundary line that separates benign from malignant cases.
 
 ### Unsupervised learning
 
-What is it?
+**Supervised learning** is a set of machine learning algorithms that are given inputs $x$ without "right" outputs $y$. Consequently, instead of predicting outputs, the goal is to find something interesting—some structure or pattern—in the _unlabeled data_.
 
-When should you use it?
+In our tumor example, we may only be given input data on age and tumor size for each tumor but not any diagnosis. So, instead of diagnosing the tumor, our unsupervised learning algorithm may try to _cluster_ them. This is a type of unsupervised learning known as a **clustering algorithm**.
+
+![](assets/tumor-clustering-example.png)
+
+Other examples of unsupervised learning in the form of clustering:
+
+- Google clustering news articles by a shared topic
+- Clustering individuals into types based on the genes they have turned on or off
+- Clustering a business' customers into different market segments
+
+Other types of unsupervised learning:
+
+- **Anomaly detection**: Finds unusual data points
+  - Example: Fraud detection
+- **Dimensionality reduction**: Compresses a larger dataset into a much smaller dataset while losing as little information as possible
