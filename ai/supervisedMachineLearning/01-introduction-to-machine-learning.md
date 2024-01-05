@@ -37,7 +37,7 @@ Supervised learning is used _most_ in real-world applications. Additionally, it'
 
 Courses 1 and 2 focus on supervised learning, while course 3 focuses on the rest.
 
-## Supervised vs. unsupervised learning
+## Supervised vs. Unsupervised Learning
 
 ### Supervised learning
 
@@ -87,4 +87,92 @@ Other types of unsupervised learning:
 
 - **Anomaly detection**: Finds unusual data points
   - Example: Fraud detection
-- **Dimensionality reduction**: Compresses a larger dataset into a much smaller dataset while losing as little information as possible
+- **Dimensionality reduction**: Compresses a large dataset into a much smaller dataset while losing as little information as possible
+
+### Training sets, training examples, and notation
+
+A **training set** is a dataset you give to a learning model to train it. Each data point in a training set is called a **training example**.
+
+In this course, we have the following notation related to training sets and training examples:
+
+- $m$
+  - Number of training examples in a training set
+- $x$
+  - Input data
+  - Called the **input variable** or **input feature** or just **feature**
+- $y$
+  - Output data
+  - Called the **output variable** or **target variable** or just **target**
+- $\^{y}$
+  - Prediction or estimation of $y$ produced by model
+- $(x, y)$
+  - A single training example
+- $(x^{(i)}, y^{(i)})$
+  - If we index our training examples, this refers to the $i^{\text{th}}$ training example
+
+### Formalization of supervised learning
+
+![](assets/supervised-learning-formalization.png)
+
+1. Training set containing features ($x$) and targets ($y$) passed as inputs to a learning algorithm
+2. Learning algorithm produces a function $f$ that takes $x$ as input and outputs $\^{y}$
+   - $f$ is called a **model** (or sometimes hypothesis)
+
+## Regression Model
+
+### Linear regression model
+
+When a learning algorithm produces a model/function $f$, one thing we can ask ourselves is how do we represent $f$? In other words, what is the mathematical formula for $f$?
+
+In a **linear regression model**, $f$ is formally represented as a _linear function_: $f_{w, b}(x) = wx + b$.
+
+> This definition of $f$ is a linear regression model with _one_ variable—often called _univariate_ linear regression.
+
+In informal terms, a linear regression model is a particular type of regression model that predicts numbers by fitting a _straight line_ to the data.
+
+**Note**: $w$ and $b$ are called the **parameters** of the model—sometimes also called **coefficients** or **weights**. They are variables you _adjust_ during training in order to _improve_ the model.
+
+> In the case of linear regression, $w$ is the slope, determining the slope of the line, and $b$ is the y-intercept, determining the position of the line.
+
+Here's some examples of different values for $w$ and $b$ and the different lines they produce:
+
+![](assets/linear-regression-parameter-examples.png)
+
+### Cost function
+
+In linear regression, our ultimate goal is to produce a line that fits the training set as well as possible.
+
+More specifically, the goal is to find values for parameters $w$ and $b$ such that $\^{y}^{(i)}$ is as close to $y^{(i)}$ for many or all $(x^{(i)}, y^{(i)})$ in the training set.
+
+But how do we know when a linear regression model succeeds or fails in this goal? In general, when we build a model, how can we tell how well it's doing so we can try to make it better?
+
+**Answer**: Construct a **cost function**—a function that measures how well a model fits its data.
+
+In particular, we will learn the **squared error cost function**, one of the most commonly used cost functions for regression problems.
+
+The squared error cost function basically computes the average squared error between every $\^{y}^{(i)}$ and $y^{(i)}$.
+
+To compute the average squared error, we do the following:
+
+1. For all $m$ training examples, compute the **error term**—the difference between the prediction and the target—and square it: $(\^{y}^{(i)} - y^{(i)})^2$
+2. Sum up all squared errors from the $m$ training examples
+3. Divide the sum by $m$ to get the average/mean
+4. Divide again by $2$ (done by convention in ML to make later calculations look neater)
+
+Formally, this is our squared error cost function $J(w, b)$:
+
+$$
+J(w, b) = \frac{1}{2m}\sum_{i = 1}^{n} \ (\^{y}^{(i)} - y^{(i)})^2
+$$
+
+> $\^{y}^{(i)}$ can be replaced with $f_{w, b}(x^{(i)})$ since they are equivalent.
+
+**Goal**: Find values of $w$ and $b$ that make the cost function $J(w, b)$ as small as possible.
+
+Next up is examples to help build an intuition around what it really means when $J(w, b)$ is large vs. when $J(w, b)$ is small.
+
+![](assets/cost-function-plotting.png)
+
+0:30
+
+## Train the Model with Gradient Descent
