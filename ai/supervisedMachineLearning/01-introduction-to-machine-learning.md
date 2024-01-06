@@ -167,12 +167,40 @@ $$
 
 > $\^{y}^{(i)}$ can be replaced with $f_{w, b}(x^{(i)})$ since they are equivalent.
 
-**Goal**: Find values of $w$ and $b$ that make the cost function $J(w, b)$ as small as possible.
+**Goal**: Find values of $w$ and $b$ that _minimize_ the cost function $J(w, b)$ as much as possible.
 
-Next up is examples to help build an intuition around what it really means when $J(w, b)$ is large vs. when $J(w, b)$ is small.
+### Visualizing cost function in 2D and 3D
 
-![](assets/cost-function-plotting.png)
+To find the minimum of $J(w, b)$, we need a way to visualize the function.
 
-0:30
+To begin, let's visualize a simpler cost function $J(w)$ where $w$ is the only parameter (so it's always the case that $b = 0$).
+
+![](assets/plotting-2d-cost-function.png)
+
+> On the left, we display different functions $f_w$ for different values of $w$. On the right, we display the values of $J(w)$ in relation to the values of $w$.
+
+You'll notice a parabola or bowl shape for $J(w)$. In this visualization, finding the value of $w$ that produces the minimum $J(w)$ amounts to finding the vertex of the parabola.
+
+Next, let's visualize the cost function $J(w, b)$ using a 3D surface plot:
+
+![](assets/plotting-3d-cost-function.png)
+
+To find the values of $w$ and $b$ that produce a minimum $J(w, b)$, we create a _contour plot_ based off of the 3D surface plot:
+
+![](assets/2d-contour-plot-example.png)
+
+> The contour plot on the top right is a 2D visualization of the 3D surface plot at the bottom.
+>
+> Think of a contour plot like a topographical map—as seen in the 2 images to the right. From a bird's eye view, we place circles around a mountain, where each circle represents the set of points on the mountain that are the same height. Each circle is a common height difference from one another.
+
+In a contour plot, you have concentric ovals, where each oval represents all of the values of $w$ and $b$ that have the same output $J(w, b)$. Additionally, outer ovals represent higher values of $J(w, b)$, and inner ovals represent smaller values of $J(w, b)$.
+
+Therefore, the values of $w$ and $b$ that produce the minimum $J(w, b)$ are all found at the innermost oval of the contour plot.
 
 ## Train the Model with Gradient Descent
+
+Manually working out the values of parameters $w$ and $b$ that produce the minimum $J(w, b)$ is tedious and inefficient—and may even stop working as we get to more complex machine learning models.
+
+Gradient descent is an algorithm that automatically calculates the ideal values of $w$ and $b$ for you.
+
+It's one of the most important algorithms in machine learning.
