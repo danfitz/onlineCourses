@@ -199,8 +199,114 @@ Therefore, the values of $w$ and $b$ that produce the minimum $J(w, b)$ are all 
 
 ## Train the Model with Gradient Descent
 
+### What is gradient descent?
+
 Manually working out the values of parameters $w$ and $b$ that produce the minimum $J(w, b)$ is tedious and inefficient—and may even stop working as we get to more complex machine learning models.
 
-Gradient descent is an algorithm that automatically calculates the ideal values of $w$ and $b$ for you.
+**Gradient descent** is an algorithm that takes _any_ function as input—including cost functions—and outputs the parameter values that produce the minimum for that function.
 
-It's one of the most important algorithms in machine learning.
+> It's one of the most important algorithms in machine learning—used for both simple (e.g., linear regression) and complex (e.g., deep learning) models.
+
+At a high level, the steps of the gradient descent algorithm proceed as follows:
+
+1. Set parameters to some initial values
+   - For linear regression, the convention is to set $w = b = 0$
+2. Keep changing the parameter values a little bit at a time in an attempt to reduce the cost function
+3. Stop when the cost function settles at or near a minimum
+
+As an analogy, in step (1), imagine choosing initial values for your parameters is like dropping yourself onto a random spot on the surface plot representing the cost function:
+
+![](assets/hills-and-valleys-gradient-descent.png)
+
+> **Note**: As the surface plot shows, not all cost functions are a bowl shape. In other words, it's possible for there to be more than 1 minimum.
+
+Think of this surface plot as a golf course with hills and valleys. Your goal is to walk into a valley as fast as possible!
+
+In step (2), you proceed to look around 360 degrees, each time taking a baby step forward that would lead to the _steepest_ descent.
+
+You then continue to repeat step (2) until you finally hit step (3) where you land in a valley—essentially a **local minimum**.
+
+**Important**: In gradient descent, changing the initial values of the parameters can change the local minimum that you settle on. This is shown with the 2 paths in the surface plot above.
+
+**Corollary**: An interesting property of gradient descent is that it can only go downhill. As a result, you can't get from one local minimum to another.
+
+### Implementing gradient descent
+
+When you take a baby step, the actual mathematical implementation of gradient descent involves a small tweak to $w$ by re-assigning its value as
+
+$$
+w = w - \alpha \frac{d}{dw} J(w, b)
+$$
+
+where
+
+- $\alpha \in [0,1]$ is the **learning rate** that determines how steep the descent is, and
+- $\frac{d}{dw} J(w, b)$ is the **partial derivative term** of the cost function $J$ that determines the direction of the baby step (more on this later).
+
+A similar small tweak to $b$ is made as
+
+$$
+b = b - \alpha \frac{d}{db} J(w, b)
+$$
+
+The gradient descent algorithm simply repeats these reassignments of $w$ and $b$ until the algorithm **converges**—meaning you reach a local minimum where updates to $w$ and $b$ no longer change much with each additional baby step you take.
+
+**Important**: As a best practice, updates to $w$ and $b$ must be done _simultaneously_ so that the updated value of one parameter doesn't affect the update of another parameter.
+
+The best way to accomplish a simultaneous update is to compute the RHS first:
+
+$$
+\begin{align*}
+tmp_w &= w - \alpha \frac{d}{dw} J(w, b) \\
+tmp_b &= b - \alpha \frac{d}{db} J(w, b) \\
+w &= tmp_w \\
+b &= tmp_b
+\end{align*}
+$$
+
+### More on the derivative term
+
+To understand what a single step of gradient descent is doing—especially the derivative term—let's return to our simplified example where $w$ is our only parameter, leading to a parabola/curve shape:
+
+![](assets/derivative-term-tangent-line-intuition.png)
+
+In the 2 examples above, we pick an arbitrary $w$. The top example has $w$ on the right side of the curve, and the bottom example has $w$ on the left side.
+
+Now what we can do is draw a **tangent line** for each point: a line that intersects with exactly a point on a curve.
+
+**Important**: The partial derivative of $J(w)$ is the _slope_ of that tangent line for that point.
+
+Corollaries:
+
+- When the tangent line has a positive slope, we can say the derivative term $\frac{d}{dw} J(w) > 0$
+  - This leads to a _decrease_ of $w$ (since $\alpha$ is non-negative), moving closer to the minimum
+- Otherwise, when the tangent line has a negative slope, $\frac{d}{dw} J(w) < 0$.
+  - This leads to an _increase_ of $w$ (since $\alpha$ is non-negative), moving closer to the minimum
+
+In both cases, we see how a step in the gradient descent algorithm brings us closer to the minimum—thanks to the derivative term.
+
+**Note**: When you have converged on a local minimum, the slope of the tangent line representing the derivative is always $0$:
+
+![](assets/local-minimum-convergence.png)
+
+Thus, the re-assignment $w = w - \alpha \cdot 0$ doesn't change $w$ at all. In other words, further gradient descent steps do nothing once you've reached a local minimum.
+
+### More on the learning rate
+
+To understand what the learning rate $\alpha$ does in gradient descent, let's consider what happens when $\alpha$ is too small or too big.
+
+![](assets/too-small-too-large-learning-rate.png)
+
+When $\alpha$ is too small (top example), gradient descent becomes too _slow_: it takes many steps to finally reach the minimum.
+
+When $\alpha$ is too big (bottom example), gradient descent can continually overshoot and step over the minimum, never reaching it. In more technical terms, we say gradient descent _fails to converge_ and may even _diverge_—meaning it actually gets further and further away from the minimum.
+
+**Important**: Even though we use a _fixed_ learning rate, as we get closer and closer to a local minimum, gradient descent _automatically_ takes _smaller and smaller_ steps.
+
+![](assets/fixed-learning-rate-smaller-steps.png)
+
+**Why**: Consider a curve is typically exponential. So as you take steps closer towards the local minimum for that curve, the slope of each tangent line (i.e., the derivative) gets smaller and smaller, meaning smaller and smaller gradient descent steps.
+
+This effect makes it easier to converge on the local minimum _even though_ the learning rate is fixed.
+
+### Gradient descent applied to linear regression
