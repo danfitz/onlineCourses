@@ -235,18 +235,18 @@ You then continue to repeat step (2) until you finally hit step (3) where you la
 When you take a baby step, the actual mathematical implementation of gradient descent involves a small tweak to $w$ by re-assigning its value as
 
 $$
-w = w - \alpha \frac{d}{dw} J(w, b)
+w = w - \alpha \frac{\partial}{\partial w} J(w, b)
 $$
 
 where
 
 - $\alpha \in [0,1]$ is the **learning rate** that determines how steep the descent is, and
-- $\frac{d}{dw} J(w, b)$ is the **partial derivative term** of the cost function $J$ that determines the direction of the baby step (more on this later).
+- $\frac{\partial}{\partial w} J(w, b)$ is the **partial derivative term** of the cost function $J$ that determines the direction of the baby step (more on this later).
 
 A similar small tweak to $b$ is made as
 
 $$
-b = b - \alpha \frac{d}{db} J(w, b)
+b = b - \alpha \frac{\partial}{\partial b} J(w, b)
 $$
 
 The gradient descent algorithm simply repeats these reassignments of $w$ and $b$ until the algorithm **converges**—meaning you reach a local minimum where updates to $w$ and $b$ no longer change much with each additional baby step you take.
@@ -257,8 +257,8 @@ The best way to accomplish a simultaneous update is to compute the RHS first:
 
 $$
 \begin{align*}
-tmp_w &= w - \alpha \frac{d}{dw} J(w, b) \\
-tmp_b &= b - \alpha \frac{d}{db} J(w, b) \\
+tmp_w &= w - \alpha \frac{\partial}{\partial w} J(w, b) \\
+tmp_b &= b - \alpha \frac{\partial}{\partial b} J(w, b) \\
 w &= tmp_w \\
 b &= tmp_b
 \end{align*}
@@ -278,9 +278,9 @@ Now what we can do is draw a **tangent line** for each point: a line that inters
 
 Corollaries:
 
-- When the tangent line has a positive slope, we can say the derivative term $\frac{d}{dw} J(w) > 0$
+- When the tangent line has a positive slope, we can say the derivative term $\frac{\partial}{\partial w} J(w) > 0$
   - This leads to a _decrease_ of $w$ (since $\alpha$ is non-negative), moving closer to the minimum
-- Otherwise, when the tangent line has a negative slope, $\frac{d}{dw} J(w) < 0$.
+- Otherwise, when the tangent line has a negative slope, $\frac{\partial}{\partial w} J(w) < 0$.
   - This leads to an _increase_ of $w$ (since $\alpha$ is non-negative), moving closer to the minimum
 
 In both cases, we see how a step in the gradient descent algorithm brings us closer to the minimum—thanks to the derivative term.
@@ -290,6 +290,8 @@ In both cases, we see how a step in the gradient descent algorithm brings us clo
 ![](assets/local-minimum-convergence.png)
 
 Thus, the re-assignment $w = w - \alpha \cdot 0$ doesn't change $w$ at all. In other words, further gradient descent steps do nothing once you've reached a local minimum.
+
+> Thankfully, this limitation isn't a problem for the squared error cost function, as it is a _convex function_. That just means its global minimum is the only local minimum, so the gradient descent algorithm will always converge on the global minimum.
 
 ### More on the learning rate
 
@@ -309,4 +311,33 @@ When $\alpha$ is too big (bottom example), gradient descent can continually over
 
 This effect makes it easier to converge on the local minimum _even though_ the learning rate is fixed.
 
-### Gradient descent applied to linear regression
+### Applying gradient descent to linear regression
+
+The formula for the partial derivative of the cost function $J$ with respect to $w$ is
+
+$$
+\frac{\partial}{\partial w} J(w, b) = \frac{1}{m} \sum_{i = 1}^{m} (f_{w, b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}
+$$
+
+The formula for the partial derivative of the cost function $J$ with respect to $b$ is
+
+$$
+\frac{\partial}{\partial b} J(w, b) = \frac{1}{m} \sum_{i = 1}^{m} f_{w, b}(x^{(i)}) - y^{(i)}
+$$
+
+Knowing these formulas, we now have everything we need to run gradient descent in order to find the values of $w$ and $b$ that produce an ideal linear regression model (i.e., a straight line that best fits the data):
+
+$$
+\begin{align*}
+\text{Repeat}&\text{ until convergence:} \ \lbrace \\
+
+w &= w - \alpha \frac{1}{m} \sum_{i = 1}^{m} (f_{w, b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)} \\
+
+b &= b - \alpha \frac{1}{m} \sum_{i = 1}^{m} f_{w, b}(x^{(i)}) - y^{(i)} \\
+\rbrace
+\end{align*}
+$$
+
+**Note**: Because each step of gradient descent involves computing the error for _every_ single training example—in effect using the full training set at each step—we call this **batch gradient descent**.
+
+> **Fun fact**: Other forms of gradient descent may actually use a subset of training examples at each step!
