@@ -51,7 +51,7 @@ One type of supervised learning algorithm is a **regression** algorithm. These a
 
 For example, we may have a set of house sizes (inputs) and their prices (outputs). Given this data, we build a regression algorithm that can take 750 square feet as input and output the predicted price of the house.
 
-![](assets/housing-price-prediction-example.png)
+![](assets/week-01/housing-price-prediction-example.png)
 
 > **Fun fact**: If you plot learning algorithm $f$ on an x-axis and y-axis, sometimes it is a straight line, sometimes a curve, or some other shape relative to the data. What shape it is depends on how you systematically _configure_ the learning algorithm.
 
@@ -59,13 +59,13 @@ Another type of supervised learning algorithm is a **classification** algorithm.
 
 For example, we may have a set of tumors, where inputs are sizes and outputs are possible diagnoses of the tumors:
 
-![](assets/breast-cancer-detection-example.png)
+![](assets/week-01/breast-cancer-detection-example.png)
 
 **Important**: It's possible to use more than one input. In practice, many machine learning algorithms use _many_ inputs.
 
 For example, instead of just using tumor size as the only input, we can also include age as an input too.
 
-![](assets/multiple-inputs-example.png)
+![](assets/week-01/multiple-inputs-example.png)
 
 > In this scenario, the learning algorithm may try to figure out a boundary line that separates benign from malignant cases.
 
@@ -75,7 +75,7 @@ For example, instead of just using tumor size as the only input, we can also inc
 
 In our tumor example, we may only be given input data on age and tumor size for each tumor but not any diagnosis. So, instead of diagnosing the tumor, our unsupervised learning algorithm may try to _cluster_ them. This is a type of unsupervised learning known as a **clustering algorithm**.
 
-![](assets/tumor-clustering-example.png)
+![](assets/week-01/tumor-clustering-example.png)
 
 Other examples of unsupervised learning in the form of clustering:
 
@@ -112,7 +112,7 @@ In this course, we have the following notation related to training sets and trai
 
 ### Formalization of supervised learning
 
-![](assets/supervised-learning-formalization.png)
+![](assets/week-01/supervised-learning-formalization.png)
 
 1. Training set containing features ($x$) and targets ($y$) passed as inputs to a learning algorithm
 2. Learning algorithm produces a function $f$ that takes $x$ as input and outputs $\^{y}$
@@ -136,7 +136,7 @@ In informal terms, a linear regression model is a particular type of regression 
 
 Here's some examples of different values for $w$ and $b$ and the different lines they produce:
 
-![](assets/linear-regression-parameter-examples.png)
+![](assets/week-01/linear-regression-parameter-examples.png)
 
 ### Cost function
 
@@ -175,7 +175,7 @@ To find the minimum of $J(w, b)$, we need a way to visualize the function.
 
 To begin, let's visualize a simpler cost function $J(w)$ where $w$ is the only parameter (so it's always the case that $b = 0$).
 
-![](assets/plotting-2d-cost-function.png)
+![](assets/week-01/plotting-2d-cost-function.png)
 
 > On the left, we display different functions $f_w$ for different values of $w$. On the right, we display the values of $J(w)$ in relation to the values of $w$.
 
@@ -183,11 +183,11 @@ You'll notice a parabola or bowl shape for $J(w)$. In this visualization, findin
 
 Next, let's visualize the cost function $J(w, b)$ using a 3D surface plot:
 
-![](assets/plotting-3d-cost-function.png)
+![](assets/week-01/plotting-3d-cost-function.png)
 
 To find the values of $w$ and $b$ that produce a minimum $J(w, b)$, we create a _contour plot_ based off of the 3D surface plot:
 
-![](assets/2d-contour-plot-example.png)
+![](assets/week-01/2d-contour-plot-example.png)
 
 > The contour plot on the top right is a 2D visualization of the 3D surface plot at the bottom.
 >
@@ -199,8 +199,145 @@ Therefore, the values of $w$ and $b$ that produce the minimum $J(w, b)$ are all 
 
 ## Train the Model with Gradient Descent
 
+### What is gradient descent?
+
 Manually working out the values of parameters $w$ and $b$ that produce the minimum $J(w, b)$ is tedious and inefficient—and may even stop working as we get to more complex machine learning models.
 
-Gradient descent is an algorithm that automatically calculates the ideal values of $w$ and $b$ for you.
+**Gradient descent** is an algorithm that takes _any_ function as input—including cost functions—and outputs the parameter values that produce the minimum for that function.
 
-It's one of the most important algorithms in machine learning.
+> It's one of the most important algorithms in machine learning—used for both simple (e.g., linear regression) and complex (e.g., deep learning) models.
+
+At a high level, the steps of the gradient descent algorithm proceed as follows:
+
+1. Set parameters to some initial values
+   - For linear regression, the convention is to set $w = b = 0$
+2. Keep changing the parameter values a little bit at a time in an attempt to reduce the cost function
+3. Stop when the cost function settles at or near a minimum
+
+As an analogy, in step (1), imagine choosing initial values for your parameters is like dropping yourself onto a random spot on the surface plot representing the cost function:
+
+![](assets/week-01/hills-and-valleys-gradient-descent.png)
+
+> **Note**: As the surface plot shows, not all cost functions are a bowl shape. In other words, it's possible for there to be more than 1 minimum.
+
+Think of this surface plot as a golf course with hills and valleys. Your goal is to walk into a valley as fast as possible!
+
+In step (2), you proceed to look around 360 degrees, each time taking a baby step forward that would lead to the _steepest_ descent.
+
+You then continue to repeat step (2) until you finally hit step (3) where you land in a valley—essentially a **local minimum**.
+
+**Important**: In gradient descent, changing the initial values of the parameters can change the local minimum that you settle on. This is shown with the 2 paths in the surface plot above.
+
+**Corollary**: An interesting property of gradient descent is that it can only go downhill. As a result, you can't get from one local minimum to another.
+
+### Implementing gradient descent
+
+When you take a baby step, the actual mathematical implementation of gradient descent involves a small tweak to $w$ by re-assigning its value as
+
+$$
+w = w - \alpha \frac{\partial}{\partial w} J(w, b)
+$$
+
+where
+
+- $\alpha \in [0,1]$ is the **learning rate** that determines how steep the descent is, and
+- $\frac{\partial}{\partial w} J(w, b)$ is the **partial derivative term** of the cost function $J$ that determines the direction of the baby step (more on this later).
+
+A similar small tweak to $b$ is made as
+
+$$
+b = b - \alpha \frac{\partial}{\partial b} J(w, b)
+$$
+
+The gradient descent algorithm simply repeats these reassignments of $w$ and $b$ until the algorithm **converges**—meaning you reach a local minimum where updates to $w$ and $b$ no longer change much with each additional baby step you take.
+
+**Important**: As a best practice, updates to $w$ and $b$ must be done _simultaneously_ so that the updated value of one parameter doesn't affect the update of another parameter.
+
+The best way to accomplish a simultaneous update is to compute the RHS first:
+
+$$
+\begin{align*}
+tmp_w &= w - \alpha \frac{\partial}{\partial w} J(w, b) \\
+tmp_b &= b - \alpha \frac{\partial}{\partial b} J(w, b) \\
+w &= tmp_w \\
+b &= tmp_b
+\end{align*}
+$$
+
+### More on the derivative term
+
+To understand what a single step of gradient descent is doing—especially the derivative term—let's return to our simplified example where $w$ is our only parameter, leading to a parabola/curve shape:
+
+![](assets/week-01/derivative-term-tangent-line-intuition.png)
+
+In the 2 examples above, we pick an arbitrary $w$. The top example has $w$ on the right side of the curve, and the bottom example has $w$ on the left side.
+
+Now what we can do is draw a **tangent line** for each point: a line that intersects with exactly a point on a curve.
+
+**Important**: The partial derivative of $J(w)$ is the _slope_ of that tangent line for that point.
+
+Corollaries:
+
+- When the tangent line has a positive slope, we can say the derivative term $\frac{\partial}{\partial w} J(w) > 0$
+  - This leads to a _decrease_ of $w$ (since $\alpha$ is non-negative), moving closer to the minimum
+- Otherwise, when the tangent line has a negative slope, $\frac{\partial}{\partial w} J(w) < 0$.
+  - This leads to an _increase_ of $w$ (since $\alpha$ is non-negative), moving closer to the minimum
+
+In both cases, we see how a step in the gradient descent algorithm brings us closer to the minimum—thanks to the derivative term.
+
+**Note**: When you have converged on a local minimum, the slope of the tangent line representing the derivative is always $0$:
+
+![](assets/week-01/local-minimum-convergence.png)
+
+Thus, the re-assignment $w = w - \alpha \cdot 0$ doesn't change $w$ at all. In other words, further gradient descent steps do nothing once you've reached a local minimum.
+
+> Thankfully, this limitation isn't a problem for the squared error cost function, as it is a _convex function_. That just means its global minimum is the only local minimum, so the gradient descent algorithm will always converge on the global minimum.
+
+### More on the learning rate
+
+To understand what the learning rate $\alpha$ does in gradient descent, let's consider what happens when $\alpha$ is too small or too big.
+
+![](assets/week-01/too-small-too-large-learning-rate.png)
+
+When $\alpha$ is too small (top example), gradient descent becomes too _slow_: it takes many steps to finally reach the minimum.
+
+When $\alpha$ is too big (bottom example), gradient descent can continually overshoot and step over the minimum, never reaching it. In more technical terms, we say gradient descent _fails to converge_ and may even _diverge_—meaning it actually gets further and further away from the minimum.
+
+**Important**: Even though we use a _fixed_ learning rate, as we get closer and closer to a local minimum, gradient descent _automatically_ takes _smaller and smaller_ steps.
+
+![](assets/week-01/fixed-learning-rate-smaller-steps.png)
+
+**Why**: Consider a curve is typically exponential. So as you take steps closer towards the local minimum for that curve, the slope of each tangent line (i.e., the derivative) gets smaller and smaller, meaning smaller and smaller gradient descent steps.
+
+This effect makes it easier to converge on the local minimum _even though_ the learning rate is fixed.
+
+### Applying gradient descent to linear regression
+
+The formula for the partial derivative of the cost function $J$ with respect to $w$ is
+
+$$
+\frac{\partial}{\partial w} J(w, b) = \frac{1}{m} \sum_{i = 1}^{m} (f_{w, b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}
+$$
+
+The formula for the partial derivative of the cost function $J$ with respect to $b$ is
+
+$$
+\frac{\partial}{\partial b} J(w, b) = \frac{1}{m} \sum_{i = 1}^{m} f_{w, b}(x^{(i)}) - y^{(i)}
+$$
+
+Knowing these formulas, we now have everything we need to run gradient descent in order to find the values of $w$ and $b$ that produce an ideal linear regression model (i.e., a straight line that best fits the data):
+
+$$
+\begin{align*}
+\text{Repeat}&\text{ until convergence:} \ \lbrace \\
+
+w &= w - \alpha \frac{1}{m} \sum_{i = 1}^{m} (f_{w, b}(x^{(i)}) - y^{(i)}) \cdot x^{(i)} \\
+
+b &= b - \alpha \frac{1}{m} \sum_{i = 1}^{m} f_{w, b}(x^{(i)}) - y^{(i)} \\
+\rbrace
+\end{align*}
+$$
+
+**Note**: Because each step of gradient descent involves computing the error for _every_ single training example—in effect using the full training set at each step—we call this **batch gradient descent**.
+
+> **Fun fact**: Other forms of gradient descent may actually use a subset of training examples at each step!
