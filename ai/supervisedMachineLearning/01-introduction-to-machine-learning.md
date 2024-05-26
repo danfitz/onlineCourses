@@ -71,7 +71,7 @@ For example, instead of just using tumor size as the only input, we can also inc
 
 ### Unsupervised learning
 
-**Supervised learning** is a set of machine learning algorithms that are given inputs $x$ without "right" outputs $y$. Consequently, instead of predicting outputs, the goal is to find something interesting—some structure or pattern—in the _unlabeled data_.
+**Unsupervised learning** is a set of machine learning algorithms that are given inputs $x$ without "right" outputs $y$. Consequently, instead of predicting outputs, the goal is to find something interesting—some structure or pattern—in the _unlabeled data_.
 
 In our tumor example, we may only be given input data on age and tumor size for each tumor but not any diagnosis. So, instead of diagnosing the tumor, our unsupervised learning algorithm may try to _cluster_ them. This is a type of unsupervised learning known as a **clustering algorithm**.
 
@@ -103,7 +103,7 @@ In this course, we have the following notation related to training sets and trai
 - $y$
   - Output data
   - Called the **output variable** or **target variable** or just **target**
-- $\^{y}$
+- $\hat{y}$
   - Prediction or estimation of $y$ produced by model
 - $(x, y)$
   - A single training example
@@ -115,7 +115,7 @@ In this course, we have the following notation related to training sets and trai
 ![](assets/week-01/supervised-learning-formalization.png)
 
 1. Training set containing features ($x$) and targets ($y$) passed as inputs to a learning algorithm
-2. Learning algorithm produces a function $f$ that takes $x$ as input and outputs $\^{y}$
+2. Learning algorithm produces a function $f$ that takes $x$ as input and outputs $\hat{y}$
    - $f$ is called a **model** (or sometimes hypothesis)
 
 ## Regression Model
@@ -142,7 +142,7 @@ Here's some examples of different values for $w$ and $b$ and the different lines
 
 In linear regression, our ultimate goal is to produce a line that fits the training set as well as possible.
 
-More specifically, the goal is to find values for parameters $w$ and $b$ such that $\^{y}^{(i)}$ is as close to $y^{(i)}$ for many or all $(x^{(i)}, y^{(i)})$ in the training set.
+More specifically, the goal is to find values for parameters $w$ and $b$ such that $\hat{y}^{(i)}$ is as close to $y^{(i)}$ for many or all $(x^{(i)}, y^{(i)})$ in the training set.
 
 But how do we know when a linear regression model succeeds or fails in this goal? In general, when we build a model, how can we tell how well it's doing so we can try to make it better?
 
@@ -150,11 +150,11 @@ But how do we know when a linear regression model succeeds or fails in this goal
 
 In particular, we will learn the **squared error cost function**, one of the most commonly used cost functions for regression problems.
 
-The squared error cost function basically computes the average squared error between every $\^{y}^{(i)}$ and $y^{(i)}$.
+The squared error cost function basically computes the average squared error between every $\hat{y}^{(i)}$ and $y^{(i)}$.
 
 To compute the average squared error, we do the following:
 
-1. For all $m$ training examples, compute the **error term**—the difference between the prediction and the target—and square it: $(\^{y}^{(i)} - y^{(i)})^2$
+1. For all $m$ training examples, compute the **error term**—the difference between the prediction and the target—and square it: $(\hat{y}^{(i)} - y^{(i)})^2$
 2. Sum up all squared errors from the $m$ training examples
 3. Divide the sum by $m$ to get the average/mean
 4. Divide again by $2$ (done by convention in ML to make later calculations look neater)
@@ -162,10 +162,10 @@ To compute the average squared error, we do the following:
 Formally, this is our squared error cost function $J(w, b)$:
 
 $$
-J(w, b) = \frac{1}{2m}\sum_{i = 1}^{n} \ (\^{y}^{(i)} - y^{(i)})^2
+J(w, b) = \frac{1}{2m}\sum_{i = 1}^{n} \ (\hat{y}^{(i)} - y^{(i)})^2
 $$
 
-> $\^{y}^{(i)}$ can be replaced with $f_{w, b}(x^{(i)})$ since they are equivalent.
+> $\hat{y}^{(i)}$ can be replaced with $f_{w, b}(x^{(i)})$ since they are equivalent.
 
 **Goal**: Find values of $w$ and $b$ that _minimize_ the cost function $J(w, b)$ as much as possible.
 
