@@ -118,42 +118,120 @@ For example, consider a training set with features $x_1$ and $x_2$ along with pa
 
 Recall that the squared error cost function $J(\vec{w}, b)$ is a convex function, making gradient descent naturally converge on a global minimum.
 
-**Problem**: Applying the same squared error cost function $J$ to a logistic regression model produces a _non-convex_ function, leading to multiple local minima where gradient descent can get stuck.
+**Problem**: Applying the same squared error cost function $J$ to a logistic regression model produces a _non-convex_, "wiggly" function, leading to multiple local minima where gradient descent can get stuck.
 
-**Proposal**: We need a different cost function that is actually convex, so gradient descent works nicely.
+![](./assets/week-03/squared-error-cost-function-non-convex.png)
 
-### New cost function
+**Proposal**: We need a _new_ cost function that is actually convex for logistic regression, so gradient descent works nicely.
 
-Recall the original squared error cost function in linear regression:
+### New cost function using logistic loss function
+
+Recall the original squared error cost function used in linear regression:
 
 $$
-J(\vec{w}, b) = \frac{1}{m} \cdot \sum_{i = 1}^{n} \ \frac{1}{2} (f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})^2
+J(\vec{w}, b) = \frac{1}{m} \cdot \sum_{i = 1}^{m} \ \frac{1}{2} (f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})^2
 $$
 
-**Note**: Each term in the summation represent how well the model is doing on a specific training example $i$.
+**Note**: Each term in the summation represents the **loss** for training example $i$. That is, it represents how far off the model is from its target for training example $i$.
 
-Let loss function $L(f_{\vec{w}, b}(\vec{x}^{(i)}), y^{(i)})$ represent the loss for each training example $i$.
+Let loss function $L$ represent the loss for each training example $i$.
 
-To create our new cost function, we are going to define a _logistic_ loss function $L$ as follows:
+To create our new cost function for logistic regression, we are going to define our own **logistic loss function** $L$ as follows:
 
 $$
 L(f_{\vec{w}, b}(\vec{x}^{(i)}), y^{(i)}) =
 \begin{cases}
-    -\log(f_{\vec{w}, b}(\vec{x})) & \text{if } y^{(i)} = 1 \\
-    -\log(1 - f_{\vec{w}, b}(\vec{x})) & \text{if } y^{(i)} = 0
+    -\log(f_{\vec{w}, b}(\vec{x}^{(i)})) & \text{if } y^{(i)} = 1 \\
+    -\log(1 - f_{\vec{w}, b}(\vec{x}^{(i)})) & \text{if } y^{(i)} = 0
 \end{cases}
 $$
 
 > Depending on the target label $y^{(i)}$, we measure the loss differently.
 
-In both cases, we strongly incentivize the model to predict an output $f(\vec{x})$ that's close to the true label $y$.
+When $y^{(i)} = 1$, a prediction that's closer to $1$ approaches a loss of $0$, while a prediction that's closer to $0$ approaches a loss of $\infty$.
 
-That's because being as close as possible to the true label $y$ approaches zero loss. Whereas being as far as possible from the true label $y$ approaches $\infty$ loss.
+![](./assets/week-03/logistic-loss-function-y-equals-1.png)
 
-<Add graphs showing how this works>
+> y-axis represents loss, and x-axis represents the value of the $\log$.
 
-9:30
+We have analogous behaviour when $y^{(i)} = 0$ as well:
+
+![](./assets/week-03/logistic-loss-function-y-equals-0.png)
+
+**Note**: In both cases, we strongly incentivize the model to make a prediction $f_{\vec{w}, b}(\vec{x}^{(i)})$ that's as close to the true label $y^{(i)}$ as possible—or else suffer big losses.
+
+**Importance**: The logistic loss function paves the way to a new cost function that is convex (though proving convexity is out of scope of this course).
+
+Here's the new **logistic cost function**:
+
+$$
+J(\vec{w}, b) = \frac{1}{m} \cdot \sum_{i = 1}^{m} \ [L(f_{\vec{w}, b}(\vec{x}^{(i)}), y^{(i)})]
+$$
+
+### Simplifying logistic loss function and new cost function
+
+Simplified logistic loss function that avoids branching cases:
+
+$$
+L(f_{\vec{w}, b}(\vec{x}^{(i)}), y^{(i)}) = -y^{(i)} \log(f_{\vec{w}, b}(\vec{x}^{(i)})) - (1 - y^{(i)})\log(1 - f_{\vec{w}, b}(\vec{x}^{(i)}))
+$$
+
+> When $y^{(i)} = 1$, the right term zeroes out. When $y^{(i)} = 0$, the left term zeroes out.
+
+Taking this simplified logistic loss function, we derive our simplified logistic cost function:
+
+$$
+\begin{align*}
+    J(\vec{w}, b) &= \frac{1}{m} \cdot \sum_{i = 1}^{m} \ [L(f_{\vec{w}, b}(\vec{x}^{(i)}), y^{(i)})] \\
+    &= \frac{1}{m} \cdot \sum_{i = 1}^{m} \ [-y^{(i)} \log(f_{\vec{w}, b}(\vec{x}^{(i)})) - (1 - y^{(i)})\log(1 - f_{\vec{w}, b}(\vec{x}^{(i)}))] \\
+    &= -\frac{1}{m} \cdot \sum_{i = 1}^{m} \ [y^{(i)} \log(f_{\vec{w}, b}(\vec{x}^{(i)})) + (1 - y^{(i)})\log(1 - f_{\vec{w}, b}(\vec{x}^{(i)}))]
+\end{align*}
+$$
+
+This is the final expression of the logistic cost function that pretty much everyone uses to train logistic regression models!
+
+> **Fun fact**: The origins of this cost function comes from statistics—namely the idea of maximum likelihood estimation, which is a method for efficiently finding the parameters of different models.
 
 ## Gradient Descent for Logistic Regression
 
+The gradient descent algorithm for logistic regression is identical to that of linear regression—with the exception that model $f$ is the sigmoid function instead of a linear function.
+
+Concepts/techniques that work the same:
+
+- Vectorization to speed up gradient descent
+- Feature scaling to speed up gradient descent
+- Monitoring gradient descent to ensure it converges
+
 ## The Problem of Overfitting
+
+### Underfitting and overfitting
+
+When it comes to how well a model fits a training set, we have a spectrum:
+
+1. Underfit (or high bias)
+2. Just right (or generalizes well)
+3. Overfit (or high variance)
+
+![](./assets/week-03/underfitting-and-overfitting-linear-regression.png)
+
+![](./assets/week-03/underfitting-and-overfitting-logistic-regression.png)
+
+> Spectrum for both linear and logistic regression. Notice that a straight line underfits, a quadratic curve fits just right, and a wiggly curve due to higher-order polynomials overfits.
+
+(1) When a model doesn’t fit its training set very well, we call this **underfitting** or **high bias**.
+
+> "High bias" comes from the idea that the model has a mistaken preconception/assumption that causes it to badly fit the training set.
+
+(2) When a model fits its training set pretty well, it exhibits the quality of **generalization**: given a brand new training example that it's never seen before, it tends to make a good prediction.
+
+(3) When a model fits its training set _too well_—maybe even fitting every training example perfectly with zero cost—we call this **overfitting** or **high variance**.
+
+**Why overfitting is a problem**: A learning algorithm may try too hard to fit all of the training examples that the model it produces becomes too sensitive to variations in the training set. This leads to a model that _lacks generalization_.
+
+> "High variance" comes from the idea that if two ML engineers were working with two slightly different training sets, the learning algorithm would generate completely different models that give highly variable predictions.
+
+**Goal**: Find a model that is "just right"—that neither underfits nor overfits its training examples—so that it generalizes well for new examples.
+
+### Ways to address overfitting
+
+### Ways to address underfitting

@@ -162,7 +162,7 @@ To compute the average squared error, we do the following:
 Formally, this is our squared error cost function $J(w, b)$:
 
 $$
-J(w, b) = \frac{1}{2m}\sum_{i = 1}^{n} \ (\hat{y}^{(i)} - y^{(i)})^2
+J(w, b) = \frac{1}{2m}\sum_{i = 1}^{m} \ (\hat{y}^{(i)} - y^{(i)})^2
 $$
 
 > $\hat{y}^{(i)}$ can be replaced with $f_{w, b}(x^{(i)})$ since they are equivalent.
