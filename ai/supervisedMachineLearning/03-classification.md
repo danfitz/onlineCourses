@@ -230,8 +230,100 @@ When it comes to how well a model fits a training set, we have a spectrum:
 
 > "High variance" comes from the idea that if two ML engineers were working with two slightly different training sets, the learning algorithm would generate completely different models that give highly variable predictions.
 
+**Pro tip**: A common cause of overfitting is too many features—something that especially occurs when model $f$ has many higher-order polynomials.
+
 **Goal**: Find a model that is "just right"—that neither underfits nor overfits its training examples—so that it generalizes well for new examples.
 
 ### Ways to address overfitting
 
+To address overfitting, we can generally either increase the size of the training data or reduce/eliminate features.
+
+3 ways to address overfitting:
+
+1. Collect more data (i.e., training examples)
+   - Even with higher-order polynomials or many features in the model, more examples tends to produce less variability in predictions
+2. Select a subset of features
+   - Being selective and choosing the most appropriate features helps eliminate overfitting
+   - **Note**: The task of choosing the best features is sometimes called **feature selection**
+   - **Disadvantage**: May throw out features that are actually useful
+3. Regularization (i.e., reduce the size of parameters $w_1, \dots, w_n$)
+   - Reduce the impact of any feature $x_j$ by _regularizing_—i.e., reducing the size of—its parameter $w_j$, leading to an overall reduced likelihood of overfitting
+   - Intuitively, regularization is like a weaker version of eliminating feature $x_j$, where elimination is equivalent to setting parameter $w_j = 0$
+   - **Advantage**: Addresses overfitting without having to throw out any features
+   - **Note**: Regularizing parameter $b$ isn't necessary but can be done
+
+Here's an example comparison where regularizing the model's parameters leads to a better-fitting curve:
+
+![](./assets/week-03/impact-of-regularization.png)
+
+### Cost function with regularization
+
+To apply regularization to some parameter $w_j$, we modify the cost function $J$ in a way that encourages the learning algorithm to preference small values for parameter $w_j$ in the process of minimizing $J$.
+
+To build an intuition for how this process works, we begin with a linear regression example below:
+
+![](./assets/week-03/regularization-in-cost-function.png)
+
+**Goal**: We want to use polynomial features $x^3$ and $x^4$ (on the right) while having the nice fit of a quadratic function (on the left):
+
+To accomplish this task, we want to regularize parameters $w_3$ and $w_4$ in order to reduce the impact of features $x^3$ and $x^4$.
+
+To perform this regularization, we add $1000 w_3^2 + 1000 w_4^2$ to cost function $J$. These additional terms will penalize the model if $w_3$ or $w_4$ are large. Therefore, in order to minimize $J$, the learning algorithm will preference very small values for parameters $w_3$ and $w_4$.
+
+**Conclusion**: Polynomial features $x^3$ and $x^4$ will have a small effect on the model—almost (but not quite) like cancelling out those features. Therefore, the model will behave more like a quadratic function (on the left).
+
+**Important**: In practice, it can be hard to know which features to regularize. So, it's common to regularize all $n$ features. The end result is usually a better-fitting model.
+
+More formally, regularization in cost function $J$ for linear regression adds a **regularization term** on the right:
+
+$$
+J(\vec{w}, b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{\vec{w}, b}(\vec{x}^{(i)} - y^{(i)})^2) + \frac{\lambda}{2m} \sum_{j=1}^{n} w_j^2
+$$
+
+Things to note:
+
+- $\lambda$ is a constant called the **regularization parameter**
+- $\lambda$ is divided by $2m$ to ensure the regularization term scales with the mean squared error term (especially as training set size $m$ grows)
+  - Doing this makes it easier to choose $\lambda$
+
+With this new cost function $J$, we now have 2 competing goals:
+
+- By including the mean squared error term in cost function $J$, we encourage the learning algorithm to fit the data well (by minimizing the difference between predictions and actual values)
+- By including the regularization term in cost function $J$, we encourage the learning algorithm to choose small values for each parameter $w_j$ (in order to reduce overfitting)
+
+The value of $\lambda$ that you choose specifies how you balance between the above two goals. To understand this, here are two extremes for $\lambda$:
+
+- $\lambda = 0$
+  - Cancels out the regularization term completely, only encouraging the learning algorithm to fit the data well
+  - Can lead to overfitting
+- $\lambda =$ very large number
+  - Encourages the algorithm to choose parameter values very close to $0$, effectively cancelling out every feature in the model and making $f_{\vec{w}, b}(\vec{x}) \approx b$
+  - Can lead to underfitting
+
+**Goal**: Choose a value of $\lambda$ that is somewhere between these two extremes in order to balance both goals.
+
+### Regularized linear regression
+
+Recall that gradient descent repeatedly updates parameter $w_j$ (for $j \in [1..n]$) as follows:
+
+$$
+w_j = w_j - \alpha \frac{\partial}{\partial w_j}J(\vec{w}, b)
+$$
+
+With cost function $J$ now including a regularization term, the derivative of $J$ with respect to $w_j$ becomes
+
+$$
+\frac{\partial}{\partial w_j}J(\vec{w}, b) = [\frac{1}{m} \sum_{i=1}{m} (f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})x_j^{(i)}] + \frac{\lambda}{m}w_j
+$$
+
+where the right term $\frac{\lambda}{m}w_j$ is new due to regularization.
+
+> Note that the derivative of $J$ with respect to $b$ remains unchanged because we decided to skip regularizing $b$.
+
+2:25
+
+### Regularized logistic regression
+
 ### Ways to address underfitting
+
+### Tools to recognize when overfitting and underfitting occur
