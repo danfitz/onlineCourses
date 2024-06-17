@@ -280,11 +280,13 @@ $$
 J(\vec{w}, b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{\vec{w}, b}(\vec{x}^{(i)} - y^{(i)})^2) + \frac{\lambda}{2m} \sum_{j=1}^{n} w_j^2
 $$
 
+> The exact same regularization term is added to the cost function $J$ for logistic regression as well. So, everything you read here applies equally to logistic regression.
+
 Things to note:
 
 - $\lambda$ is a constant called the **regularization parameter**
 - $\lambda$ is divided by $2m$ to ensure the regularization term scales with the mean squared error term (especially as training set size $m$ grows)
-  - Doing this makes it easier to choose $\lambda$
+  - Doing this makes the effect of $\lambda$ more stable as training set size $m$ changes
 
 With this new cost function $J$, we now have 2 competing goals:
 
@@ -304,6 +306,8 @@ The value of $\lambda$ that you choose specifies how you balance between the abo
 
 ### Regularized linear regression
 
+With regularized linear regression, gradient descent works exactly the same _except_ for a small change to one of the derivatives.
+
 Recall that gradient descent repeatedly updates parameter $w_j$ (for $j \in [1..n]$) as follows:
 
 $$
@@ -316,14 +320,20 @@ $$
 \frac{\partial}{\partial w_j}J(\vec{w}, b) = [\frac{1}{m} \sum_{i=1}{m} (f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})x_j^{(i)}] + \frac{\lambda}{m}w_j
 $$
 
-where the right term $\frac{\lambda}{m}w_j$ is new due to regularization.
+where the rightmost term $\frac{\lambda}{m}w_j$ is what's new due to regularization. (Namely, it is the derivative of the regularization term.)
 
-> Note that the derivative of $J$ with respect to $b$ remains unchanged because we decided to skip regularizing $b$.
+**Note**: The derivative of $J$ with respect to $b$ remains unchanged because we decided to skip regularizing $b$.
 
-2:25
+> **Aside**: By rearranging the update step for $w_j$ during gradient descent, we see that regularization actually shrinks $w_j$ a little bit at each iteration.
+>
+> ![](./assets/week-03/regularization-shrinks-w-in-gradient-descent.png)
 
 ### Regularized logistic regression
 
-### Ways to address underfitting
+With regularized logistic regression, gradient descent is almost exactly the same as it is for regularized linear regression—except function $f$ is a logistic function instead of a linear function.
 
-### Tools to recognize when overfitting and underfitting occur
+So, we see the exact same change in the derivative of $J$ with respect to $w_j$:
+
+$$
+\frac{\partial}{\partial w_j}J(\vec{w}, b) = [\frac{1}{m} \sum_{i=1}{m} (f_{\vec{w}, b}(\vec{x}^{(i)}) - y^{(i)})x_j^{(i)}] + \frac{\lambda}{m}w_j
+$$
