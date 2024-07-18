@@ -1,5 +1,10 @@
 # Dan Fitz's Notes
 
+- [Ai](ai/README.md)
+  - Supervised Machine Learning
+    * [Introduction To Machine Learning](ai/supervisedMachineLearning/01-introduction-to-machine-learning.md)
+    * [Regression With Multiple Input Variables](ai/supervisedMachineLearning/02-regression-with-multiple-input-variables.md)
+    * [Classification](ai/supervisedMachineLearning/03-classification.md)
 - [Csharp](csharp/README.md)
   - C Sharp Advanced
     * [Generics](csharp/cSharpAdvanced/a-generics.md)
